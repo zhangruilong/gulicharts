@@ -24,10 +24,15 @@ Ext.onReady(function() {
 		frame : true,
 		layout : 'column',
 		items : [ {
-			xtype : 'textfield',
-			id : 'Companycompanyid',
-			name : 'companyid',
-			hidden : true
+			columnWidth : 1,
+			layout : 'form',
+			items : [ {
+				xtype : 'textfield',
+				fieldLabel : '经销商ID',
+				id : 'Companycompanyid',
+				name : 'companyid',
+				maxLength : 100
+			} ]
 		}
 		, {
 			columnWidth : 1,
@@ -178,7 +183,7 @@ Ext.onReady(function() {
 		columns : [{// 改
 			header : '经销商ID',
 			dataIndex : 'companyid',
-			hidden : true
+			sortable : true
 		}
 		, {
 			header : '编码',
@@ -246,6 +251,7 @@ Ext.onReady(function() {
 				iconCls : 'add',
 				handler : function() {
 					CompanydataForm.form.reset();
+					Ext.getCmp("Companycompanyid").setEditable (true);
 					createTextWindow(basePath + Companyaction + "?method=insAll", "新增", CompanydataForm, Companystore);
 				}
 			},'-',{
@@ -258,6 +264,7 @@ Ext.onReady(function() {
 						});
 						return;
 					}
+					Ext.getCmp("Companycompanyid").setEditable (false);
 					createTextWindow(basePath + Companyaction + "?method=updAll", "修改", CompanydataForm, Companystore);
 					CompanydataForm.form.loadRecord(selections[0]);
 				}

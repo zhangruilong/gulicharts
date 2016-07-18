@@ -45,10 +45,15 @@ Ext.onReady(function() {
 		frame : true,
 		layout : 'column',
 		items : [ {
-			xtype : 'textfield',
-			id : 'Goodsviewgoodsid',
-			name : 'goodsid',
-			hidden : true
+			columnWidth : 1,
+			layout : 'form',
+			items : [ {
+				xtype : 'textfield',
+				fieldLabel : 'goodsid',
+				id : 'Goodsviewgoodsid',
+				name : 'goodsid',
+				maxLength : 100
+			} ]
 		}
 		, {
 			columnWidth : 1,
@@ -430,7 +435,7 @@ Ext.onReady(function() {
 		columns : [{// 改
 			header : 'goodsid',
 			dataIndex : 'goodsid',
-			hidden : true
+			sortable : true
 		}
 		, {
 			header : 'goodscompany',
@@ -599,6 +604,45 @@ Ext.onReady(function() {
 		}
 		],
 		tbar : [{
+				text : "新增",
+				iconCls : 'add',
+				handler : function() {
+					GoodsviewdataForm.form.reset();
+					Ext.getCmp("Goodsviewgoodsid").setEditable (true);
+					createTextWindow(basePath + Goodsviewaction + "?method=insAll", "新增", GoodsviewdataForm, Goodsviewstore);
+				}
+			},'-',{
+				text : "修改",
+				iconCls : 'edit',
+				handler : function() {
+					var selections = Goodsviewgrid.getSelection();
+					if (selections.length != 1) {
+						Ext.Msg.alert('提示', '请选择一条数据！', function() {
+						});
+						return;
+					}
+					Ext.getCmp("Goodsviewgoodsid").setEditable (false);
+					createTextWindow(basePath + Goodsviewaction + "?method=updAll", "修改", GoodsviewdataForm, Goodsviewstore);
+					GoodsviewdataForm.form.loadRecord(selections[0]);
+				}
+			},'-',{
+				text : "删除",
+				iconCls : 'delete',
+				handler : function() {
+					var selections = Goodsviewgrid.getSelection();
+					if (Ext.isEmpty(selections)) {
+						Ext.Msg.alert('提示', '请至少选择一条数据！');
+						return;
+					}
+					commonDelete(basePath + Goodsviewaction + "?method=delAll",selections,Goodsviewstore,Goodsviewkeycolumn);
+				}
+			},'-',{
+				text : "导入",
+				iconCls : 'imp',
+				handler : function() {
+					commonImp(basePath + Goodsviewaction + "?method=impAll","导入",Goodsviewstore);
+				}
+			},'-',{
 				text : "后台导出",
 				iconCls : 'exp',
 				handler : function() {

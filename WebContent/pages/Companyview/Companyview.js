@@ -30,10 +30,15 @@ Ext.onReady(function() {
 		frame : true,
 		layout : 'column',
 		items : [ {
-			xtype : 'textfield',
-			id : 'Companyviewcompanyid',
-			name : 'companyid',
-			hidden : true
+			columnWidth : 1,
+			layout : 'form',
+			items : [ {
+				xtype : 'textfield',
+				fieldLabel : 'companyid',
+				id : 'Companyviewcompanyid',
+				name : 'companyid',
+				maxLength : 100
+			} ]
 		}
 		, {
 			columnWidth : 1,
@@ -250,7 +255,7 @@ Ext.onReady(function() {
 		columns : [{// 改
 			header : 'companyid',
 			dataIndex : 'companyid',
-			hidden : true
+			sortable : true
 		}
 		, {
 			header : 'companycode',
@@ -344,6 +349,45 @@ Ext.onReady(function() {
 		}
 		],
 		tbar : [{
+				text : "新增",
+				iconCls : 'add',
+				handler : function() {
+					CompanyviewdataForm.form.reset();
+					Ext.getCmp("Companyviewcompanyid").setEditable (true);
+					createTextWindow(basePath + Companyviewaction + "?method=insAll", "新增", CompanyviewdataForm, Companyviewstore);
+				}
+			},'-',{
+				text : "修改",
+				iconCls : 'edit',
+				handler : function() {
+					var selections = Companyviewgrid.getSelection();
+					if (selections.length != 1) {
+						Ext.Msg.alert('提示', '请选择一条数据！', function() {
+						});
+						return;
+					}
+					Ext.getCmp("Companyviewcompanyid").setEditable (false);
+					createTextWindow(basePath + Companyviewaction + "?method=updAll", "修改", CompanyviewdataForm, Companyviewstore);
+					CompanyviewdataForm.form.loadRecord(selections[0]);
+				}
+			},'-',{
+				text : "删除",
+				iconCls : 'delete',
+				handler : function() {
+					var selections = Companyviewgrid.getSelection();
+					if (Ext.isEmpty(selections)) {
+						Ext.Msg.alert('提示', '请至少选择一条数据！');
+						return;
+					}
+					commonDelete(basePath + Companyviewaction + "?method=delAll",selections,Companyviewstore,Companyviewkeycolumn);
+				}
+			},'-',{
+				text : "导入",
+				iconCls : 'imp',
+				handler : function() {
+					commonImp(basePath + Companyviewaction + "?method=impAll","导入",Companyviewstore);
+				}
+			},'-',{
 				text : "后台导出",
 				iconCls : 'exp',
 				handler : function() {

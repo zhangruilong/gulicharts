@@ -32,10 +32,15 @@ Ext.onReady(function() {
 		frame : true,
 		layout : 'column',
 		items : [ {
-			xtype : 'textfield',
-			id : 'Ordermviewordermid',
-			name : 'ordermid',
-			hidden : true
+			columnWidth : 1,
+			layout : 'form',
+			items : [ {
+				xtype : 'textfield',
+				fieldLabel : 'ordermid',
+				id : 'Ordermviewordermid',
+				name : 'ordermid',
+				maxLength : 100
+			} ]
 		}
 		, {
 			columnWidth : 1,
@@ -274,7 +279,7 @@ Ext.onReady(function() {
 		columns : [{// 改
 			header : 'ordermid',
 			dataIndex : 'ordermid',
-			hidden : true
+			sortable : true
 		}
 		, {
 			header : 'ordermcustomer',
@@ -378,6 +383,45 @@ Ext.onReady(function() {
 		}
 		],
 		tbar : [{
+				text : "新增",
+				iconCls : 'add',
+				handler : function() {
+					OrdermviewdataForm.form.reset();
+					Ext.getCmp("Ordermviewordermid").setEditable (true);
+					createTextWindow(basePath + Ordermviewaction + "?method=insAll", "新增", OrdermviewdataForm, Ordermviewstore);
+				}
+			},'-',{
+				text : "修改",
+				iconCls : 'edit',
+				handler : function() {
+					var selections = Ordermviewgrid.getSelection();
+					if (selections.length != 1) {
+						Ext.Msg.alert('提示', '请选择一条数据！', function() {
+						});
+						return;
+					}
+					Ext.getCmp("Ordermviewordermid").setEditable (false);
+					createTextWindow(basePath + Ordermviewaction + "?method=updAll", "修改", OrdermviewdataForm, Ordermviewstore);
+					OrdermviewdataForm.form.loadRecord(selections[0]);
+				}
+			},'-',{
+				text : "删除",
+				iconCls : 'delete',
+				handler : function() {
+					var selections = Ordermviewgrid.getSelection();
+					if (Ext.isEmpty(selections)) {
+						Ext.Msg.alert('提示', '请至少选择一条数据！');
+						return;
+					}
+					commonDelete(basePath + Ordermviewaction + "?method=delAll",selections,Ordermviewstore,Ordermviewkeycolumn);
+				}
+			},'-',{
+				text : "导入",
+				iconCls : 'imp',
+				handler : function() {
+					commonImp(basePath + Ordermviewaction + "?method=impAll","导入",Ordermviewstore);
+				}
+			},'-',{
 				text : "后台导出",
 				iconCls : 'exp',
 				handler : function() {

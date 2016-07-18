@@ -16,10 +16,15 @@ Ext.onReady(function() {
 		frame : true,
 		layout : 'column',
 		items : [ {
-			xtype : 'textfield',
-			id : 'Collectcollectid',
-			name : 'collectid',
-			hidden : true
+			columnWidth : 1,
+			layout : 'form',
+			items : [ {
+				xtype : 'textfield',
+				fieldLabel : '收藏ID',
+				id : 'Collectcollectid',
+				name : 'collectid',
+				maxLength : 100
+			} ]
 		}
 		, {
 			columnWidth : 1,
@@ -82,7 +87,7 @@ Ext.onReady(function() {
 		columns : [{// 改
 			header : '收藏ID',
 			dataIndex : 'collectid',
-			hidden : true
+			sortable : true
 		}
 		, {
 			header : '商品ID',
@@ -110,6 +115,7 @@ Ext.onReady(function() {
 				iconCls : 'add',
 				handler : function() {
 					CollectdataForm.form.reset();
+					Ext.getCmp("Collectcollectid").setEditable (true);
 					createTextWindow(basePath + Collectaction + "?method=insAll", "新增", CollectdataForm, Collectstore);
 				}
 			},'-',{
@@ -122,6 +128,7 @@ Ext.onReady(function() {
 						});
 						return;
 					}
+					Ext.getCmp("Collectcollectid").setEditable (false);
 					createTextWindow(basePath + Collectaction + "?method=updAll", "修改", CollectdataForm, Collectstore);
 					CollectdataForm.form.loadRecord(selections[0]);
 				}

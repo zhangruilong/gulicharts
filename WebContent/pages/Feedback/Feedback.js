@@ -16,10 +16,15 @@ Ext.onReady(function() {
 		frame : true,
 		layout : 'column',
 		items : [ {
-			xtype : 'textfield',
-			id : 'Feedbackfeedbackid',
-			name : 'feedbackid',
-			hidden : true
+			columnWidth : 1,
+			layout : 'form',
+			items : [ {
+				xtype : 'textfield',
+				fieldLabel : '客户反馈id',
+				id : 'Feedbackfeedbackid',
+				name : 'feedbackid',
+				maxLength : 100
+			} ]
 		}
 		, {
 			columnWidth : 1,
@@ -82,7 +87,7 @@ Ext.onReady(function() {
 		columns : [{// 改
 			header : '客户反馈id',
 			dataIndex : 'feedbackid',
-			hidden : true
+			sortable : true
 		}
 		, {
 			header : '内容',
@@ -110,6 +115,7 @@ Ext.onReady(function() {
 				iconCls : 'add',
 				handler : function() {
 					FeedbackdataForm.form.reset();
+					Ext.getCmp("Feedbackfeedbackid").setEditable (true);
 					createTextWindow(basePath + Feedbackaction + "?method=insAll", "新增", FeedbackdataForm, Feedbackstore);
 				}
 			},'-',{
@@ -122,6 +128,7 @@ Ext.onReady(function() {
 						});
 						return;
 					}
+					Ext.getCmp("Feedbackfeedbackid").setEditable (false);
 					createTextWindow(basePath + Feedbackaction + "?method=updAll", "修改", FeedbackdataForm, Feedbackstore);
 					FeedbackdataForm.form.loadRecord(selections[0]);
 				}

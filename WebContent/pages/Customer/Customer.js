@@ -27,10 +27,15 @@ Ext.onReady(function() {
 		frame : true,
 		layout : 'column',
 		items : [ {
-			xtype : 'textfield',
-			id : 'Customercustomerid',
-			name : 'customerid',
-			hidden : true
+			columnWidth : 1,
+			layout : 'form',
+			items : [ {
+				xtype : 'textfield',
+				fieldLabel : '客户ID',
+				id : 'Customercustomerid',
+				name : 'customerid',
+				maxLength : 100
+			} ]
 		}
 		, {
 			columnWidth : 1,
@@ -214,7 +219,7 @@ Ext.onReady(function() {
 		columns : [{// 改
 			header : '客户ID',
 			dataIndex : 'customerid',
-			hidden : true
+			sortable : true
 		}
 		, {
 			header : '编码',
@@ -297,6 +302,7 @@ Ext.onReady(function() {
 				iconCls : 'add',
 				handler : function() {
 					CustomerdataForm.form.reset();
+					Ext.getCmp("Customercustomerid").setEditable (true);
 					createTextWindow(basePath + Customeraction + "?method=insAll", "新增", CustomerdataForm, Customerstore);
 				}
 			},'-',{
@@ -309,6 +315,7 @@ Ext.onReady(function() {
 						});
 						return;
 					}
+					Ext.getCmp("Customercustomerid").setEditable (false);
 					createTextWindow(basePath + Customeraction + "?method=updAll", "修改", CustomerdataForm, Customerstore);
 					CustomerdataForm.form.loadRecord(selections[0]);
 				}

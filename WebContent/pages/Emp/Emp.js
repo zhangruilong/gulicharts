@@ -20,10 +20,15 @@ Ext.onReady(function() {
 		frame : true,
 		layout : 'column',
 		items : [ {
-			xtype : 'textfield',
-			id : 'Empempid',
-			name : 'empid',
-			hidden : true
+			columnWidth : 1,
+			layout : 'form',
+			items : [ {
+				xtype : 'textfield',
+				fieldLabel : '业务员ID',
+				id : 'Empempid',
+				name : 'empid',
+				maxLength : 100
+			} ]
 		}
 		, {
 			columnWidth : 1,
@@ -130,7 +135,7 @@ Ext.onReady(function() {
 		columns : [{// 改
 			header : '业务员ID',
 			dataIndex : 'empid',
-			hidden : true
+			sortable : true
 		}
 		, {
 			header : '经销商ID',
@@ -178,6 +183,7 @@ Ext.onReady(function() {
 				iconCls : 'add',
 				handler : function() {
 					EmpdataForm.form.reset();
+					Ext.getCmp("Empempid").setEditable (true);
 					createTextWindow(basePath + Empaction + "?method=insAll", "新增", EmpdataForm, Empstore);
 				}
 			},'-',{
@@ -190,6 +196,7 @@ Ext.onReady(function() {
 						});
 						return;
 					}
+					Ext.getCmp("Empempid").setEditable (false);
 					createTextWindow(basePath + Empaction + "?method=updAll", "修改", EmpdataForm, Empstore);
 					EmpdataForm.form.loadRecord(selections[0]);
 				}

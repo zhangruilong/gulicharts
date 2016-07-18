@@ -17,10 +17,15 @@ Ext.onReady(function() {
 		frame : true,
 		layout : 'column',
 		items : [ {
-			xtype : 'textfield',
-			id : 'Addressaddressid',
-			name : 'addressid',
-			hidden : true
+			columnWidth : 1,
+			layout : 'form',
+			items : [ {
+				xtype : 'textfield',
+				fieldLabel : '我的地址ID',
+				id : 'Addressaddressid',
+				name : 'addressid',
+				maxLength : 100
+			} ]
 		}
 		, {
 			columnWidth : 1,
@@ -94,7 +99,7 @@ Ext.onReady(function() {
 		columns : [{// 改
 			header : '我的地址ID',
 			dataIndex : 'addressid',
-			hidden : true
+			sortable : true
 		}
 		, {
 			header : '客户ID',
@@ -127,6 +132,7 @@ Ext.onReady(function() {
 				iconCls : 'add',
 				handler : function() {
 					AddressdataForm.form.reset();
+					Ext.getCmp("Addressaddressid").setEditable (true);
 					createTextWindow(basePath + Addressaction + "?method=insAll", "新增", AddressdataForm, Addressstore);
 				}
 			},'-',{
@@ -139,6 +145,7 @@ Ext.onReady(function() {
 						});
 						return;
 					}
+					Ext.getCmp("Addressaddressid").setEditable (false);
 					createTextWindow(basePath + Addressaction + "?method=updAll", "修改", AddressdataForm, Addressstore);
 					AddressdataForm.form.loadRecord(selections[0]);
 				}

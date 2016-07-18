@@ -23,10 +23,15 @@ Ext.onReady(function() {
 		frame : true,
 		layout : 'column',
 		items : [ {
-			xtype : 'textfield',
-			id : 'Pricespricesid',
-			name : 'pricesid',
-			hidden : true
+			columnWidth : 1,
+			layout : 'form',
+			items : [ {
+				xtype : 'textfield',
+				fieldLabel : '价格体系ID',
+				id : 'Pricespricesid',
+				name : 'pricesid',
+				maxLength : 100
+			} ]
 		}
 		, {
 			columnWidth : 1,
@@ -166,7 +171,7 @@ Ext.onReady(function() {
 		columns : [{// 改
 			header : '价格体系ID',
 			dataIndex : 'pricesid',
-			hidden : true
+			sortable : true
 		}
 		, {
 			header : '商品ID',
@@ -229,6 +234,7 @@ Ext.onReady(function() {
 				iconCls : 'add',
 				handler : function() {
 					PricesdataForm.form.reset();
+					Ext.getCmp("Pricespricesid").setEditable (true);
 					createTextWindow(basePath + Pricesaction + "?method=insAll", "新增", PricesdataForm, Pricesstore);
 				}
 			},'-',{
@@ -241,6 +247,7 @@ Ext.onReady(function() {
 						});
 						return;
 					}
+					Ext.getCmp("Pricespricesid").setEditable (false);
 					createTextWindow(basePath + Pricesaction + "?method=updAll", "修改", PricesdataForm, Pricesstore);
 					PricesdataForm.form.loadRecord(selections[0]);
 				}

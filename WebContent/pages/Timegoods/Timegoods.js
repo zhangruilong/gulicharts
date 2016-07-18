@@ -30,10 +30,15 @@ Ext.onReady(function() {
 		frame : true,
 		layout : 'column',
 		items : [ {
-			xtype : 'textfield',
-			id : 'Timegoodstimegoodsid',
-			name : 'timegoodsid',
-			hidden : true
+			columnWidth : 1,
+			layout : 'form',
+			items : [ {
+				xtype : 'textfield',
+				fieldLabel : '促销品ID',
+				id : 'Timegoodstimegoodsid',
+				name : 'timegoodsid',
+				maxLength : 100
+			} ]
 		}
 		, {
 			columnWidth : 1,
@@ -250,7 +255,7 @@ Ext.onReady(function() {
 		columns : [{// 改
 			header : '促销品ID',
 			dataIndex : 'timegoodsid',
-			hidden : true
+			sortable : true
 		}
 		, {
 			header : '经销商ID',
@@ -348,6 +353,7 @@ Ext.onReady(function() {
 				iconCls : 'add',
 				handler : function() {
 					TimegoodsdataForm.form.reset();
+					Ext.getCmp("Timegoodstimegoodsid").setEditable (true);
 					createTextWindow(basePath + Timegoodsaction + "?method=insAll", "新增", TimegoodsdataForm, Timegoodsstore);
 				}
 			},'-',{
@@ -360,6 +366,7 @@ Ext.onReady(function() {
 						});
 						return;
 					}
+					Ext.getCmp("Timegoodstimegoodsid").setEditable (false);
 					createTextWindow(basePath + Timegoodsaction + "?method=updAll", "修改", TimegoodsdataForm, Timegoodsstore);
 					TimegoodsdataForm.form.loadRecord(selections[0]);
 				}

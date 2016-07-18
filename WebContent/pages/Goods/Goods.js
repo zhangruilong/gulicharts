@@ -27,10 +27,15 @@ Ext.onReady(function() {
 		frame : true,
 		layout : 'column',
 		items : [ {
-			xtype : 'textfield',
-			id : 'Goodsgoodsid',
-			name : 'goodsid',
-			hidden : true
+			columnWidth : 1,
+			layout : 'form',
+			items : [ {
+				xtype : 'textfield',
+				fieldLabel : '商品ID',
+				id : 'Goodsgoodsid',
+				name : 'goodsid',
+				maxLength : 100
+			} ]
 		}
 		, {
 			columnWidth : 1,
@@ -214,7 +219,7 @@ Ext.onReady(function() {
 		columns : [{// 改
 			header : '商品ID',
 			dataIndex : 'goodsid',
-			hidden : true
+			sortable : true
 		}
 		, {
 			header : '经销商ID',
@@ -297,6 +302,7 @@ Ext.onReady(function() {
 				iconCls : 'add',
 				handler : function() {
 					GoodsdataForm.form.reset();
+					Ext.getCmp("Goodsgoodsid").setEditable (true);
 					createTextWindow(basePath + Goodsaction + "?method=insAll", "新增", GoodsdataForm, Goodsstore);
 				}
 			},'-',{
@@ -309,6 +315,7 @@ Ext.onReady(function() {
 						});
 						return;
 					}
+					Ext.getCmp("Goodsgoodsid").setEditable (false);
 					createTextWindow(basePath + Goodsaction + "?method=updAll", "修改", GoodsdataForm, Goodsstore);
 					GoodsdataForm.form.loadRecord(selections[0]);
 				}

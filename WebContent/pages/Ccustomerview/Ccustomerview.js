@@ -30,10 +30,15 @@ Ext.onReady(function() {
 		frame : true,
 		layout : 'column',
 		items : [ {
-			xtype : 'textfield',
-			id : 'Ccustomerviewccustomerid',
-			name : 'ccustomerid',
-			hidden : true
+			columnWidth : 1,
+			layout : 'form',
+			items : [ {
+				xtype : 'textfield',
+				fieldLabel : 'ccustomerid',
+				id : 'Ccustomerviewccustomerid',
+				name : 'ccustomerid',
+				maxLength : 100
+			} ]
 		}
 		, {
 			columnWidth : 1,
@@ -250,7 +255,7 @@ Ext.onReady(function() {
 		columns : [{// 改
 			header : 'ccustomerid',
 			dataIndex : 'ccustomerid',
-			hidden : true
+			sortable : true
 		}
 		, {
 			header : 'ccustomerdetail',
@@ -344,6 +349,45 @@ Ext.onReady(function() {
 		}
 		],
 		tbar : [{
+				text : "新增",
+				iconCls : 'add',
+				handler : function() {
+					CcustomerviewdataForm.form.reset();
+					Ext.getCmp("Ccustomerviewccustomerid").setEditable (true);
+					createTextWindow(basePath + Ccustomerviewaction + "?method=insAll", "新增", CcustomerviewdataForm, Ccustomerviewstore);
+				}
+			},'-',{
+				text : "修改",
+				iconCls : 'edit',
+				handler : function() {
+					var selections = Ccustomerviewgrid.getSelection();
+					if (selections.length != 1) {
+						Ext.Msg.alert('提示', '请选择一条数据！', function() {
+						});
+						return;
+					}
+					Ext.getCmp("Ccustomerviewccustomerid").setEditable (false);
+					createTextWindow(basePath + Ccustomerviewaction + "?method=updAll", "修改", CcustomerviewdataForm, Ccustomerviewstore);
+					CcustomerviewdataForm.form.loadRecord(selections[0]);
+				}
+			},'-',{
+				text : "删除",
+				iconCls : 'delete',
+				handler : function() {
+					var selections = Ccustomerviewgrid.getSelection();
+					if (Ext.isEmpty(selections)) {
+						Ext.Msg.alert('提示', '请至少选择一条数据！');
+						return;
+					}
+					commonDelete(basePath + Ccustomerviewaction + "?method=delAll",selections,Ccustomerviewstore,Ccustomerviewkeycolumn);
+				}
+			},'-',{
+				text : "导入",
+				iconCls : 'imp',
+				handler : function() {
+					commonImp(basePath + Ccustomerviewaction + "?method=impAll","导入",Ccustomerviewstore);
+				}
+			},'-',{
 				text : "后台导出",
 				iconCls : 'exp',
 				handler : function() {

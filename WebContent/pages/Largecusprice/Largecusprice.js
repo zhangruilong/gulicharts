@@ -22,10 +22,15 @@ Ext.onReady(function() {
 		frame : true,
 		layout : 'column',
 		items : [ {
-			xtype : 'textfield',
-			id : 'Largecuspriceid',
-			name : 'id',
-			hidden : true
+			columnWidth : 1,
+			layout : 'form',
+			items : [ {
+				xtype : 'textfield',
+				fieldLabel : 'ID',
+				id : 'Largecuspriceid',
+				name : 'id',
+				maxLength : 100
+			} ]
 		}
 		, {
 			columnWidth : 1,
@@ -154,7 +159,7 @@ Ext.onReady(function() {
 		columns : [{// 改
 			header : 'ID',
 			dataIndex : 'id',
-			hidden : true
+			sortable : true
 		}
 		, {
 			header : '供应商',
@@ -212,6 +217,7 @@ Ext.onReady(function() {
 				iconCls : 'add',
 				handler : function() {
 					LargecuspricedataForm.form.reset();
+					Ext.getCmp("Largecuspriceid").setEditable (true);
 					createTextWindow(basePath + Largecuspriceaction + "?method=insAll", "新增", LargecuspricedataForm, Largecuspricestore);
 				}
 			},'-',{
@@ -224,6 +230,7 @@ Ext.onReady(function() {
 						});
 						return;
 					}
+					Ext.getCmp("Largecuspriceid").setEditable (false);
 					createTextWindow(basePath + Largecuspriceaction + "?method=updAll", "修改", LargecuspricedataForm, Largecuspricestore);
 					LargecuspricedataForm.form.loadRecord(selections[0]);
 				}

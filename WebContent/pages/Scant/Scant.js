@@ -21,10 +21,15 @@ Ext.onReady(function() {
 		frame : true,
 		layout : 'column',
 		items : [ {
-			xtype : 'textfield',
-			id : 'Scantscantid',
-			name : 'scantid',
-			hidden : true
+			columnWidth : 1,
+			layout : 'form',
+			items : [ {
+				xtype : 'textfield',
+				fieldLabel : '标品ID',
+				id : 'Scantscantid',
+				name : 'scantid',
+				maxLength : 100
+			} ]
 		}
 		, {
 			columnWidth : 1,
@@ -142,7 +147,7 @@ Ext.onReady(function() {
 		columns : [{// 改
 			header : '标品ID',
 			dataIndex : 'scantid',
-			hidden : true
+			sortable : true
 		}
 		, {
 			header : '编码',
@@ -195,6 +200,7 @@ Ext.onReady(function() {
 				iconCls : 'add',
 				handler : function() {
 					ScantdataForm.form.reset();
+					Ext.getCmp("Scantscantid").setEditable (true);
 					createTextWindow(basePath + Scantaction + "?method=insAll", "新增", ScantdataForm, Scantstore);
 				}
 			},'-',{
@@ -207,6 +213,7 @@ Ext.onReady(function() {
 						});
 						return;
 					}
+					Ext.getCmp("Scantscantid").setEditable (false);
 					createTextWindow(basePath + Scantaction + "?method=updAll", "修改", ScantdataForm, Scantstore);
 					ScantdataForm.form.loadRecord(selections[0]);
 				}

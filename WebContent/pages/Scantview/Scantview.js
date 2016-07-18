@@ -27,10 +27,15 @@ Ext.onReady(function() {
 		frame : true,
 		layout : 'column',
 		items : [ {
-			xtype : 'textfield',
-			id : 'Scantviewscantid',
-			name : 'scantid',
-			hidden : true
+			columnWidth : 1,
+			layout : 'form',
+			items : [ {
+				xtype : 'textfield',
+				fieldLabel : 'scantid',
+				id : 'Scantviewscantid',
+				name : 'scantid',
+				maxLength : 100
+			} ]
 		}
 		, {
 			columnWidth : 1,
@@ -214,7 +219,7 @@ Ext.onReady(function() {
 		columns : [{// 改
 			header : 'scantid',
 			dataIndex : 'scantid',
-			hidden : true
+			sortable : true
 		}
 		, {
 			header : 'scantcode',
@@ -293,6 +298,45 @@ Ext.onReady(function() {
 		}
 		],
 		tbar : [{
+				text : "新增",
+				iconCls : 'add',
+				handler : function() {
+					ScantviewdataForm.form.reset();
+					Ext.getCmp("Scantviewscantid").setEditable (true);
+					createTextWindow(basePath + Scantviewaction + "?method=insAll", "新增", ScantviewdataForm, Scantviewstore);
+				}
+			},'-',{
+				text : "修改",
+				iconCls : 'edit',
+				handler : function() {
+					var selections = Scantviewgrid.getSelection();
+					if (selections.length != 1) {
+						Ext.Msg.alert('提示', '请选择一条数据！', function() {
+						});
+						return;
+					}
+					Ext.getCmp("Scantviewscantid").setEditable (false);
+					createTextWindow(basePath + Scantviewaction + "?method=updAll", "修改", ScantviewdataForm, Scantviewstore);
+					ScantviewdataForm.form.loadRecord(selections[0]);
+				}
+			},'-',{
+				text : "删除",
+				iconCls : 'delete',
+				handler : function() {
+					var selections = Scantviewgrid.getSelection();
+					if (Ext.isEmpty(selections)) {
+						Ext.Msg.alert('提示', '请至少选择一条数据！');
+						return;
+					}
+					commonDelete(basePath + Scantviewaction + "?method=delAll",selections,Scantviewstore,Scantviewkeycolumn);
+				}
+			},'-',{
+				text : "导入",
+				iconCls : 'imp',
+				handler : function() {
+					commonImp(basePath + Scantviewaction + "?method=impAll","导入",Scantviewstore);
+				}
+			},'-',{
 				text : "后台导出",
 				iconCls : 'exp',
 				handler : function() {

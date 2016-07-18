@@ -17,10 +17,15 @@ Ext.onReady(function() {
 		frame : true,
 		layout : 'column',
 		items : [ {
-			xtype : 'textfield',
-			id : 'Paypayid',
-			name : 'payid',
-			hidden : true
+			columnWidth : 1,
+			layout : 'form',
+			items : [ {
+				xtype : 'textfield',
+				fieldLabel : '在线支付ID',
+				id : 'Paypayid',
+				name : 'payid',
+				maxLength : 100
+			} ]
 		}
 		, {
 			columnWidth : 1,
@@ -94,7 +99,7 @@ Ext.onReady(function() {
 		columns : [{// 改
 			header : '在线支付ID',
 			dataIndex : 'payid',
-			hidden : true
+			sortable : true
 		}
 		, {
 			header : '订单ID',
@@ -127,6 +132,7 @@ Ext.onReady(function() {
 				iconCls : 'add',
 				handler : function() {
 					PaydataForm.form.reset();
+					Ext.getCmp("Paypayid").setEditable (true);
 					createTextWindow(basePath + Payaction + "?method=insAll", "新增", PaydataForm, Paystore);
 				}
 			},'-',{
@@ -139,6 +145,7 @@ Ext.onReady(function() {
 						});
 						return;
 					}
+					Ext.getCmp("Paypayid").setEditable (false);
 					createTextWindow(basePath + Payaction + "?method=updAll", "修改", PaydataForm, Paystore);
 					PaydataForm.form.loadRecord(selections[0]);
 				}

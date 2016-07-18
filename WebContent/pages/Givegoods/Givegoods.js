@@ -27,10 +27,15 @@ Ext.onReady(function() {
 		frame : true,
 		layout : 'column',
 		items : [ {
-			xtype : 'textfield',
-			id : 'Givegoodsgivegoodsid',
-			name : 'givegoodsid',
-			hidden : true
+			columnWidth : 1,
+			layout : 'form',
+			items : [ {
+				xtype : 'textfield',
+				fieldLabel : '买赠ID',
+				id : 'Givegoodsgivegoodsid',
+				name : 'givegoodsid',
+				maxLength : 100
+			} ]
 		}
 		, {
 			columnWidth : 1,
@@ -214,7 +219,7 @@ Ext.onReady(function() {
 		columns : [{// 改
 			header : '买赠ID',
 			dataIndex : 'givegoodsid',
-			hidden : true
+			sortable : true
 		}
 		, {
 			header : '经销商ID',
@@ -297,6 +302,7 @@ Ext.onReady(function() {
 				iconCls : 'add',
 				handler : function() {
 					GivegoodsdataForm.form.reset();
+					Ext.getCmp("Givegoodsgivegoodsid").setEditable (true);
 					createTextWindow(basePath + Givegoodsaction + "?method=insAll", "新增", GivegoodsdataForm, Givegoodsstore);
 				}
 			},'-',{
@@ -309,6 +315,7 @@ Ext.onReady(function() {
 						});
 						return;
 					}
+					Ext.getCmp("Givegoodsgivegoodsid").setEditable (false);
 					createTextWindow(basePath + Givegoodsaction + "?method=updAll", "修改", GivegoodsdataForm, Givegoodsstore);
 					GivegoodsdataForm.form.loadRecord(selections[0]);
 				}

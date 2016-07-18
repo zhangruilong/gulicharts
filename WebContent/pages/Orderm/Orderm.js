@@ -28,10 +28,15 @@ Ext.onReady(function() {
 		frame : true,
 		layout : 'column',
 		items : [ {
-			xtype : 'textfield',
-			id : 'Ordermordermid',
-			name : 'ordermid',
-			hidden : true
+			columnWidth : 1,
+			layout : 'form',
+			items : [ {
+				xtype : 'textfield',
+				fieldLabel : '订单ID',
+				id : 'Ordermordermid',
+				name : 'ordermid',
+				maxLength : 100
+			} ]
 		}
 		, {
 			columnWidth : 1,
@@ -226,7 +231,7 @@ Ext.onReady(function() {
 		columns : [{// 改
 			header : '订单ID',
 			dataIndex : 'ordermid',
-			hidden : true
+			sortable : true
 		}
 		, {
 			header : '客户ID',
@@ -314,6 +319,7 @@ Ext.onReady(function() {
 				iconCls : 'add',
 				handler : function() {
 					OrdermdataForm.form.reset();
+					Ext.getCmp("Ordermordermid").setEditable (true);
 					createTextWindow(basePath + Ordermaction + "?method=insAll", "新增", OrdermdataForm, Ordermstore);
 				}
 			},'-',{
@@ -326,6 +332,7 @@ Ext.onReady(function() {
 						});
 						return;
 					}
+					Ext.getCmp("Ordermordermid").setEditable (false);
 					createTextWindow(basePath + Ordermaction + "?method=updAll", "修改", OrdermdataForm, Ordermstore);
 					OrdermdataForm.form.loadRecord(selections[0]);
 				}

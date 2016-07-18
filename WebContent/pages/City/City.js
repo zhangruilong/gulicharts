@@ -17,10 +17,15 @@ Ext.onReady(function() {
 		frame : true,
 		layout : 'column',
 		items : [ {
-			xtype : 'textfield',
-			id : 'Citycityid',
-			name : 'cityid',
-			hidden : true
+			columnWidth : 1,
+			layout : 'form',
+			items : [ {
+				xtype : 'textfield',
+				fieldLabel : '城市ID',
+				id : 'Citycityid',
+				name : 'cityid',
+				maxLength : 100
+			} ]
 		}
 		, {
 			columnWidth : 1,
@@ -94,7 +99,7 @@ Ext.onReady(function() {
 		columns : [{// 改
 			header : '城市ID',
 			dataIndex : 'cityid',
-			hidden : true
+			sortable : true
 		}
 		, {
 			header : '编码',
@@ -127,6 +132,7 @@ Ext.onReady(function() {
 				iconCls : 'add',
 				handler : function() {
 					CitydataForm.form.reset();
+					Ext.getCmp("Citycityid").setEditable (true);
 					createTextWindow(basePath + Cityaction + "?method=insAll", "新增", CitydataForm, Citystore);
 				}
 			},'-',{
@@ -139,6 +145,7 @@ Ext.onReady(function() {
 						});
 						return;
 					}
+					Ext.getCmp("Citycityid").setEditable (false);
 					createTextWindow(basePath + Cityaction + "?method=updAll", "修改", CitydataForm, Citystore);
 					CitydataForm.form.loadRecord(selections[0]);
 				}

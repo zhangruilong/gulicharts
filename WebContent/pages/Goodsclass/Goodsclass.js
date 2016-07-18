@@ -17,10 +17,15 @@ Ext.onReady(function() {
 		frame : true,
 		layout : 'column',
 		items : [ {
-			xtype : 'textfield',
-			id : 'Goodsclassgoodsclassid',
-			name : 'goodsclassid',
-			hidden : true
+			columnWidth : 1,
+			layout : 'form',
+			items : [ {
+				xtype : 'textfield',
+				fieldLabel : '大小类ID',
+				id : 'Goodsclassgoodsclassid',
+				name : 'goodsclassid',
+				maxLength : 100
+			} ]
 		}
 		, {
 			columnWidth : 1,
@@ -94,7 +99,7 @@ Ext.onReady(function() {
 		columns : [{// 改
 			header : '大小类ID',
 			dataIndex : 'goodsclassid',
-			hidden : true
+			sortable : true
 		}
 		, {
 			header : '编码',
@@ -127,6 +132,7 @@ Ext.onReady(function() {
 				iconCls : 'add',
 				handler : function() {
 					GoodsclassdataForm.form.reset();
+					Ext.getCmp("Goodsclassgoodsclassid").setEditable (true);
 					createTextWindow(basePath + Goodsclassaction + "?method=insAll", "新增", GoodsclassdataForm, Goodsclassstore);
 				}
 			},'-',{
@@ -139,6 +145,7 @@ Ext.onReady(function() {
 						});
 						return;
 					}
+					Ext.getCmp("Goodsclassgoodsclassid").setEditable (false);
 					createTextWindow(basePath + Goodsclassaction + "?method=updAll", "修改", GoodsclassdataForm, Goodsclassstore);
 					GoodsclassdataForm.form.loadRecord(selections[0]);
 				}

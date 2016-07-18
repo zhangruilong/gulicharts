@@ -44,10 +44,15 @@ Ext.onReady(function() {
 		frame : true,
 		layout : 'column',
 		items : [ {
-			xtype : 'textfield',
-			id : 'Timegoodsviewtimegoodsid',
-			name : 'timegoodsid',
-			hidden : true
+			columnWidth : 1,
+			layout : 'form',
+			items : [ {
+				xtype : 'textfield',
+				fieldLabel : 'timegoodsid',
+				id : 'Timegoodsviewtimegoodsid',
+				name : 'timegoodsid',
+				maxLength : 100
+			} ]
 		}
 		, {
 			columnWidth : 1,
@@ -418,7 +423,7 @@ Ext.onReady(function() {
 		columns : [{// 改
 			header : 'timegoodsid',
 			dataIndex : 'timegoodsid',
-			hidden : true
+			sortable : true
 		}
 		, {
 			header : 'timegoodscompany',
@@ -582,6 +587,45 @@ Ext.onReady(function() {
 		}
 		],
 		tbar : [{
+				text : "新增",
+				iconCls : 'add',
+				handler : function() {
+					TimegoodsviewdataForm.form.reset();
+					Ext.getCmp("Timegoodsviewtimegoodsid").setEditable (true);
+					createTextWindow(basePath + Timegoodsviewaction + "?method=insAll", "新增", TimegoodsviewdataForm, Timegoodsviewstore);
+				}
+			},'-',{
+				text : "修改",
+				iconCls : 'edit',
+				handler : function() {
+					var selections = Timegoodsviewgrid.getSelection();
+					if (selections.length != 1) {
+						Ext.Msg.alert('提示', '请选择一条数据！', function() {
+						});
+						return;
+					}
+					Ext.getCmp("Timegoodsviewtimegoodsid").setEditable (false);
+					createTextWindow(basePath + Timegoodsviewaction + "?method=updAll", "修改", TimegoodsviewdataForm, Timegoodsviewstore);
+					TimegoodsviewdataForm.form.loadRecord(selections[0]);
+				}
+			},'-',{
+				text : "删除",
+				iconCls : 'delete',
+				handler : function() {
+					var selections = Timegoodsviewgrid.getSelection();
+					if (Ext.isEmpty(selections)) {
+						Ext.Msg.alert('提示', '请至少选择一条数据！');
+						return;
+					}
+					commonDelete(basePath + Timegoodsviewaction + "?method=delAll",selections,Timegoodsviewstore,Timegoodsviewkeycolumn);
+				}
+			},'-',{
+				text : "导入",
+				iconCls : 'imp',
+				handler : function() {
+					commonImp(basePath + Timegoodsviewaction + "?method=impAll","导入",Timegoodsviewstore);
+				}
+			},'-',{
 				text : "后台导出",
 				iconCls : 'exp',
 				handler : function() {

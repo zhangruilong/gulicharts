@@ -17,10 +17,15 @@ Ext.onReady(function() {
 		frame : true,
 		layout : 'column',
 		items : [ {
-			xtype : 'textfield',
-			id : 'Ccustomerccustomerid',
-			name : 'ccustomerid',
-			hidden : true
+			columnWidth : 1,
+			layout : 'form',
+			items : [ {
+				xtype : 'textfield',
+				fieldLabel : '经销商和客户ID',
+				id : 'Ccustomerccustomerid',
+				name : 'ccustomerid',
+				maxLength : 100
+			} ]
 		}
 		, {
 			columnWidth : 1,
@@ -49,7 +54,7 @@ Ext.onReady(function() {
 			layout : 'form',
 			items : [ {
 				xtype : 'textfield',
-				fieldLabel : '描述(关系等级)',
+				fieldLabel : '客户等级',
 				id : 'Ccustomerccustomerdetail',
 				name : 'ccustomerdetail',
 				maxLength : 100
@@ -60,7 +65,7 @@ Ext.onReady(function() {
 			layout : 'form',
 			items : [ {
 				xtype : 'textfield',
-				fieldLabel : '创建时间',
+				fieldLabel : '客户经理',
 				id : 'Ccustomercreatetime',
 				name : 'createtime',
 				maxLength : 100
@@ -71,7 +76,7 @@ Ext.onReady(function() {
 			layout : 'form',
 			items : [ {
 				xtype : 'textfield',
-				fieldLabel : '创建人',
+				fieldLabel : '大客户',
 				id : 'Ccustomercreator',
 				name : 'creator',
 				maxLength : 100
@@ -94,7 +99,7 @@ Ext.onReady(function() {
 		columns : [{// 改
 			header : '经销商和客户ID',
 			dataIndex : 'ccustomerid',
-			hidden : true
+			sortable : true
 		}
 		, {
 			header : '经销商ID',
@@ -107,17 +112,17 @@ Ext.onReady(function() {
 			sortable : true
 		}
 		, {
-			header : '描述(关系等级)',
+			header : '客户等级',
 			dataIndex : 'ccustomerdetail',
 			sortable : true
 		}
 		, {
-			header : '创建时间',
+			header : '客户经理',
 			dataIndex : 'createtime',
 			sortable : true
 		}
 		, {
-			header : '创建人',
+			header : '大客户',
 			dataIndex : 'creator',
 			sortable : true
 		}
@@ -127,6 +132,7 @@ Ext.onReady(function() {
 				iconCls : 'add',
 				handler : function() {
 					CcustomerdataForm.form.reset();
+					Ext.getCmp("Ccustomerccustomerid").setEditable (true);
 					createTextWindow(basePath + Ccustomeraction + "?method=insAll", "新增", CcustomerdataForm, Ccustomerstore);
 				}
 			},'-',{
@@ -139,6 +145,7 @@ Ext.onReady(function() {
 						});
 						return;
 					}
+					Ext.getCmp("Ccustomerccustomerid").setEditable (false);
 					createTextWindow(basePath + Ccustomeraction + "?method=updAll", "修改", CcustomerdataForm, Ccustomerstore);
 					CcustomerdataForm.form.loadRecord(selections[0]);
 				}

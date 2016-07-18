@@ -41,10 +41,15 @@ Ext.onReady(function() {
 		frame : true,
 		layout : 'column',
 		items : [ {
-			xtype : 'textfield',
-			id : 'Givegoodsviewgivegoodsid',
-			name : 'givegoodsid',
-			hidden : true
+			columnWidth : 1,
+			layout : 'form',
+			items : [ {
+				xtype : 'textfield',
+				fieldLabel : 'givegoodsid',
+				id : 'Givegoodsviewgivegoodsid',
+				name : 'givegoodsid',
+				maxLength : 100
+			} ]
 		}
 		, {
 			columnWidth : 1,
@@ -382,7 +387,7 @@ Ext.onReady(function() {
 		columns : [{// 改
 			header : 'givegoodsid',
 			dataIndex : 'givegoodsid',
-			hidden : true
+			sortable : true
 		}
 		, {
 			header : 'givegoodscompany',
@@ -531,6 +536,45 @@ Ext.onReady(function() {
 		}
 		],
 		tbar : [{
+				text : "新增",
+				iconCls : 'add',
+				handler : function() {
+					GivegoodsviewdataForm.form.reset();
+					Ext.getCmp("Givegoodsviewgivegoodsid").setEditable (true);
+					createTextWindow(basePath + Givegoodsviewaction + "?method=insAll", "新增", GivegoodsviewdataForm, Givegoodsviewstore);
+				}
+			},'-',{
+				text : "修改",
+				iconCls : 'edit',
+				handler : function() {
+					var selections = Givegoodsviewgrid.getSelection();
+					if (selections.length != 1) {
+						Ext.Msg.alert('提示', '请选择一条数据！', function() {
+						});
+						return;
+					}
+					Ext.getCmp("Givegoodsviewgivegoodsid").setEditable (false);
+					createTextWindow(basePath + Givegoodsviewaction + "?method=updAll", "修改", GivegoodsviewdataForm, Givegoodsviewstore);
+					GivegoodsviewdataForm.form.loadRecord(selections[0]);
+				}
+			},'-',{
+				text : "删除",
+				iconCls : 'delete',
+				handler : function() {
+					var selections = Givegoodsviewgrid.getSelection();
+					if (Ext.isEmpty(selections)) {
+						Ext.Msg.alert('提示', '请至少选择一条数据！');
+						return;
+					}
+					commonDelete(basePath + Givegoodsviewaction + "?method=delAll",selections,Givegoodsviewstore,Givegoodsviewkeycolumn);
+				}
+			},'-',{
+				text : "导入",
+				iconCls : 'imp',
+				handler : function() {
+					commonImp(basePath + Givegoodsviewaction + "?method=impAll","导入",Givegoodsviewstore);
+				}
+			},'-',{
 				text : "后台导出",
 				iconCls : 'exp',
 				handler : function() {
