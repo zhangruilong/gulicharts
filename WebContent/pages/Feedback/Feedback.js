@@ -84,30 +84,50 @@ Ext.onReady(function() {
 	        type: 'spreadsheet',
 	        checkboxSelect: true
 	     },
+	     plugins: {
+	         ptype: 'cellediting',
+	         clicksToEdit: 1
+	     },
 		columns : [{// 改
 			header : '客户反馈id',
 			dataIndex : 'feedbackid',
-			sortable : true
+			sortable : true, 
+			editor: {
+                xtype: 'textfield',
+                editable: false
+            }
 		}
 		, {
 			header : '内容',
 			dataIndex : 'feedbackdetail',
-			sortable : true
+			sortable : true,  
+			editor: {
+                xtype: 'textfield'
+            }
 		}
 		, {
 			header : '客户id',
 			dataIndex : 'feedbackcustomer',
-			sortable : true
+			sortable : true,  
+			editor: {
+                xtype: 'textfield'
+            }
 		}
 		, {
 			header : '反馈时间',
 			dataIndex : 'feedbacktime',
-			sortable : true
+			sortable : true,  
+			editor: {
+                xtype: 'textfield'
+            }
 		}
 		, {
 			header : '反馈状态',
 			dataIndex : 'feedbackstate',
-			sortable : true
+			sortable : true,  
+			editor: {
+                xtype: 'textfield'
+            }
 		}
 		],
 		tbar : [{
@@ -119,6 +139,17 @@ Ext.onReady(function() {
 					createTextWindow(basePath + Feedbackaction + "?method=insAll", "新增", FeedbackdataForm, Feedbackstore);
 				}
 			},'-',{
+				text : "保存",
+				iconCls : 'ok',
+				handler : function() {
+					var selections = Feedbackgrid.getSelection();
+					if (Ext.isEmpty(selections)) {
+						Ext.Msg.alert('提示', '请至少选择一条数据！');
+						return;
+					}
+					commonSave(basePath + Feedbackaction + "?method=updAll",selections);
+				}
+			},'-',{
 				text : "修改",
 				iconCls : 'edit',
 				handler : function() {
@@ -128,6 +159,7 @@ Ext.onReady(function() {
 						});
 						return;
 					}
+					FeedbackdataForm.form.reset();
 					Ext.getCmp("Feedbackfeedbackid").setEditable (false);
 					createTextWindow(basePath + Feedbackaction + "?method=updAll", "修改", FeedbackdataForm, Feedbackstore);
 					FeedbackdataForm.form.loadRecord(selections[0]);

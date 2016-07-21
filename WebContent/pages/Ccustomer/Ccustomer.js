@@ -96,35 +96,58 @@ Ext.onReady(function() {
 	        type: 'spreadsheet',
 	        checkboxSelect: true
 	     },
+	     plugins: {
+	         ptype: 'cellediting',
+	         clicksToEdit: 1
+	     },
 		columns : [{// 改
 			header : '经销商和客户ID',
 			dataIndex : 'ccustomerid',
-			sortable : true
+			sortable : true, 
+			editor: {
+                xtype: 'textfield',
+                editable: false
+            }
 		}
 		, {
 			header : '经销商ID',
 			dataIndex : 'ccustomercompany',
-			sortable : true
+			sortable : true,  
+			editor: {
+                xtype: 'textfield'
+            }
 		}
 		, {
 			header : '客户ID',
 			dataIndex : 'ccustomercustomer',
-			sortable : true
+			sortable : true,  
+			editor: {
+                xtype: 'textfield'
+            }
 		}
 		, {
 			header : '客户等级',
 			dataIndex : 'ccustomerdetail',
-			sortable : true
+			sortable : true,  
+			editor: {
+                xtype: 'textfield'
+            }
 		}
 		, {
 			header : '客户经理',
 			dataIndex : 'createtime',
-			sortable : true
+			sortable : true,  
+			editor: {
+                xtype: 'textfield'
+            }
 		}
 		, {
 			header : '大客户',
 			dataIndex : 'creator',
-			sortable : true
+			sortable : true,  
+			editor: {
+                xtype: 'textfield'
+            }
 		}
 		],
 		tbar : [{
@@ -136,6 +159,17 @@ Ext.onReady(function() {
 					createTextWindow(basePath + Ccustomeraction + "?method=insAll", "新增", CcustomerdataForm, Ccustomerstore);
 				}
 			},'-',{
+				text : "保存",
+				iconCls : 'ok',
+				handler : function() {
+					var selections = Ccustomergrid.getSelection();
+					if (Ext.isEmpty(selections)) {
+						Ext.Msg.alert('提示', '请至少选择一条数据！');
+						return;
+					}
+					commonSave(basePath + Ccustomeraction + "?method=updAll",selections);
+				}
+			},'-',{
 				text : "修改",
 				iconCls : 'edit',
 				handler : function() {
@@ -145,6 +179,7 @@ Ext.onReady(function() {
 						});
 						return;
 					}
+					CcustomerdataForm.form.reset();
 					Ext.getCmp("Ccustomerccustomerid").setEditable (false);
 					createTextWindow(basePath + Ccustomeraction + "?method=updAll", "修改", CcustomerdataForm, Ccustomerstore);
 					CcustomerdataForm.form.loadRecord(selections[0]);

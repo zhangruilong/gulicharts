@@ -252,100 +252,162 @@ Ext.onReady(function() {
 	        type: 'spreadsheet',
 	        checkboxSelect: true
 	     },
+	     plugins: {
+	         ptype: 'cellediting',
+	         clicksToEdit: 1
+	     },
 		columns : [{// 改
 			header : '促销品ID',
 			dataIndex : 'timegoodsid',
-			sortable : true
+			sortable : true, 
+			editor: {
+                xtype: 'textfield',
+                editable: false
+            }
 		}
 		, {
 			header : '经销商ID',
 			dataIndex : 'timegoodscompany',
-			sortable : true
+			sortable : true,  
+			editor: {
+                xtype: 'textfield'
+            }
 		}
 		, {
 			header : '编码',
 			dataIndex : 'timegoodscode',
-			sortable : true
+			sortable : true,  
+			editor: {
+                xtype: 'textfield'
+            }
 		}
 		, {
 			header : '名称',
 			dataIndex : 'timegoodsname',
-			sortable : true
+			sortable : true,  
+			editor: {
+                xtype: 'textfield'
+            }
 		}
 		, {
 			header : '描述',
 			dataIndex : 'timegoodsdetail',
-			sortable : true
+			sortable : true,  
+			editor: {
+                xtype: 'textfield'
+            }
 		}
 		, {
 			header : '规格',
 			dataIndex : 'timegoodsunits',
-			sortable : true
+			sortable : true,  
+			editor: {
+                xtype: 'textfield'
+            }
 		}
 		, {
 			header : '单位',
 			dataIndex : 'timegoodsunit',
-			sortable : true
+			sortable : true,  
+			editor: {
+                xtype: 'textfield'
+            }
 		}
 		, {
 			header : '原价',
 			dataIndex : 'timegoodsprice',
-			sortable : true
+			sortable : true,  
+			editor: {
+                xtype: 'textfield'
+            }
 		}
 		, {
 			header : '现价',
 			dataIndex : 'timegoodsorgprice',
-			sortable : true
+			sortable : true,  
+			editor: {
+                xtype: 'textfield'
+            }
 		}
 		, {
 			header : '限量',
 			dataIndex : 'timegoodsnum',
-			sortable : true
+			sortable : true,  
+			editor: {
+                xtype: 'textfield'
+            }
 		}
 		, {
 			header : '小类名称',
 			dataIndex : 'timegoodsclass',
-			sortable : true
+			sortable : true,  
+			editor: {
+                xtype: 'textfield'
+            }
 		}
 		, {
 			header : '图片',
 			dataIndex : 'timegoodsimage',
-			sortable : true
+			sortable : true,  
+			editor: {
+                xtype: 'textfield'
+            }
 		}
 		, {
 			header : '状态',
 			dataIndex : 'timegoodsstatue',
-			sortable : true
+			sortable : true,  
+			editor: {
+                xtype: 'textfield'
+            }
 		}
 		, {
 			header : '创建时间',
 			dataIndex : 'createtime',
-			sortable : true
+			sortable : true,  
+			editor: {
+                xtype: 'textfield'
+            }
 		}
 		, {
 			header : '创建人',
 			dataIndex : 'creator',
-			sortable : true
+			sortable : true,  
+			editor: {
+                xtype: 'textfield'
+            }
 		}
 		, {
 			header : '全部限量',
 			dataIndex : 'allnum',
-			sortable : true
+			sortable : true,  
+			editor: {
+                xtype: 'textfield'
+            }
 		}
 		, {
 			header : '剩余数量',
 			dataIndex : 'surplusnum',
-			sortable : true
+			sortable : true,  
+			editor: {
+                xtype: 'textfield'
+            }
 		}
 		, {
 			header : '顺序',
 			dataIndex : 'timegoodsseq',
-			sortable : true
+			sortable : true,  
+			editor: {
+                xtype: 'textfield'
+            }
 		}
 		, {
 			header : '客户范围',
 			dataIndex : 'timegoodsscope',
-			sortable : true
+			sortable : true,  
+			editor: {
+                xtype: 'textfield'
+            }
 		}
 		],
 		tbar : [{
@@ -357,6 +419,17 @@ Ext.onReady(function() {
 					createTextWindow(basePath + Timegoodsaction + "?method=insAll", "新增", TimegoodsdataForm, Timegoodsstore);
 				}
 			},'-',{
+				text : "保存",
+				iconCls : 'ok',
+				handler : function() {
+					var selections = Timegoodsgrid.getSelection();
+					if (Ext.isEmpty(selections)) {
+						Ext.Msg.alert('提示', '请至少选择一条数据！');
+						return;
+					}
+					commonSave(basePath + Timegoodsaction + "?method=updAll",selections);
+				}
+			},'-',{
 				text : "修改",
 				iconCls : 'edit',
 				handler : function() {
@@ -366,6 +439,7 @@ Ext.onReady(function() {
 						});
 						return;
 					}
+					TimegoodsdataForm.form.reset();
 					Ext.getCmp("Timegoodstimegoodsid").setEditable (false);
 					createTextWindow(basePath + Timegoodsaction + "?method=updAll", "修改", TimegoodsdataForm, Timegoodsstore);
 					TimegoodsdataForm.form.loadRecord(selections[0]);

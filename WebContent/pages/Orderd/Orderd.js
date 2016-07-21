@@ -180,70 +180,114 @@ Ext.onReady(function() {
 	        type: 'spreadsheet',
 	        checkboxSelect: true
 	     },
+	     plugins: {
+	         ptype: 'cellediting',
+	         clicksToEdit: 1
+	     },
 		columns : [{// 改
 			header : '订单详细ID',
 			dataIndex : 'orderdid',
-			sortable : true
+			sortable : true, 
+			editor: {
+                xtype: 'textfield',
+                editable: false
+            }
 		}
 		, {
 			header : '订单ID',
 			dataIndex : 'orderdorderm',
-			sortable : true
+			sortable : true,  
+			editor: {
+                xtype: 'textfield'
+            }
 		}
 		, {
 			header : '商品编码',
 			dataIndex : 'orderdcode',
-			sortable : true
+			sortable : true,  
+			editor: {
+                xtype: 'textfield'
+            }
 		}
 		, {
 			header : '商品类型',
 			dataIndex : 'orderdtype',
-			sortable : true
+			sortable : true,  
+			editor: {
+                xtype: 'textfield'
+            }
 		}
 		, {
 			header : '名称',
 			dataIndex : 'orderdname',
-			sortable : true
+			sortable : true,  
+			editor: {
+                xtype: 'textfield'
+            }
 		}
 		, {
 			header : '描述',
 			dataIndex : 'orderddetail',
-			sortable : true
+			sortable : true,  
+			editor: {
+                xtype: 'textfield'
+            }
 		}
 		, {
 			header : '规格',
 			dataIndex : 'orderdunits',
-			sortable : true
+			sortable : true,  
+			editor: {
+                xtype: 'textfield'
+            }
 		}
 		, {
 			header : '价格',
 			dataIndex : 'orderdprice',
-			sortable : true
+			sortable : true,  
+			editor: {
+                xtype: 'textfield'
+            }
 		}
 		, {
 			header : '单位',
 			dataIndex : 'orderdunit',
-			sortable : true
+			sortable : true,  
+			editor: {
+                xtype: 'textfield'
+            }
 		}
 		, {
 			header : '小类',
 			dataIndex : 'orderdclass',
-			sortable : true
+			sortable : true,  
+			editor: {
+                xtype: 'textfield'
+            }
 		}
 		, {
 			header : '数量',
 			dataIndex : 'orderdnum',
-			sortable : true
+			sortable : true,  
+			editor: {
+                xtype: 'textfield'
+            }
 		}
 		, {
 			header : '下单金额',
 			dataIndex : 'orderdmoney',
-			sortable : true
+			sortable : true,  
+			editor: {
+                xtype: 'textfield'
+            }
 		}
 		, {
 			header : '实际金额',
 			dataIndex : 'orderdrightmoney',
-			sortable : true
+			sortable : true,  
+			editor: {
+                xtype: 'textfield'
+            }
 		}
 		],
 		tbar : [{
@@ -255,6 +299,17 @@ Ext.onReady(function() {
 					createTextWindow(basePath + Orderdaction + "?method=insAll", "新增", OrderddataForm, Orderdstore);
 				}
 			},'-',{
+				text : "保存",
+				iconCls : 'ok',
+				handler : function() {
+					var selections = Orderdgrid.getSelection();
+					if (Ext.isEmpty(selections)) {
+						Ext.Msg.alert('提示', '请至少选择一条数据！');
+						return;
+					}
+					commonSave(basePath + Orderdaction + "?method=updAll",selections);
+				}
+			},'-',{
 				text : "修改",
 				iconCls : 'edit',
 				handler : function() {
@@ -264,6 +319,7 @@ Ext.onReady(function() {
 						});
 						return;
 					}
+					OrderddataForm.form.reset();
 					Ext.getCmp("Orderdorderdid").setEditable (false);
 					createTextWindow(basePath + Orderdaction + "?method=updAll", "修改", OrderddataForm, Orderdstore);
 					OrderddataForm.form.loadRecord(selections[0]);

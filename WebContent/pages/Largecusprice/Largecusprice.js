@@ -156,60 +156,98 @@ Ext.onReady(function() {
 	        type: 'spreadsheet',
 	        checkboxSelect: true
 	     },
+	     plugins: {
+	         ptype: 'cellediting',
+	         clicksToEdit: 1
+	     },
 		columns : [{// 改
 			header : 'ID',
 			dataIndex : 'id',
-			sortable : true
+			sortable : true, 
+			editor: {
+                xtype: 'textfield',
+                editable: false
+            }
 		}
 		, {
 			header : '供应商',
 			dataIndex : 'largecuspricecompany',
-			sortable : true
+			sortable : true,  
+			editor: {
+                xtype: 'textfield'
+            }
 		}
 		, {
 			header : '客户',
 			dataIndex : 'largecuspricecustomer',
-			sortable : true
+			sortable : true,  
+			editor: {
+                xtype: 'textfield'
+            }
 		}
 		, {
 			header : '商品',
 			dataIndex : 'largecuspricegoods',
-			sortable : true
+			sortable : true,  
+			editor: {
+                xtype: 'textfield'
+            }
 		}
 		, {
 			header : '单品价',
 			dataIndex : 'largecuspriceprice',
-			sortable : true
+			sortable : true,  
+			editor: {
+                xtype: 'textfield'
+            }
 		}
 		, {
 			header : '描述',
 			dataIndex : 'largecuspricedetail',
-			sortable : true
+			sortable : true,  
+			editor: {
+                xtype: 'textfield'
+            }
 		}
 		, {
 			header : '创建时间',
 			dataIndex : 'largecuspricecreatetime',
-			sortable : true
+			sortable : true,  
+			editor: {
+                xtype: 'textfield'
+            }
 		}
 		, {
 			header : '创建人',
 			dataIndex : 'largecuspricecreator',
-			sortable : true
+			sortable : true,  
+			editor: {
+                xtype: 'textfield'
+            }
 		}
 		, {
 			header : '套装价',
 			dataIndex : 'largecuspriceprice2',
-			sortable : true
+			sortable : true,  
+			editor: {
+                xtype: 'textfield'
+            }
 		}
 		, {
 			header : '单品价单位',
 			dataIndex : 'largecuspriceunit',
-			sortable : true
+			sortable : true,  
+			editor: {
+                xtype: 'textfield'
+            }
 		}
 		, {
 			header : '套装价单位',
 			dataIndex : 'largecuspriceunit2',
-			sortable : true
+			sortable : true,  
+			editor: {
+                xtype: 'textfield'
+            }
 		}
 		],
 		tbar : [{
@@ -221,6 +259,17 @@ Ext.onReady(function() {
 					createTextWindow(basePath + Largecuspriceaction + "?method=insAll", "新增", LargecuspricedataForm, Largecuspricestore);
 				}
 			},'-',{
+				text : "保存",
+				iconCls : 'ok',
+				handler : function() {
+					var selections = Largecuspricegrid.getSelection();
+					if (Ext.isEmpty(selections)) {
+						Ext.Msg.alert('提示', '请至少选择一条数据！');
+						return;
+					}
+					commonSave(basePath + Largecuspriceaction + "?method=updAll",selections);
+				}
+			},'-',{
 				text : "修改",
 				iconCls : 'edit',
 				handler : function() {
@@ -230,6 +279,7 @@ Ext.onReady(function() {
 						});
 						return;
 					}
+					LargecuspricedataForm.form.reset();
 					Ext.getCmp("Largecuspriceid").setEditable (false);
 					createTextWindow(basePath + Largecuspriceaction + "?method=updAll", "修改", LargecuspricedataForm, Largecuspricestore);
 					LargecuspricedataForm.form.loadRecord(selections[0]);

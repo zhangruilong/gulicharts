@@ -144,55 +144,90 @@ Ext.onReady(function() {
 	        type: 'spreadsheet',
 	        checkboxSelect: true
 	     },
+	     plugins: {
+	         ptype: 'cellediting',
+	         clicksToEdit: 1
+	     },
 		columns : [{// 改
 			header : '标品ID',
 			dataIndex : 'scantid',
-			sortable : true
+			sortable : true, 
+			editor: {
+                xtype: 'textfield',
+                editable: false
+            }
 		}
 		, {
 			header : '编码',
 			dataIndex : 'scantcode',
-			sortable : true
+			sortable : true,  
+			editor: {
+                xtype: 'textfield'
+            }
 		}
 		, {
 			header : '名称',
 			dataIndex : 'scantname',
-			sortable : true
+			sortable : true,  
+			editor: {
+                xtype: 'textfield'
+            }
 		}
 		, {
 			header : '描述',
 			dataIndex : 'scantdetail',
-			sortable : true
+			sortable : true,  
+			editor: {
+                xtype: 'textfield'
+            }
 		}
 		, {
 			header : '规格',
 			dataIndex : 'scantunits',
-			sortable : true
+			sortable : true,  
+			editor: {
+                xtype: 'textfield'
+            }
 		}
 		, {
 			header : '小类ID',
 			dataIndex : 'scantclass',
-			sortable : true
+			sortable : true,  
+			editor: {
+                xtype: 'textfield'
+            }
 		}
 		, {
 			header : '图片',
 			dataIndex : 'scantimage',
-			sortable : true
+			sortable : true,  
+			editor: {
+                xtype: 'textfield'
+            }
 		}
 		, {
 			header : '品牌',
 			dataIndex : 'scantbrand',
-			sortable : true
+			sortable : true,  
+			editor: {
+                xtype: 'textfield'
+            }
 		}
 		, {
 			header : '种类',
 			dataIndex : 'scanttype',
-			sortable : true
+			sortable : true,  
+			editor: {
+                xtype: 'textfield'
+            }
 		}
 		, {
 			header : '状态',
 			dataIndex : 'scantstatue',
-			sortable : true
+			sortable : true,  
+			editor: {
+                xtype: 'textfield'
+            }
 		}
 		],
 		tbar : [{
@@ -204,6 +239,17 @@ Ext.onReady(function() {
 					createTextWindow(basePath + Scantaction + "?method=insAll", "新增", ScantdataForm, Scantstore);
 				}
 			},'-',{
+				text : "保存",
+				iconCls : 'ok',
+				handler : function() {
+					var selections = Scantgrid.getSelection();
+					if (Ext.isEmpty(selections)) {
+						Ext.Msg.alert('提示', '请至少选择一条数据！');
+						return;
+					}
+					commonSave(basePath + Scantaction + "?method=updAll",selections);
+				}
+			},'-',{
 				text : "修改",
 				iconCls : 'edit',
 				handler : function() {
@@ -213,6 +259,7 @@ Ext.onReady(function() {
 						});
 						return;
 					}
+					ScantdataForm.form.reset();
 					Ext.getCmp("Scantscantid").setEditable (false);
 					createTextWindow(basePath + Scantaction + "?method=updAll", "修改", ScantdataForm, Scantstore);
 					ScantdataForm.form.loadRecord(selections[0]);

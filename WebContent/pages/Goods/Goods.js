@@ -216,85 +216,138 @@ Ext.onReady(function() {
 	        type: 'spreadsheet',
 	        checkboxSelect: true
 	     },
+	     plugins: {
+	         ptype: 'cellediting',
+	         clicksToEdit: 1
+	     },
 		columns : [{// 改
 			header : '商品ID',
 			dataIndex : 'goodsid',
-			sortable : true
+			sortable : true, 
+			editor: {
+                xtype: 'textfield',
+                editable: false
+            }
 		}
 		, {
 			header : '经销商ID',
 			dataIndex : 'goodscompany',
-			sortable : true
+			sortable : true,  
+			editor: {
+                xtype: 'textfield'
+            }
 		}
 		, {
 			header : '编码',
 			dataIndex : 'goodscode',
-			sortable : true
+			sortable : true,  
+			editor: {
+                xtype: 'textfield'
+            }
 		}
 		, {
 			header : '名称',
 			dataIndex : 'goodsname',
-			sortable : true
+			sortable : true,  
+			editor: {
+                xtype: 'textfield'
+            }
 		}
 		, {
 			header : '描述',
 			dataIndex : 'goodsdetail',
-			sortable : true
+			sortable : true,  
+			editor: {
+                xtype: 'textfield'
+            }
 		}
 		, {
 			header : '规格',
 			dataIndex : 'goodsunits',
-			sortable : true
+			sortable : true,  
+			editor: {
+                xtype: 'textfield'
+            }
 		}
 		, {
 			header : '小类ID',
 			dataIndex : 'goodsclass',
-			sortable : true
+			sortable : true,  
+			editor: {
+                xtype: 'textfield'
+            }
 		}
 		, {
 			header : '图片',
 			dataIndex : 'goodsimage',
-			sortable : true
+			sortable : true,  
+			editor: {
+                xtype: 'textfield'
+            }
 		}
 		, {
 			header : '状态',
 			dataIndex : 'goodsstatue',
-			sortable : true
+			sortable : true,  
+			editor: {
+                xtype: 'textfield'
+            }
 		}
 		, {
 			header : '创建时间',
 			dataIndex : 'createtime',
-			sortable : true
+			sortable : true,  
+			editor: {
+                xtype: 'textfield'
+            }
 		}
 		, {
 			header : '修改时间',
 			dataIndex : 'updtime',
-			sortable : true
+			sortable : true,  
+			editor: {
+                xtype: 'textfield'
+            }
 		}
 		, {
 			header : '创建人',
 			dataIndex : 'creator',
-			sortable : true
+			sortable : true,  
+			editor: {
+                xtype: 'textfield'
+            }
 		}
 		, {
 			header : '修改人',
 			dataIndex : 'updor',
-			sortable : true
+			sortable : true,  
+			editor: {
+                xtype: 'textfield'
+            }
 		}
 		, {
 			header : '品牌',
 			dataIndex : 'goodsbrand',
-			sortable : true
+			sortable : true,  
+			editor: {
+                xtype: 'textfield'
+            }
 		}
 		, {
 			header : '种类',
 			dataIndex : 'goodstype',
-			sortable : true
+			sortable : true,  
+			editor: {
+                xtype: 'textfield'
+            }
 		}
 		, {
 			header : '顺序',
 			dataIndex : 'goodsorder',
-			sortable : true
+			sortable : true,  
+			editor: {
+                xtype: 'textfield'
+            }
 		}
 		],
 		tbar : [{
@@ -306,6 +359,17 @@ Ext.onReady(function() {
 					createTextWindow(basePath + Goodsaction + "?method=insAll", "新增", GoodsdataForm, Goodsstore);
 				}
 			},'-',{
+				text : "保存",
+				iconCls : 'ok',
+				handler : function() {
+					var selections = Goodsgrid.getSelection();
+					if (Ext.isEmpty(selections)) {
+						Ext.Msg.alert('提示', '请至少选择一条数据！');
+						return;
+					}
+					commonSave(basePath + Goodsaction + "?method=updAll",selections);
+				}
+			},'-',{
 				text : "修改",
 				iconCls : 'edit',
 				handler : function() {
@@ -315,6 +379,7 @@ Ext.onReady(function() {
 						});
 						return;
 					}
+					GoodsdataForm.form.reset();
 					Ext.getCmp("Goodsgoodsid").setEditable (false);
 					createTextWindow(basePath + Goodsaction + "?method=updAll", "修改", GoodsdataForm, Goodsstore);
 					GoodsdataForm.form.loadRecord(selections[0]);

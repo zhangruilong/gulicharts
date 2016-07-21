@@ -84,30 +84,50 @@ Ext.onReady(function() {
 	        type: 'spreadsheet',
 	        checkboxSelect: true
 	     },
+	     plugins: {
+	         ptype: 'cellediting',
+	         clicksToEdit: 1
+	     },
 		columns : [{// 改
 			header : '收藏ID',
 			dataIndex : 'collectid',
-			sortable : true
+			sortable : true, 
+			editor: {
+                xtype: 'textfield',
+                editable: false
+            }
 		}
 		, {
 			header : '商品ID',
 			dataIndex : 'collectgoods',
-			sortable : true
+			sortable : true,  
+			editor: {
+                xtype: 'textfield'
+            }
 		}
 		, {
 			header : '客户ID',
 			dataIndex : 'collectcustomer',
-			sortable : true
+			sortable : true,  
+			editor: {
+                xtype: 'textfield'
+            }
 		}
 		, {
 			header : '描述',
 			dataIndex : 'collectdetail',
-			sortable : true
+			sortable : true,  
+			editor: {
+                xtype: 'textfield'
+            }
 		}
 		, {
 			header : '创建时间',
 			dataIndex : 'createtime',
-			sortable : true
+			sortable : true,  
+			editor: {
+                xtype: 'textfield'
+            }
 		}
 		],
 		tbar : [{
@@ -119,6 +139,17 @@ Ext.onReady(function() {
 					createTextWindow(basePath + Collectaction + "?method=insAll", "新增", CollectdataForm, Collectstore);
 				}
 			},'-',{
+				text : "保存",
+				iconCls : 'ok',
+				handler : function() {
+					var selections = Collectgrid.getSelection();
+					if (Ext.isEmpty(selections)) {
+						Ext.Msg.alert('提示', '请至少选择一条数据！');
+						return;
+					}
+					commonSave(basePath + Collectaction + "?method=updAll",selections);
+				}
+			},'-',{
 				text : "修改",
 				iconCls : 'edit',
 				handler : function() {
@@ -128,6 +159,7 @@ Ext.onReady(function() {
 						});
 						return;
 					}
+					CollectdataForm.form.reset();
 					Ext.getCmp("Collectcollectid").setEditable (false);
 					createTextWindow(basePath + Collectaction + "?method=updAll", "修改", CollectdataForm, Collectstore);
 					CollectdataForm.form.loadRecord(selections[0]);

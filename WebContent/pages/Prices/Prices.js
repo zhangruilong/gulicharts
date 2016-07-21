@@ -168,65 +168,106 @@ Ext.onReady(function() {
 	        type: 'spreadsheet',
 	        checkboxSelect: true
 	     },
+	     plugins: {
+	         ptype: 'cellediting',
+	         clicksToEdit: 1
+	     },
 		columns : [{// 改
 			header : '价格体系ID',
 			dataIndex : 'pricesid',
-			sortable : true
+			sortable : true, 
+			editor: {
+                xtype: 'textfield',
+                editable: false
+            }
 		}
 		, {
 			header : '商品ID',
 			dataIndex : 'pricesgoods',
-			sortable : true
+			sortable : true,  
+			editor: {
+                xtype: 'textfield'
+            }
 		}
 		, {
 			header : '分类',
 			dataIndex : 'pricesclass',
-			sortable : true
+			sortable : true,  
+			editor: {
+                xtype: 'textfield'
+            }
 		}
 		, {
 			header : '等级',
 			dataIndex : 'priceslevel',
-			sortable : true
+			sortable : true,  
+			editor: {
+                xtype: 'textfield'
+            }
 		}
 		, {
 			header : '单品价',
 			dataIndex : 'pricesprice',
-			sortable : true
+			sortable : true,  
+			editor: {
+                xtype: 'textfield'
+            }
 		}
 		, {
 			header : '单品单位',
 			dataIndex : 'pricesunit',
-			sortable : true
+			sortable : true,  
+			editor: {
+                xtype: 'textfield'
+            }
 		}
 		, {
 			header : '套装价',
 			dataIndex : 'pricesprice2',
-			sortable : true
+			sortable : true,  
+			editor: {
+                xtype: 'textfield'
+            }
 		}
 		, {
 			header : '套装单位',
 			dataIndex : 'pricesunit2',
-			sortable : true
+			sortable : true,  
+			editor: {
+                xtype: 'textfield'
+            }
 		}
 		, {
 			header : '创建时间',
 			dataIndex : 'createtime',
-			sortable : true
+			sortable : true,  
+			editor: {
+                xtype: 'textfield'
+            }
 		}
 		, {
 			header : '修改时间',
 			dataIndex : 'updtime',
-			sortable : true
+			sortable : true,  
+			editor: {
+                xtype: 'textfield'
+            }
 		}
 		, {
 			header : '创建人',
 			dataIndex : 'creator',
-			sortable : true
+			sortable : true,  
+			editor: {
+                xtype: 'textfield'
+            }
 		}
 		, {
 			header : '修改人',
 			dataIndex : 'updor',
-			sortable : true
+			sortable : true,  
+			editor: {
+                xtype: 'textfield'
+            }
 		}
 		],
 		tbar : [{
@@ -238,6 +279,17 @@ Ext.onReady(function() {
 					createTextWindow(basePath + Pricesaction + "?method=insAll", "新增", PricesdataForm, Pricesstore);
 				}
 			},'-',{
+				text : "保存",
+				iconCls : 'ok',
+				handler : function() {
+					var selections = Pricesgrid.getSelection();
+					if (Ext.isEmpty(selections)) {
+						Ext.Msg.alert('提示', '请至少选择一条数据！');
+						return;
+					}
+					commonSave(basePath + Pricesaction + "?method=updAll",selections);
+				}
+			},'-',{
 				text : "修改",
 				iconCls : 'edit',
 				handler : function() {
@@ -247,6 +299,7 @@ Ext.onReady(function() {
 						});
 						return;
 					}
+					PricesdataForm.form.reset();
 					Ext.getCmp("Pricespricesid").setEditable (false);
 					createTextWindow(basePath + Pricesaction + "?method=updAll", "修改", PricesdataForm, Pricesstore);
 					PricesdataForm.form.loadRecord(selections[0]);

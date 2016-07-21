@@ -96,35 +96,58 @@ Ext.onReady(function() {
 	        type: 'spreadsheet',
 	        checkboxSelect: true
 	     },
+	     plugins: {
+	         ptype: 'cellediting',
+	         clicksToEdit: 1
+	     },
 		columns : [{// 改
 			header : '在线支付ID',
 			dataIndex : 'payid',
-			sortable : true
+			sortable : true, 
+			editor: {
+                xtype: 'textfield',
+                editable: false
+            }
 		}
 		, {
 			header : '订单ID',
 			dataIndex : 'payorderm',
-			sortable : true
+			sortable : true,  
+			editor: {
+                xtype: 'textfield'
+            }
 		}
 		, {
 			header : '备注',
 			dataIndex : 'paydetail',
-			sortable : true
+			sortable : true,  
+			editor: {
+                xtype: 'textfield'
+            }
 		}
 		, {
 			header : '状态',
 			dataIndex : 'paystatue',
-			sortable : true
+			sortable : true,  
+			editor: {
+                xtype: 'textfield'
+            }
 		}
 		, {
 			header : '修改时间',
 			dataIndex : 'updtime',
-			sortable : true
+			sortable : true,  
+			editor: {
+                xtype: 'textfield'
+            }
 		}
 		, {
 			header : '修改人',
 			dataIndex : 'updor',
-			sortable : true
+			sortable : true,  
+			editor: {
+                xtype: 'textfield'
+            }
 		}
 		],
 		tbar : [{
@@ -136,6 +159,17 @@ Ext.onReady(function() {
 					createTextWindow(basePath + Payaction + "?method=insAll", "新增", PaydataForm, Paystore);
 				}
 			},'-',{
+				text : "保存",
+				iconCls : 'ok',
+				handler : function() {
+					var selections = Paygrid.getSelection();
+					if (Ext.isEmpty(selections)) {
+						Ext.Msg.alert('提示', '请至少选择一条数据！');
+						return;
+					}
+					commonSave(basePath + Payaction + "?method=updAll",selections);
+				}
+			},'-',{
 				text : "修改",
 				iconCls : 'edit',
 				handler : function() {
@@ -145,6 +179,7 @@ Ext.onReady(function() {
 						});
 						return;
 					}
+					PaydataForm.form.reset();
 					Ext.getCmp("Paypayid").setEditable (false);
 					createTextWindow(basePath + Payaction + "?method=updAll", "修改", PaydataForm, Paystore);
 					PaydataForm.form.loadRecord(selections[0]);

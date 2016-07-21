@@ -96,35 +96,58 @@ Ext.onReady(function() {
 	        type: 'spreadsheet',
 	        checkboxSelect: true
 	     },
+	     plugins: {
+	         ptype: 'cellediting',
+	         clicksToEdit: 1
+	     },
 		columns : [{// 改
 			header : '城市ID',
 			dataIndex : 'cityid',
-			sortable : true
+			sortable : true, 
+			editor: {
+                xtype: 'textfield',
+                editable: false
+            }
 		}
 		, {
 			header : '编码',
 			dataIndex : 'citycode',
-			sortable : true
+			sortable : true,  
+			editor: {
+                xtype: 'textfield'
+            }
 		}
 		, {
 			header : '名称',
 			dataIndex : 'cityname',
-			sortable : true
+			sortable : true,  
+			editor: {
+                xtype: 'textfield'
+            }
 		}
 		, {
 			header : '父类',
 			dataIndex : 'cityparent',
-			sortable : true
+			sortable : true,  
+			editor: {
+                xtype: 'textfield'
+            }
 		}
 		, {
 			header : '描述',
 			dataIndex : 'citydetail',
-			sortable : true
+			sortable : true,  
+			editor: {
+                xtype: 'textfield'
+            }
 		}
 		, {
 			header : '状态',
 			dataIndex : 'citystatue',
-			sortable : true
+			sortable : true,  
+			editor: {
+                xtype: 'textfield'
+            }
 		}
 		],
 		tbar : [{
@@ -136,6 +159,17 @@ Ext.onReady(function() {
 					createTextWindow(basePath + Cityaction + "?method=insAll", "新增", CitydataForm, Citystore);
 				}
 			},'-',{
+				text : "保存",
+				iconCls : 'ok',
+				handler : function() {
+					var selections = Citygrid.getSelection();
+					if (Ext.isEmpty(selections)) {
+						Ext.Msg.alert('提示', '请至少选择一条数据！');
+						return;
+					}
+					commonSave(basePath + Cityaction + "?method=updAll",selections);
+				}
+			},'-',{
 				text : "修改",
 				iconCls : 'edit',
 				handler : function() {
@@ -145,6 +179,7 @@ Ext.onReady(function() {
 						});
 						return;
 					}
+					CitydataForm.form.reset();
 					Ext.getCmp("Citycityid").setEditable (false);
 					createTextWindow(basePath + Cityaction + "?method=updAll", "修改", CitydataForm, Citystore);
 					CitydataForm.form.loadRecord(selections[0]);

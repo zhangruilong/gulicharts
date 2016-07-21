@@ -96,35 +96,58 @@ Ext.onReady(function() {
 	        type: 'spreadsheet',
 	        checkboxSelect: true
 	     },
+	     plugins: {
+	         ptype: 'cellediting',
+	         clicksToEdit: 1
+	     },
 		columns : [{// 改
 			header : '大小类ID',
 			dataIndex : 'goodsclassid',
-			sortable : true
+			sortable : true, 
+			editor: {
+                xtype: 'textfield',
+                editable: false
+            }
 		}
 		, {
 			header : '编码',
 			dataIndex : 'goodsclasscode',
-			sortable : true
+			sortable : true,  
+			editor: {
+                xtype: 'textfield'
+            }
 		}
 		, {
 			header : '名称',
 			dataIndex : 'goodsclassname',
-			sortable : true
+			sortable : true,  
+			editor: {
+                xtype: 'textfield'
+            }
 		}
 		, {
 			header : '父类',
 			dataIndex : 'goodsclassparent',
-			sortable : true
+			sortable : true,  
+			editor: {
+                xtype: 'textfield'
+            }
 		}
 		, {
 			header : '描述',
 			dataIndex : 'goodsclassdetail',
-			sortable : true
+			sortable : true,  
+			editor: {
+                xtype: 'textfield'
+            }
 		}
 		, {
 			header : '状态',
 			dataIndex : 'goodsclassstatue',
-			sortable : true
+			sortable : true,  
+			editor: {
+                xtype: 'textfield'
+            }
 		}
 		],
 		tbar : [{
@@ -136,6 +159,17 @@ Ext.onReady(function() {
 					createTextWindow(basePath + Goodsclassaction + "?method=insAll", "新增", GoodsclassdataForm, Goodsclassstore);
 				}
 			},'-',{
+				text : "保存",
+				iconCls : 'ok',
+				handler : function() {
+					var selections = Goodsclassgrid.getSelection();
+					if (Ext.isEmpty(selections)) {
+						Ext.Msg.alert('提示', '请至少选择一条数据！');
+						return;
+					}
+					commonSave(basePath + Goodsclassaction + "?method=updAll",selections);
+				}
+			},'-',{
 				text : "修改",
 				iconCls : 'edit',
 				handler : function() {
@@ -145,6 +179,7 @@ Ext.onReady(function() {
 						});
 						return;
 					}
+					GoodsclassdataForm.form.reset();
 					Ext.getCmp("Goodsclassgoodsclassid").setEditable (false);
 					createTextWindow(basePath + Goodsclassaction + "?method=updAll", "修改", GoodsclassdataForm, Goodsclassstore);
 					GoodsclassdataForm.form.loadRecord(selections[0]);

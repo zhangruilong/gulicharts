@@ -96,35 +96,58 @@ Ext.onReady(function() {
 	        type: 'spreadsheet',
 	        checkboxSelect: true
 	     },
+	     plugins: {
+	         ptype: 'cellediting',
+	         clicksToEdit: 1
+	     },
 		columns : [{// 改
 			header : '我的地址ID',
 			dataIndex : 'addressid',
-			sortable : true
+			sortable : true, 
+			editor: {
+                xtype: 'textfield',
+                editable: false
+            }
 		}
 		, {
 			header : '客户ID',
 			dataIndex : 'addresscustomer',
-			sortable : true
+			sortable : true,  
+			editor: {
+                xtype: 'textfield'
+            }
 		}
 		, {
 			header : '联系人',
 			dataIndex : 'addressconnect',
-			sortable : true
+			sortable : true,  
+			editor: {
+                xtype: 'textfield'
+            }
 		}
 		, {
 			header : '手机',
 			dataIndex : 'addressphone',
-			sortable : true
+			sortable : true,  
+			editor: {
+                xtype: 'textfield'
+            }
 		}
 		, {
 			header : '地址',
 			dataIndex : 'addressaddress',
-			sortable : true
+			sortable : true,  
+			editor: {
+                xtype: 'textfield'
+            }
 		}
 		, {
 			header : '是否默认(1默认,0不是默认)',
 			dataIndex : 'addressture',
-			sortable : true
+			sortable : true,  
+			editor: {
+                xtype: 'textfield'
+            }
 		}
 		],
 		tbar : [{
@@ -136,6 +159,17 @@ Ext.onReady(function() {
 					createTextWindow(basePath + Addressaction + "?method=insAll", "新增", AddressdataForm, Addressstore);
 				}
 			},'-',{
+				text : "保存",
+				iconCls : 'ok',
+				handler : function() {
+					var selections = Addressgrid.getSelection();
+					if (Ext.isEmpty(selections)) {
+						Ext.Msg.alert('提示', '请至少选择一条数据！');
+						return;
+					}
+					commonSave(basePath + Addressaction + "?method=updAll",selections);
+				}
+			},'-',{
 				text : "修改",
 				iconCls : 'edit',
 				handler : function() {
@@ -145,6 +179,7 @@ Ext.onReady(function() {
 						});
 						return;
 					}
+					AddressdataForm.form.reset();
 					Ext.getCmp("Addressaddressid").setEditable (false);
 					createTextWindow(basePath + Addressaction + "?method=updAll", "修改", AddressdataForm, Addressstore);
 					AddressdataForm.form.loadRecord(selections[0]);
