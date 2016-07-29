@@ -89,21 +89,23 @@ Ext.onReady(function() {
 	var Addressgrid =  Ext.create('Ext.grid.Panel', {
 		height : document.documentElement.clientHeight - 4,
 		width : '100%',
+		forceFit: true,
 		title : Addresstitle,
 		store : Addressstore,
 		bbar : Addressbbar,
 	    selModel: {
-	        type: 'spreadsheet',
-	        checkboxSelect: true
-	     },
-	     plugins: {
+	        type: 'checkboxmodel'
+	    },
+	    plugins: {
 	         ptype: 'cellediting',
 	         clicksToEdit: 1
-	     },
-		columns : [{// 改
+	    },
+		columns : [{xtype: 'rownumberer',width:36}, 
+		{// 改
 			header : '我的地址ID',
 			dataIndex : 'addressid',
 			sortable : true, 
+			minWidth:100,
 			editor: {
                 xtype: 'textfield',
                 editable: false
@@ -113,6 +115,7 @@ Ext.onReady(function() {
 			header : '客户ID',
 			dataIndex : 'addresscustomer',
 			sortable : true,  
+			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -121,6 +124,7 @@ Ext.onReady(function() {
 			header : '联系人',
 			dataIndex : 'addressconnect',
 			sortable : true,  
+			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -129,6 +133,7 @@ Ext.onReady(function() {
 			header : '手机',
 			dataIndex : 'addressphone',
 			sortable : true,  
+			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -137,6 +142,7 @@ Ext.onReady(function() {
 			header : '地址',
 			dataIndex : 'addressaddress',
 			sortable : true,  
+			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -145,13 +151,14 @@ Ext.onReady(function() {
 			header : '是否默认(1默认,0不是默认)',
 			dataIndex : 'addressture',
 			sortable : true,  
+			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
 		}
 		],
 		tbar : [{
-				text : "新增",
+				text : Ext.os.deviceType === 'Phone' ? null : "新增",
 				iconCls : 'add',
 				handler : function() {
 					AddressdataForm.form.reset();
@@ -159,7 +166,7 @@ Ext.onReady(function() {
 					createTextWindow(basePath + Addressaction + "?method=insAll", "新增", AddressdataForm, Addressstore);
 				}
 			},'-',{
-				text : "保存",
+				text : Ext.os.deviceType === 'Phone' ? null : "保存",
 				iconCls : 'ok',
 				handler : function() {
 					var selections = Addressgrid.getSelection();
@@ -170,7 +177,7 @@ Ext.onReady(function() {
 					commonSave(basePath + Addressaction + "?method=updAll",selections);
 				}
 			},'-',{
-				text : "修改",
+				text : Ext.os.deviceType === 'Phone' ? null : "修改",
 				iconCls : 'edit',
 				handler : function() {
 					var selections = Addressgrid.getSelection();
@@ -185,54 +192,64 @@ Ext.onReady(function() {
 					AddressdataForm.form.loadRecord(selections[0]);
 				}
 			},'-',{
-				text : "删除",
-				iconCls : 'delete',
-				handler : function() {
-					var selections = Addressgrid.getSelection();
-					if (Ext.isEmpty(selections)) {
-						Ext.Msg.alert('提示', '请至少选择一条数据！');
-						return;
-					}
-					commonDelete(basePath + Addressaction + "?method=delAll",selections,Addressstore,Addresskeycolumn);
-				}
-			},'-',{
-				text : "导入",
-				iconCls : 'imp',
-				handler : function() {
-					commonImp(basePath + Addressaction + "?method=impAll","导入",Addressstore);
-				}
-			},'-',{
-				text : "后台导出",
-				iconCls : 'exp',
-				handler : function() {
-					Ext.Msg.confirm('请确认', '<b>提示:</b>请确认要导出当前数据？', function(btn, text) {
-						if (btn == 'yes') {
-							window.location.href = basePath + Addressaction + "?method=expAll"; 
-						}
-					});
-				}
-			},'-',{
-				text : "前台导出",
-				iconCls : 'exp',
-				handler : function() {
-					commonExp(Addressgrid);
-				}
-			},'-',{
-				text : "附件",
-				iconCls : 'attach',
-				handler : function() {
-					var selections = Addressgrid.getSelection();
-					if (selections.length != 1) {
-						Ext.Msg.alert('提示', '请选择一条数据！', function() {
-						});
-						return;
-					}
-					var fid = '';
-					for (var i=0;i<Addresskeycolumn.length;i++){
-						fid += selections[0].data[Addresskeycolumn[i]] + ","
-					}
-					commonAttach(fid, Addressclassify);
-				}
+	            text: '操作',
+	            menu: {
+	                xtype: 'menu',
+	                items: {
+	                    xtype: 'buttongroup',
+	                    columns: 3,
+	                    items: [{
+	                    	text : "删除",
+	        				iconCls : 'delete',
+	        				handler : function() {
+	        					var selections = Addressgrid.getSelection();
+	        					if (Ext.isEmpty(selections)) {
+	        						Ext.Msg.alert('提示', '请至少选择一条数据！');
+	        						return;
+	        					}
+	        					commonDelete(basePath + Addressaction + "?method=delAll",selections,Addressstore,Addresskeycolumn);
+	        				}
+	                    },{
+	                    	text : "导入",
+	        				iconCls : 'imp',
+	        				handler : function() {
+	        					commonImp(basePath + Addressaction + "?method=impAll","导入",Addressstore);
+	        				}
+	                    },{
+	                    	text : "后台导出",
+	        				iconCls : 'exp',
+	        				handler : function() {
+	        					Ext.Msg.confirm('请确认', '<b>提示:</b>请确认要导出当前数据？', function(btn, text) {
+	        						if (btn == 'yes') {
+	        							window.location.href = basePath + Addressaction + "?method=expAll"; 
+	        						}
+	        					});
+	        				}
+	                    },{
+	                    	text : "前台导出",
+	        				iconCls : 'exp',
+	        				handler : function() {
+	        					commonExp(Addressgrid);
+	        				}
+	                    },{
+	                    	text : "附件",
+	        				iconCls : 'attach',
+	        				handler : function() {
+	        					var selections = Addressgrid.getSelection();
+	        					if (selections.length != 1) {
+	        						Ext.Msg.alert('提示', '请选择一条数据！', function() {
+	        						});
+	        						return;
+	        					}
+	        					var fid = '';
+	        					for (var i=0;i<Addresskeycolumn.length;i++){
+	        						fid += selections[0].data[Addresskeycolumn[i]] + ","
+	        					}
+	        					commonAttach(fid, Addressclassify);
+	        				}
+	                    }]
+	                }
+	            }
 			},'->',{
 				xtype : 'textfield',
 				id : 'queryAddressaction',

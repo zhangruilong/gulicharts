@@ -89,21 +89,23 @@ Ext.onReady(function() {
 	var Citygrid =  Ext.create('Ext.grid.Panel', {
 		height : document.documentElement.clientHeight - 4,
 		width : '100%',
+		forceFit: true,
 		title : Citytitle,
 		store : Citystore,
 		bbar : Citybbar,
 	    selModel: {
-	        type: 'spreadsheet',
-	        checkboxSelect: true
-	     },
-	     plugins: {
+	        type: 'checkboxmodel'
+	    },
+	    plugins: {
 	         ptype: 'cellediting',
 	         clicksToEdit: 1
-	     },
-		columns : [{// 改
+	    },
+		columns : [{xtype: 'rownumberer',width:36}, 
+		{// 改
 			header : '城市ID',
 			dataIndex : 'cityid',
 			sortable : true, 
+			minWidth:100,
 			editor: {
                 xtype: 'textfield',
                 editable: false
@@ -113,6 +115,7 @@ Ext.onReady(function() {
 			header : '编码',
 			dataIndex : 'citycode',
 			sortable : true,  
+			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -121,6 +124,7 @@ Ext.onReady(function() {
 			header : '名称',
 			dataIndex : 'cityname',
 			sortable : true,  
+			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -129,6 +133,7 @@ Ext.onReady(function() {
 			header : '父类',
 			dataIndex : 'cityparent',
 			sortable : true,  
+			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -137,6 +142,7 @@ Ext.onReady(function() {
 			header : '描述',
 			dataIndex : 'citydetail',
 			sortable : true,  
+			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -145,13 +151,14 @@ Ext.onReady(function() {
 			header : '状态',
 			dataIndex : 'citystatue',
 			sortable : true,  
+			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
 		}
 		],
 		tbar : [{
-				text : "新增",
+				text : Ext.os.deviceType === 'Phone' ? null : "新增",
 				iconCls : 'add',
 				handler : function() {
 					CitydataForm.form.reset();
@@ -159,7 +166,7 @@ Ext.onReady(function() {
 					createTextWindow(basePath + Cityaction + "?method=insAll", "新增", CitydataForm, Citystore);
 				}
 			},'-',{
-				text : "保存",
+				text : Ext.os.deviceType === 'Phone' ? null : "保存",
 				iconCls : 'ok',
 				handler : function() {
 					var selections = Citygrid.getSelection();
@@ -170,7 +177,7 @@ Ext.onReady(function() {
 					commonSave(basePath + Cityaction + "?method=updAll",selections);
 				}
 			},'-',{
-				text : "修改",
+				text : Ext.os.deviceType === 'Phone' ? null : "修改",
 				iconCls : 'edit',
 				handler : function() {
 					var selections = Citygrid.getSelection();
@@ -185,54 +192,64 @@ Ext.onReady(function() {
 					CitydataForm.form.loadRecord(selections[0]);
 				}
 			},'-',{
-				text : "删除",
-				iconCls : 'delete',
-				handler : function() {
-					var selections = Citygrid.getSelection();
-					if (Ext.isEmpty(selections)) {
-						Ext.Msg.alert('提示', '请至少选择一条数据！');
-						return;
-					}
-					commonDelete(basePath + Cityaction + "?method=delAll",selections,Citystore,Citykeycolumn);
-				}
-			},'-',{
-				text : "导入",
-				iconCls : 'imp',
-				handler : function() {
-					commonImp(basePath + Cityaction + "?method=impAll","导入",Citystore);
-				}
-			},'-',{
-				text : "后台导出",
-				iconCls : 'exp',
-				handler : function() {
-					Ext.Msg.confirm('请确认', '<b>提示:</b>请确认要导出当前数据？', function(btn, text) {
-						if (btn == 'yes') {
-							window.location.href = basePath + Cityaction + "?method=expAll"; 
-						}
-					});
-				}
-			},'-',{
-				text : "前台导出",
-				iconCls : 'exp',
-				handler : function() {
-					commonExp(Citygrid);
-				}
-			},'-',{
-				text : "附件",
-				iconCls : 'attach',
-				handler : function() {
-					var selections = Citygrid.getSelection();
-					if (selections.length != 1) {
-						Ext.Msg.alert('提示', '请选择一条数据！', function() {
-						});
-						return;
-					}
-					var fid = '';
-					for (var i=0;i<Citykeycolumn.length;i++){
-						fid += selections[0].data[Citykeycolumn[i]] + ","
-					}
-					commonAttach(fid, Cityclassify);
-				}
+	            text: '操作',
+	            menu: {
+	                xtype: 'menu',
+	                items: {
+	                    xtype: 'buttongroup',
+	                    columns: 3,
+	                    items: [{
+	                    	text : "删除",
+	        				iconCls : 'delete',
+	        				handler : function() {
+	        					var selections = Citygrid.getSelection();
+	        					if (Ext.isEmpty(selections)) {
+	        						Ext.Msg.alert('提示', '请至少选择一条数据！');
+	        						return;
+	        					}
+	        					commonDelete(basePath + Cityaction + "?method=delAll",selections,Citystore,Citykeycolumn);
+	        				}
+	                    },{
+	                    	text : "导入",
+	        				iconCls : 'imp',
+	        				handler : function() {
+	        					commonImp(basePath + Cityaction + "?method=impAll","导入",Citystore);
+	        				}
+	                    },{
+	                    	text : "后台导出",
+	        				iconCls : 'exp',
+	        				handler : function() {
+	        					Ext.Msg.confirm('请确认', '<b>提示:</b>请确认要导出当前数据？', function(btn, text) {
+	        						if (btn == 'yes') {
+	        							window.location.href = basePath + Cityaction + "?method=expAll"; 
+	        						}
+	        					});
+	        				}
+	                    },{
+	                    	text : "前台导出",
+	        				iconCls : 'exp',
+	        				handler : function() {
+	        					commonExp(Citygrid);
+	        				}
+	                    },{
+	                    	text : "附件",
+	        				iconCls : 'attach',
+	        				handler : function() {
+	        					var selections = Citygrid.getSelection();
+	        					if (selections.length != 1) {
+	        						Ext.Msg.alert('提示', '请选择一条数据！', function() {
+	        						});
+	        						return;
+	        					}
+	        					var fid = '';
+	        					for (var i=0;i<Citykeycolumn.length;i++){
+	        						fid += selections[0].data[Citykeycolumn[i]] + ","
+	        					}
+	        					commonAttach(fid, Cityclassify);
+	        				}
+	                    }]
+	                }
+	            }
 			},'->',{
 				xtype : 'textfield',
 				id : 'queryCityaction',

@@ -161,21 +161,23 @@ Ext.onReady(function() {
 	var Pricesgrid =  Ext.create('Ext.grid.Panel', {
 		height : document.documentElement.clientHeight - 4,
 		width : '100%',
+		forceFit: true,
 		title : Pricestitle,
 		store : Pricesstore,
 		bbar : Pricesbbar,
 	    selModel: {
-	        type: 'spreadsheet',
-	        checkboxSelect: true
-	     },
-	     plugins: {
+	        type: 'checkboxmodel'
+	    },
+	    plugins: {
 	         ptype: 'cellediting',
 	         clicksToEdit: 1
-	     },
-		columns : [{// 改
+	    },
+		columns : [{xtype: 'rownumberer',width:36}, 
+		{// 改
 			header : '价格体系ID',
 			dataIndex : 'pricesid',
 			sortable : true, 
+			minWidth:100,
 			editor: {
                 xtype: 'textfield',
                 editable: false
@@ -185,6 +187,7 @@ Ext.onReady(function() {
 			header : '商品ID',
 			dataIndex : 'pricesgoods',
 			sortable : true,  
+			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -193,6 +196,7 @@ Ext.onReady(function() {
 			header : '分类',
 			dataIndex : 'pricesclass',
 			sortable : true,  
+			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -201,6 +205,7 @@ Ext.onReady(function() {
 			header : '等级',
 			dataIndex : 'priceslevel',
 			sortable : true,  
+			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -209,6 +214,7 @@ Ext.onReady(function() {
 			header : '单品价',
 			dataIndex : 'pricesprice',
 			sortable : true,  
+			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -217,6 +223,7 @@ Ext.onReady(function() {
 			header : '单品单位',
 			dataIndex : 'pricesunit',
 			sortable : true,  
+			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -225,6 +232,7 @@ Ext.onReady(function() {
 			header : '套装价',
 			dataIndex : 'pricesprice2',
 			sortable : true,  
+			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -233,6 +241,7 @@ Ext.onReady(function() {
 			header : '套装单位',
 			dataIndex : 'pricesunit2',
 			sortable : true,  
+			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -241,6 +250,7 @@ Ext.onReady(function() {
 			header : '创建时间',
 			dataIndex : 'createtime',
 			sortable : true,  
+			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -249,6 +259,7 @@ Ext.onReady(function() {
 			header : '修改时间',
 			dataIndex : 'updtime',
 			sortable : true,  
+			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -257,6 +268,7 @@ Ext.onReady(function() {
 			header : '创建人',
 			dataIndex : 'creator',
 			sortable : true,  
+			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -265,13 +277,14 @@ Ext.onReady(function() {
 			header : '修改人',
 			dataIndex : 'updor',
 			sortable : true,  
+			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
 		}
 		],
 		tbar : [{
-				text : "新增",
+				text : Ext.os.deviceType === 'Phone' ? null : "新增",
 				iconCls : 'add',
 				handler : function() {
 					PricesdataForm.form.reset();
@@ -279,7 +292,7 @@ Ext.onReady(function() {
 					createTextWindow(basePath + Pricesaction + "?method=insAll", "新增", PricesdataForm, Pricesstore);
 				}
 			},'-',{
-				text : "保存",
+				text : Ext.os.deviceType === 'Phone' ? null : "保存",
 				iconCls : 'ok',
 				handler : function() {
 					var selections = Pricesgrid.getSelection();
@@ -290,7 +303,7 @@ Ext.onReady(function() {
 					commonSave(basePath + Pricesaction + "?method=updAll",selections);
 				}
 			},'-',{
-				text : "修改",
+				text : Ext.os.deviceType === 'Phone' ? null : "修改",
 				iconCls : 'edit',
 				handler : function() {
 					var selections = Pricesgrid.getSelection();
@@ -305,54 +318,64 @@ Ext.onReady(function() {
 					PricesdataForm.form.loadRecord(selections[0]);
 				}
 			},'-',{
-				text : "删除",
-				iconCls : 'delete',
-				handler : function() {
-					var selections = Pricesgrid.getSelection();
-					if (Ext.isEmpty(selections)) {
-						Ext.Msg.alert('提示', '请至少选择一条数据！');
-						return;
-					}
-					commonDelete(basePath + Pricesaction + "?method=delAll",selections,Pricesstore,Priceskeycolumn);
-				}
-			},'-',{
-				text : "导入",
-				iconCls : 'imp',
-				handler : function() {
-					commonImp(basePath + Pricesaction + "?method=impAll","导入",Pricesstore);
-				}
-			},'-',{
-				text : "后台导出",
-				iconCls : 'exp',
-				handler : function() {
-					Ext.Msg.confirm('请确认', '<b>提示:</b>请确认要导出当前数据？', function(btn, text) {
-						if (btn == 'yes') {
-							window.location.href = basePath + Pricesaction + "?method=expAll"; 
-						}
-					});
-				}
-			},'-',{
-				text : "前台导出",
-				iconCls : 'exp',
-				handler : function() {
-					commonExp(Pricesgrid);
-				}
-			},'-',{
-				text : "附件",
-				iconCls : 'attach',
-				handler : function() {
-					var selections = Pricesgrid.getSelection();
-					if (selections.length != 1) {
-						Ext.Msg.alert('提示', '请选择一条数据！', function() {
-						});
-						return;
-					}
-					var fid = '';
-					for (var i=0;i<Priceskeycolumn.length;i++){
-						fid += selections[0].data[Priceskeycolumn[i]] + ","
-					}
-					commonAttach(fid, Pricesclassify);
-				}
+	            text: '操作',
+	            menu: {
+	                xtype: 'menu',
+	                items: {
+	                    xtype: 'buttongroup',
+	                    columns: 3,
+	                    items: [{
+	                    	text : "删除",
+	        				iconCls : 'delete',
+	        				handler : function() {
+	        					var selections = Pricesgrid.getSelection();
+	        					if (Ext.isEmpty(selections)) {
+	        						Ext.Msg.alert('提示', '请至少选择一条数据！');
+	        						return;
+	        					}
+	        					commonDelete(basePath + Pricesaction + "?method=delAll",selections,Pricesstore,Priceskeycolumn);
+	        				}
+	                    },{
+	                    	text : "导入",
+	        				iconCls : 'imp',
+	        				handler : function() {
+	        					commonImp(basePath + Pricesaction + "?method=impAll","导入",Pricesstore);
+	        				}
+	                    },{
+	                    	text : "后台导出",
+	        				iconCls : 'exp',
+	        				handler : function() {
+	        					Ext.Msg.confirm('请确认', '<b>提示:</b>请确认要导出当前数据？', function(btn, text) {
+	        						if (btn == 'yes') {
+	        							window.location.href = basePath + Pricesaction + "?method=expAll"; 
+	        						}
+	        					});
+	        				}
+	                    },{
+	                    	text : "前台导出",
+	        				iconCls : 'exp',
+	        				handler : function() {
+	        					commonExp(Pricesgrid);
+	        				}
+	                    },{
+	                    	text : "附件",
+	        				iconCls : 'attach',
+	        				handler : function() {
+	        					var selections = Pricesgrid.getSelection();
+	        					if (selections.length != 1) {
+	        						Ext.Msg.alert('提示', '请选择一条数据！', function() {
+	        						});
+	        						return;
+	        					}
+	        					var fid = '';
+	        					for (var i=0;i<Priceskeycolumn.length;i++){
+	        						fid += selections[0].data[Priceskeycolumn[i]] + ","
+	        					}
+	        					commonAttach(fid, Pricesclassify);
+	        				}
+	                    }]
+	                }
+	            }
 			},'->',{
 				xtype : 'textfield',
 				id : 'queryPricesaction',

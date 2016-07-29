@@ -173,21 +173,23 @@ Ext.onReady(function() {
 	var Companygrid =  Ext.create('Ext.grid.Panel', {
 		height : document.documentElement.clientHeight - 4,
 		width : '100%',
+		forceFit: true,
 		title : Companytitle,
 		store : Companystore,
 		bbar : Companybbar,
 	    selModel: {
-	        type: 'spreadsheet',
-	        checkboxSelect: true
-	     },
-	     plugins: {
+	        type: 'checkboxmodel'
+	    },
+	    plugins: {
 	         ptype: 'cellediting',
 	         clicksToEdit: 1
-	     },
-		columns : [{// 改
+	    },
+		columns : [{xtype: 'rownumberer',width:36}, 
+		{// 改
 			header : '经销商ID',
 			dataIndex : 'companyid',
 			sortable : true, 
+			minWidth:100,
 			editor: {
                 xtype: 'textfield',
                 editable: false
@@ -197,6 +199,7 @@ Ext.onReady(function() {
 			header : '编码',
 			dataIndex : 'companycode',
 			sortable : true,  
+			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -205,6 +208,7 @@ Ext.onReady(function() {
 			header : '姓名(联系人名)',
 			dataIndex : 'username',
 			sortable : true,  
+			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -213,6 +217,7 @@ Ext.onReady(function() {
 			header : '手机',
 			dataIndex : 'companyphone',
 			sortable : true,  
+			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -221,6 +226,7 @@ Ext.onReady(function() {
 			header : '店铺(供应商名)',
 			dataIndex : 'companyshop',
 			sortable : true,  
+			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -229,6 +235,7 @@ Ext.onReady(function() {
 			header : '城市和县ID',
 			dataIndex : 'companycity',
 			sortable : true,  
+			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -237,6 +244,7 @@ Ext.onReady(function() {
 			header : '街道地址',
 			dataIndex : 'companyaddress',
 			sortable : true,  
+			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -245,6 +253,7 @@ Ext.onReady(function() {
 			header : '描述',
 			dataIndex : 'companydetail',
 			sortable : true,  
+			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -253,6 +262,7 @@ Ext.onReady(function() {
 			header : '状态',
 			dataIndex : 'companystatue',
 			sortable : true,  
+			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -261,6 +271,7 @@ Ext.onReady(function() {
 			header : '账号',
 			dataIndex : 'loginname',
 			sortable : true,  
+			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -269,6 +280,7 @@ Ext.onReady(function() {
 			header : '密码',
 			dataIndex : 'password',
 			sortable : true,  
+			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -277,6 +289,7 @@ Ext.onReady(function() {
 			header : '创建时间',
 			dataIndex : 'createtime',
 			sortable : true,  
+			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -285,13 +298,14 @@ Ext.onReady(function() {
 			header : '修改时间',
 			dataIndex : 'updtime',
 			sortable : true,  
+			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
 		}
 		],
 		tbar : [{
-				text : "新增",
+				text : Ext.os.deviceType === 'Phone' ? null : "新增",
 				iconCls : 'add',
 				handler : function() {
 					CompanydataForm.form.reset();
@@ -299,7 +313,7 @@ Ext.onReady(function() {
 					createTextWindow(basePath + Companyaction + "?method=insAll", "新增", CompanydataForm, Companystore);
 				}
 			},'-',{
-				text : "保存",
+				text : Ext.os.deviceType === 'Phone' ? null : "保存",
 				iconCls : 'ok',
 				handler : function() {
 					var selections = Companygrid.getSelection();
@@ -310,7 +324,7 @@ Ext.onReady(function() {
 					commonSave(basePath + Companyaction + "?method=updAll",selections);
 				}
 			},'-',{
-				text : "修改",
+				text : Ext.os.deviceType === 'Phone' ? null : "修改",
 				iconCls : 'edit',
 				handler : function() {
 					var selections = Companygrid.getSelection();
@@ -325,54 +339,64 @@ Ext.onReady(function() {
 					CompanydataForm.form.loadRecord(selections[0]);
 				}
 			},'-',{
-				text : "删除",
-				iconCls : 'delete',
-				handler : function() {
-					var selections = Companygrid.getSelection();
-					if (Ext.isEmpty(selections)) {
-						Ext.Msg.alert('提示', '请至少选择一条数据！');
-						return;
-					}
-					commonDelete(basePath + Companyaction + "?method=delAll",selections,Companystore,Companykeycolumn);
-				}
-			},'-',{
-				text : "导入",
-				iconCls : 'imp',
-				handler : function() {
-					commonImp(basePath + Companyaction + "?method=impAll","导入",Companystore);
-				}
-			},'-',{
-				text : "后台导出",
-				iconCls : 'exp',
-				handler : function() {
-					Ext.Msg.confirm('请确认', '<b>提示:</b>请确认要导出当前数据？', function(btn, text) {
-						if (btn == 'yes') {
-							window.location.href = basePath + Companyaction + "?method=expAll"; 
-						}
-					});
-				}
-			},'-',{
-				text : "前台导出",
-				iconCls : 'exp',
-				handler : function() {
-					commonExp(Companygrid);
-				}
-			},'-',{
-				text : "附件",
-				iconCls : 'attach',
-				handler : function() {
-					var selections = Companygrid.getSelection();
-					if (selections.length != 1) {
-						Ext.Msg.alert('提示', '请选择一条数据！', function() {
-						});
-						return;
-					}
-					var fid = '';
-					for (var i=0;i<Companykeycolumn.length;i++){
-						fid += selections[0].data[Companykeycolumn[i]] + ","
-					}
-					commonAttach(fid, Companyclassify);
-				}
+	            text: '操作',
+	            menu: {
+	                xtype: 'menu',
+	                items: {
+	                    xtype: 'buttongroup',
+	                    columns: 3,
+	                    items: [{
+	                    	text : "删除",
+	        				iconCls : 'delete',
+	        				handler : function() {
+	        					var selections = Companygrid.getSelection();
+	        					if (Ext.isEmpty(selections)) {
+	        						Ext.Msg.alert('提示', '请至少选择一条数据！');
+	        						return;
+	        					}
+	        					commonDelete(basePath + Companyaction + "?method=delAll",selections,Companystore,Companykeycolumn);
+	        				}
+	                    },{
+	                    	text : "导入",
+	        				iconCls : 'imp',
+	        				handler : function() {
+	        					commonImp(basePath + Companyaction + "?method=impAll","导入",Companystore);
+	        				}
+	                    },{
+	                    	text : "后台导出",
+	        				iconCls : 'exp',
+	        				handler : function() {
+	        					Ext.Msg.confirm('请确认', '<b>提示:</b>请确认要导出当前数据？', function(btn, text) {
+	        						if (btn == 'yes') {
+	        							window.location.href = basePath + Companyaction + "?method=expAll"; 
+	        						}
+	        					});
+	        				}
+	                    },{
+	                    	text : "前台导出",
+	        				iconCls : 'exp',
+	        				handler : function() {
+	        					commonExp(Companygrid);
+	        				}
+	                    },{
+	                    	text : "附件",
+	        				iconCls : 'attach',
+	        				handler : function() {
+	        					var selections = Companygrid.getSelection();
+	        					if (selections.length != 1) {
+	        						Ext.Msg.alert('提示', '请选择一条数据！', function() {
+	        						});
+	        						return;
+	        					}
+	        					var fid = '';
+	        					for (var i=0;i<Companykeycolumn.length;i++){
+	        						fid += selections[0].data[Companykeycolumn[i]] + ","
+	        					}
+	        					commonAttach(fid, Companyclassify);
+	        				}
+	                    }]
+	                }
+	            }
 			},'->',{
 				xtype : 'textfield',
 				id : 'queryCompanyaction',

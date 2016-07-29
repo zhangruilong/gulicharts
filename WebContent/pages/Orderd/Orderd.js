@@ -173,21 +173,23 @@ Ext.onReady(function() {
 	var Orderdgrid =  Ext.create('Ext.grid.Panel', {
 		height : document.documentElement.clientHeight - 4,
 		width : '100%',
+		forceFit: true,
 		title : Orderdtitle,
 		store : Orderdstore,
 		bbar : Orderdbbar,
 	    selModel: {
-	        type: 'spreadsheet',
-	        checkboxSelect: true
-	     },
-	     plugins: {
+	        type: 'checkboxmodel'
+	    },
+	    plugins: {
 	         ptype: 'cellediting',
 	         clicksToEdit: 1
-	     },
-		columns : [{// 改
+	    },
+		columns : [{xtype: 'rownumberer',width:36}, 
+		{// 改
 			header : '订单详细ID',
 			dataIndex : 'orderdid',
 			sortable : true, 
+			minWidth:100,
 			editor: {
                 xtype: 'textfield',
                 editable: false
@@ -197,6 +199,7 @@ Ext.onReady(function() {
 			header : '订单ID',
 			dataIndex : 'orderdorderm',
 			sortable : true,  
+			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -205,6 +208,7 @@ Ext.onReady(function() {
 			header : '商品编码',
 			dataIndex : 'orderdcode',
 			sortable : true,  
+			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -213,6 +217,7 @@ Ext.onReady(function() {
 			header : '商品类型',
 			dataIndex : 'orderdtype',
 			sortable : true,  
+			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -221,6 +226,7 @@ Ext.onReady(function() {
 			header : '名称',
 			dataIndex : 'orderdname',
 			sortable : true,  
+			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -229,6 +235,7 @@ Ext.onReady(function() {
 			header : '描述',
 			dataIndex : 'orderddetail',
 			sortable : true,  
+			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -237,6 +244,7 @@ Ext.onReady(function() {
 			header : '规格',
 			dataIndex : 'orderdunits',
 			sortable : true,  
+			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -245,6 +253,7 @@ Ext.onReady(function() {
 			header : '价格',
 			dataIndex : 'orderdprice',
 			sortable : true,  
+			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -253,6 +262,7 @@ Ext.onReady(function() {
 			header : '单位',
 			dataIndex : 'orderdunit',
 			sortable : true,  
+			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -261,6 +271,7 @@ Ext.onReady(function() {
 			header : '小类',
 			dataIndex : 'orderdclass',
 			sortable : true,  
+			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -269,6 +280,7 @@ Ext.onReady(function() {
 			header : '数量',
 			dataIndex : 'orderdnum',
 			sortable : true,  
+			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -277,6 +289,7 @@ Ext.onReady(function() {
 			header : '下单金额',
 			dataIndex : 'orderdmoney',
 			sortable : true,  
+			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -285,13 +298,14 @@ Ext.onReady(function() {
 			header : '实际金额',
 			dataIndex : 'orderdrightmoney',
 			sortable : true,  
+			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
 		}
 		],
 		tbar : [{
-				text : "新增",
+				text : Ext.os.deviceType === 'Phone' ? null : "新增",
 				iconCls : 'add',
 				handler : function() {
 					OrderddataForm.form.reset();
@@ -299,7 +313,7 @@ Ext.onReady(function() {
 					createTextWindow(basePath + Orderdaction + "?method=insAll", "新增", OrderddataForm, Orderdstore);
 				}
 			},'-',{
-				text : "保存",
+				text : Ext.os.deviceType === 'Phone' ? null : "保存",
 				iconCls : 'ok',
 				handler : function() {
 					var selections = Orderdgrid.getSelection();
@@ -310,7 +324,7 @@ Ext.onReady(function() {
 					commonSave(basePath + Orderdaction + "?method=updAll",selections);
 				}
 			},'-',{
-				text : "修改",
+				text : Ext.os.deviceType === 'Phone' ? null : "修改",
 				iconCls : 'edit',
 				handler : function() {
 					var selections = Orderdgrid.getSelection();
@@ -325,54 +339,64 @@ Ext.onReady(function() {
 					OrderddataForm.form.loadRecord(selections[0]);
 				}
 			},'-',{
-				text : "删除",
-				iconCls : 'delete',
-				handler : function() {
-					var selections = Orderdgrid.getSelection();
-					if (Ext.isEmpty(selections)) {
-						Ext.Msg.alert('提示', '请至少选择一条数据！');
-						return;
-					}
-					commonDelete(basePath + Orderdaction + "?method=delAll",selections,Orderdstore,Orderdkeycolumn);
-				}
-			},'-',{
-				text : "导入",
-				iconCls : 'imp',
-				handler : function() {
-					commonImp(basePath + Orderdaction + "?method=impAll","导入",Orderdstore);
-				}
-			},'-',{
-				text : "后台导出",
-				iconCls : 'exp',
-				handler : function() {
-					Ext.Msg.confirm('请确认', '<b>提示:</b>请确认要导出当前数据？', function(btn, text) {
-						if (btn == 'yes') {
-							window.location.href = basePath + Orderdaction + "?method=expAll"; 
-						}
-					});
-				}
-			},'-',{
-				text : "前台导出",
-				iconCls : 'exp',
-				handler : function() {
-					commonExp(Orderdgrid);
-				}
-			},'-',{
-				text : "附件",
-				iconCls : 'attach',
-				handler : function() {
-					var selections = Orderdgrid.getSelection();
-					if (selections.length != 1) {
-						Ext.Msg.alert('提示', '请选择一条数据！', function() {
-						});
-						return;
-					}
-					var fid = '';
-					for (var i=0;i<Orderdkeycolumn.length;i++){
-						fid += selections[0].data[Orderdkeycolumn[i]] + ","
-					}
-					commonAttach(fid, Orderdclassify);
-				}
+	            text: '操作',
+	            menu: {
+	                xtype: 'menu',
+	                items: {
+	                    xtype: 'buttongroup',
+	                    columns: 3,
+	                    items: [{
+	                    	text : "删除",
+	        				iconCls : 'delete',
+	        				handler : function() {
+	        					var selections = Orderdgrid.getSelection();
+	        					if (Ext.isEmpty(selections)) {
+	        						Ext.Msg.alert('提示', '请至少选择一条数据！');
+	        						return;
+	        					}
+	        					commonDelete(basePath + Orderdaction + "?method=delAll",selections,Orderdstore,Orderdkeycolumn);
+	        				}
+	                    },{
+	                    	text : "导入",
+	        				iconCls : 'imp',
+	        				handler : function() {
+	        					commonImp(basePath + Orderdaction + "?method=impAll","导入",Orderdstore);
+	        				}
+	                    },{
+	                    	text : "后台导出",
+	        				iconCls : 'exp',
+	        				handler : function() {
+	        					Ext.Msg.confirm('请确认', '<b>提示:</b>请确认要导出当前数据？', function(btn, text) {
+	        						if (btn == 'yes') {
+	        							window.location.href = basePath + Orderdaction + "?method=expAll"; 
+	        						}
+	        					});
+	        				}
+	                    },{
+	                    	text : "前台导出",
+	        				iconCls : 'exp',
+	        				handler : function() {
+	        					commonExp(Orderdgrid);
+	        				}
+	                    },{
+	                    	text : "附件",
+	        				iconCls : 'attach',
+	        				handler : function() {
+	        					var selections = Orderdgrid.getSelection();
+	        					if (selections.length != 1) {
+	        						Ext.Msg.alert('提示', '请选择一条数据！', function() {
+	        						});
+	        						return;
+	        					}
+	        					var fid = '';
+	        					for (var i=0;i<Orderdkeycolumn.length;i++){
+	        						fid += selections[0].data[Orderdkeycolumn[i]] + ","
+	        					}
+	        					commonAttach(fid, Orderdclassify);
+	        				}
+	                    }]
+	                }
+	            }
 			},'->',{
 				xtype : 'textfield',
 				id : 'queryOrderdaction',
