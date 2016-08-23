@@ -173,7 +173,6 @@ Ext.onReady(function() {
 	var Orderdgrid =  Ext.create('Ext.grid.Panel', {
 		height : document.documentElement.clientHeight - 4,
 		width : '100%',
-		forceFit: true,
 		title : Orderdtitle,
 		store : Orderdstore,
 		bbar : Orderdbbar,
@@ -189,7 +188,6 @@ Ext.onReady(function() {
 			header : '订单详细ID',
 			dataIndex : 'orderdid',
 			sortable : true, 
-			minWidth:100,
 			editor: {
                 xtype: 'textfield',
                 editable: false
@@ -199,7 +197,6 @@ Ext.onReady(function() {
 			header : '订单ID',
 			dataIndex : 'orderdorderm',
 			sortable : true,  
-			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -208,7 +205,6 @@ Ext.onReady(function() {
 			header : '商品编码',
 			dataIndex : 'orderdcode',
 			sortable : true,  
-			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -217,7 +213,6 @@ Ext.onReady(function() {
 			header : '商品类型',
 			dataIndex : 'orderdtype',
 			sortable : true,  
-			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -226,7 +221,6 @@ Ext.onReady(function() {
 			header : '名称',
 			dataIndex : 'orderdname',
 			sortable : true,  
-			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -235,7 +229,6 @@ Ext.onReady(function() {
 			header : '描述',
 			dataIndex : 'orderddetail',
 			sortable : true,  
-			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -244,7 +237,6 @@ Ext.onReady(function() {
 			header : '规格',
 			dataIndex : 'orderdunits',
 			sortable : true,  
-			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -253,7 +245,6 @@ Ext.onReady(function() {
 			header : '价格',
 			dataIndex : 'orderdprice',
 			sortable : true,  
-			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -262,7 +253,6 @@ Ext.onReady(function() {
 			header : '单位',
 			dataIndex : 'orderdunit',
 			sortable : true,  
-			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -271,7 +261,6 @@ Ext.onReady(function() {
 			header : '小类',
 			dataIndex : 'orderdclass',
 			sortable : true,  
-			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -280,7 +269,6 @@ Ext.onReady(function() {
 			header : '数量',
 			dataIndex : 'orderdnum',
 			sortable : true,  
-			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -289,7 +277,6 @@ Ext.onReady(function() {
 			header : '下单金额',
 			dataIndex : 'orderdmoney',
 			sortable : true,  
-			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -298,7 +285,6 @@ Ext.onReady(function() {
 			header : '实际金额',
 			dataIndex : 'orderdrightmoney',
 			sortable : true,  
-			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -394,7 +380,14 @@ Ext.onReady(function() {
 	        					}
 	        					commonAttach(fid, Orderdclassify);
 	        				}
-	                    }]
+	                    },{
+	        				text : "筛选",
+    						iconCls : 'select',
+    						handler : function() {
+    							Ext.getCmp("Orderdorderdid").setEditable (true);
+    							createQueryWindow("筛选", OrderddataForm, Orderdstore);
+    						}
+    					}]
 	                }
 	            }
 			},'->',{

@@ -173,7 +173,6 @@ Ext.onReady(function() {
 	var Companygrid =  Ext.create('Ext.grid.Panel', {
 		height : document.documentElement.clientHeight - 4,
 		width : '100%',
-		forceFit: true,
 		title : Companytitle,
 		store : Companystore,
 		bbar : Companybbar,
@@ -189,7 +188,6 @@ Ext.onReady(function() {
 			header : '经销商ID',
 			dataIndex : 'companyid',
 			sortable : true, 
-			minWidth:100,
 			editor: {
                 xtype: 'textfield',
                 editable: false
@@ -199,7 +197,6 @@ Ext.onReady(function() {
 			header : '编码',
 			dataIndex : 'companycode',
 			sortable : true,  
-			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -208,7 +205,6 @@ Ext.onReady(function() {
 			header : '姓名(联系人名)',
 			dataIndex : 'username',
 			sortable : true,  
-			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -217,7 +213,6 @@ Ext.onReady(function() {
 			header : '手机',
 			dataIndex : 'companyphone',
 			sortable : true,  
-			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -226,7 +221,6 @@ Ext.onReady(function() {
 			header : '店铺(供应商名)',
 			dataIndex : 'companyshop',
 			sortable : true,  
-			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -235,7 +229,6 @@ Ext.onReady(function() {
 			header : '城市和县ID',
 			dataIndex : 'companycity',
 			sortable : true,  
-			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -244,7 +237,6 @@ Ext.onReady(function() {
 			header : '街道地址',
 			dataIndex : 'companyaddress',
 			sortable : true,  
-			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -253,7 +245,6 @@ Ext.onReady(function() {
 			header : '描述',
 			dataIndex : 'companydetail',
 			sortable : true,  
-			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -262,7 +253,6 @@ Ext.onReady(function() {
 			header : '状态',
 			dataIndex : 'companystatue',
 			sortable : true,  
-			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -271,7 +261,6 @@ Ext.onReady(function() {
 			header : '账号',
 			dataIndex : 'loginname',
 			sortable : true,  
-			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -280,7 +269,6 @@ Ext.onReady(function() {
 			header : '密码',
 			dataIndex : 'password',
 			sortable : true,  
-			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -289,7 +277,6 @@ Ext.onReady(function() {
 			header : '创建时间',
 			dataIndex : 'createtime',
 			sortable : true,  
-			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -298,7 +285,6 @@ Ext.onReady(function() {
 			header : '修改时间',
 			dataIndex : 'updtime',
 			sortable : true,  
-			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -394,7 +380,14 @@ Ext.onReady(function() {
 	        					}
 	        					commonAttach(fid, Companyclassify);
 	        				}
-	                    }]
+	                    },{
+	        				text : "筛选",
+    						iconCls : 'select',
+    						handler : function() {
+    							Ext.getCmp("Companycompanyid").setEditable (true);
+    							createQueryWindow("筛选", CompanydataForm, Companystore);
+    						}
+    					}]
 	                }
 	            }
 			},'->',{

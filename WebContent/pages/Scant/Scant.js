@@ -137,7 +137,6 @@ Ext.onReady(function() {
 	var Scantgrid =  Ext.create('Ext.grid.Panel', {
 		height : document.documentElement.clientHeight - 4,
 		width : '100%',
-		forceFit: true,
 		title : Scanttitle,
 		store : Scantstore,
 		bbar : Scantbbar,
@@ -153,7 +152,6 @@ Ext.onReady(function() {
 			header : '标品ID',
 			dataIndex : 'scantid',
 			sortable : true, 
-			minWidth:100,
 			editor: {
                 xtype: 'textfield',
                 editable: false
@@ -163,7 +161,6 @@ Ext.onReady(function() {
 			header : '编码',
 			dataIndex : 'scantcode',
 			sortable : true,  
-			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -172,7 +169,6 @@ Ext.onReady(function() {
 			header : '名称',
 			dataIndex : 'scantname',
 			sortable : true,  
-			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -181,7 +177,6 @@ Ext.onReady(function() {
 			header : '描述',
 			dataIndex : 'scantdetail',
 			sortable : true,  
-			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -190,7 +185,6 @@ Ext.onReady(function() {
 			header : '规格',
 			dataIndex : 'scantunits',
 			sortable : true,  
-			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -199,7 +193,6 @@ Ext.onReady(function() {
 			header : '小类ID',
 			dataIndex : 'scantclass',
 			sortable : true,  
-			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -208,7 +201,6 @@ Ext.onReady(function() {
 			header : '图片',
 			dataIndex : 'scantimage',
 			sortable : true,  
-			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -217,7 +209,6 @@ Ext.onReady(function() {
 			header : '品牌',
 			dataIndex : 'scantbrand',
 			sortable : true,  
-			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -226,7 +217,6 @@ Ext.onReady(function() {
 			header : '种类',
 			dataIndex : 'scanttype',
 			sortable : true,  
-			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -235,7 +225,6 @@ Ext.onReady(function() {
 			header : '状态',
 			dataIndex : 'scantstatue',
 			sortable : true,  
-			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -331,7 +320,14 @@ Ext.onReady(function() {
 	        					}
 	        					commonAttach(fid, Scantclassify);
 	        				}
-	                    }]
+	                    },{
+	        				text : "筛选",
+    						iconCls : 'select',
+    						handler : function() {
+    							Ext.getCmp("Scantscantid").setEditable (true);
+    							createQueryWindow("筛选", ScantdataForm, Scantstore);
+    						}
+    					}]
 	                }
 	            }
 			},'->',{

@@ -38,15 +38,15 @@ public class Timegoods
    /**
     * 原价
     */
-   private String timegoodsprice;   
+   private Float timegoodsprice;   
    /**
     * 现价
     */
-   private String timegoodsorgprice;   
+   private Float timegoodsorgprice;   
    /**
     * 限量
     */
-   private int timegoodsnum;   
+   private Integer timegoodsnum;   
    /**
     * 小类名称
     */
@@ -70,15 +70,15 @@ public class Timegoods
    /**
     * 全部限量
     */
-   private int allnum;   
+   private Integer allnum;   
    /**
     * 剩余数量
     */
-   private int surplusnum;   
+   private Integer surplusnum;   
    /**
     * 顺序
     */
-   private int timegoodsseq;   
+   private Integer timegoodsseq;   
    /**
     * 客户范围
     */
@@ -207,7 +207,7 @@ public class Timegoods
 	 *设置"原价"属性
 	 *@param timegoodsprice 实体的Timegoodsprice属性
 	 */
-	public void setTimegoodsprice(String timegoodsprice)
+	public void setTimegoodsprice(Float timegoodsprice)
 	{
 		this.timegoodsprice = timegoodsprice;
 	}
@@ -215,7 +215,7 @@ public class Timegoods
 	/**
 	 *获取"原价"属性
 	 */
-	public String getTimegoodsprice()
+	public Float getTimegoodsprice()
 	{
 		return this.timegoodsprice;
 	}	   
@@ -224,7 +224,7 @@ public class Timegoods
 	 *设置"现价"属性
 	 *@param timegoodsorgprice 实体的Timegoodsorgprice属性
 	 */
-	public void setTimegoodsorgprice(String timegoodsorgprice)
+	public void setTimegoodsorgprice(Float timegoodsorgprice)
 	{
 		this.timegoodsorgprice = timegoodsorgprice;
 	}
@@ -232,7 +232,7 @@ public class Timegoods
 	/**
 	 *获取"现价"属性
 	 */
-	public String getTimegoodsorgprice()
+	public Float getTimegoodsorgprice()
 	{
 		return this.timegoodsorgprice;
 	}	   
@@ -241,7 +241,7 @@ public class Timegoods
 	 *设置"限量"属性
 	 *@param timegoodsnum 实体的Timegoodsnum属性
 	 */
-	public void setTimegoodsnum(int timegoodsnum)
+	public void setTimegoodsnum(Integer timegoodsnum)
 	{
 		this.timegoodsnum = timegoodsnum;
 	}
@@ -249,7 +249,7 @@ public class Timegoods
 	/**
 	 *获取"限量"属性
 	 */
-	public int getTimegoodsnum()
+	public Integer getTimegoodsnum()
 	{
 		return this.timegoodsnum;
 	}	   
@@ -343,7 +343,7 @@ public class Timegoods
 	 *设置"全部限量"属性
 	 *@param allnum 实体的Allnum属性
 	 */
-	public void setAllnum(int allnum)
+	public void setAllnum(Integer allnum)
 	{
 		this.allnum = allnum;
 	}
@@ -351,7 +351,7 @@ public class Timegoods
 	/**
 	 *获取"全部限量"属性
 	 */
-	public int getAllnum()
+	public Integer getAllnum()
 	{
 		return this.allnum;
 	}	   
@@ -360,7 +360,7 @@ public class Timegoods
 	 *设置"剩余数量"属性
 	 *@param surplusnum 实体的Surplusnum属性
 	 */
-	public void setSurplusnum(int surplusnum)
+	public void setSurplusnum(Integer surplusnum)
 	{
 		this.surplusnum = surplusnum;
 	}
@@ -368,7 +368,7 @@ public class Timegoods
 	/**
 	 *获取"剩余数量"属性
 	 */
-	public int getSurplusnum()
+	public Integer getSurplusnum()
 	{
 		return this.surplusnum;
 	}	   
@@ -377,7 +377,7 @@ public class Timegoods
 	 *设置"顺序"属性
 	 *@param timegoodsseq 实体的Timegoodsseq属性
 	 */
-	public void setTimegoodsseq(int timegoodsseq)
+	public void setTimegoodsseq(Integer timegoodsseq)
 	{
 		this.timegoodsseq = timegoodsseq;
 	}
@@ -385,7 +385,7 @@ public class Timegoods
 	/**
 	 *获取"顺序"属性
 	 */
-	public int getTimegoodsseq()
+	public Integer getTimegoodsseq()
 	{
 		return this.timegoodsseq;
 	}	   
@@ -418,17 +418,17 @@ public class Timegoods
 	 	,String timegoodsdetail
 	 	,String timegoodsunits
 	 	,String timegoodsunit
-	 	,String timegoodsprice
-	 	,String timegoodsorgprice
-	 	,int timegoodsnum
+	 	,Float timegoodsprice
+	 	,Float timegoodsorgprice
+	 	,Integer timegoodsnum
 	 	,String timegoodsclass
 	 	,String timegoodsimage
 	 	,String timegoodsstatue
 	 	,String createtime
 	 	,String creator
-	 	,int allnum
-	 	,int surplusnum
-	 	,int timegoodsseq
+	 	,Integer allnum
+	 	,Integer surplusnum
+	 	,Integer timegoodsseq
 	 	,String timegoodsscope
 		 ){
 		super();

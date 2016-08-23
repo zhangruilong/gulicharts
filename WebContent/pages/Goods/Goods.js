@@ -215,16 +215,15 @@ Ext.onReady(function() {
 	    selModel: {
 	        type: 'checkboxmodel'
 	    },
-	    plugins: [{
+	    plugins: {
 	         ptype: 'cellediting',
 	         clicksToEdit: 1
-	    }],
+	    },
 		columns : [{xtype: 'rownumberer',width:36}, 
 		{// 改
 			header : '商品ID',
 			dataIndex : 'goodsid',
 			sortable : true, 
-			minWidth:100,
 			editor: {
                 xtype: 'textfield',
                 editable: false
@@ -234,7 +233,6 @@ Ext.onReady(function() {
 			header : '经销商ID',
 			dataIndex : 'goodscompany',
 			sortable : true,  
-			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -243,7 +241,6 @@ Ext.onReady(function() {
 			header : '编码',
 			dataIndex : 'goodscode',
 			sortable : true,  
-			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -252,7 +249,6 @@ Ext.onReady(function() {
 			header : '名称',
 			dataIndex : 'goodsname',
 			sortable : true,  
-			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -261,7 +257,6 @@ Ext.onReady(function() {
 			header : '描述',
 			dataIndex : 'goodsdetail',
 			sortable : true,  
-			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -270,7 +265,6 @@ Ext.onReady(function() {
 			header : '规格',
 			dataIndex : 'goodsunits',
 			sortable : true,  
-			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -279,7 +273,6 @@ Ext.onReady(function() {
 			header : '小类ID',
 			dataIndex : 'goodsclass',
 			sortable : true,  
-			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -288,7 +281,6 @@ Ext.onReady(function() {
 			header : '图片',
 			dataIndex : 'goodsimage',
 			sortable : true,  
-			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -297,7 +289,6 @@ Ext.onReady(function() {
 			header : '状态',
 			dataIndex : 'goodsstatue',
 			sortable : true,  
-			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -306,7 +297,6 @@ Ext.onReady(function() {
 			header : '创建时间',
 			dataIndex : 'createtime',
 			sortable : true,  
-			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -315,7 +305,6 @@ Ext.onReady(function() {
 			header : '修改时间',
 			dataIndex : 'updtime',
 			sortable : true,  
-			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -324,7 +313,6 @@ Ext.onReady(function() {
 			header : '创建人',
 			dataIndex : 'creator',
 			sortable : true,  
-			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -333,7 +321,6 @@ Ext.onReady(function() {
 			header : '修改人',
 			dataIndex : 'updor',
 			sortable : true,  
-			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -342,7 +329,6 @@ Ext.onReady(function() {
 			header : '品牌',
 			dataIndex : 'goodsbrand',
 			sortable : true,  
-			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -351,7 +337,6 @@ Ext.onReady(function() {
 			header : '种类',
 			dataIndex : 'goodstype',
 			sortable : true,  
-			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -360,7 +345,6 @@ Ext.onReady(function() {
 			header : '顺序',
 			dataIndex : 'goodsorder',
 			sortable : true,  
-			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }

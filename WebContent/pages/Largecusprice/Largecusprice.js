@@ -149,7 +149,6 @@ Ext.onReady(function() {
 	var Largecuspricegrid =  Ext.create('Ext.grid.Panel', {
 		height : document.documentElement.clientHeight - 4,
 		width : '100%',
-		forceFit: true,
 		title : Largecuspricetitle,
 		store : Largecuspricestore,
 		bbar : Largecuspricebbar,
@@ -165,7 +164,6 @@ Ext.onReady(function() {
 			header : 'ID',
 			dataIndex : 'id',
 			sortable : true, 
-			minWidth:100,
 			editor: {
                 xtype: 'textfield',
                 editable: false
@@ -175,7 +173,6 @@ Ext.onReady(function() {
 			header : '供应商',
 			dataIndex : 'largecuspricecompany',
 			sortable : true,  
-			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -184,7 +181,6 @@ Ext.onReady(function() {
 			header : '客户',
 			dataIndex : 'largecuspricecustomer',
 			sortable : true,  
-			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -193,7 +189,6 @@ Ext.onReady(function() {
 			header : '商品',
 			dataIndex : 'largecuspricegoods',
 			sortable : true,  
-			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -202,7 +197,6 @@ Ext.onReady(function() {
 			header : '单品价',
 			dataIndex : 'largecuspriceprice',
 			sortable : true,  
-			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -211,7 +205,6 @@ Ext.onReady(function() {
 			header : '描述',
 			dataIndex : 'largecuspricedetail',
 			sortable : true,  
-			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -220,7 +213,6 @@ Ext.onReady(function() {
 			header : '创建时间',
 			dataIndex : 'largecuspricecreatetime',
 			sortable : true,  
-			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -229,7 +221,6 @@ Ext.onReady(function() {
 			header : '创建人',
 			dataIndex : 'largecuspricecreator',
 			sortable : true,  
-			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -238,7 +229,6 @@ Ext.onReady(function() {
 			header : '套装价',
 			dataIndex : 'largecuspriceprice2',
 			sortable : true,  
-			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -247,7 +237,6 @@ Ext.onReady(function() {
 			header : '单品价单位',
 			dataIndex : 'largecuspriceunit',
 			sortable : true,  
-			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -256,7 +245,6 @@ Ext.onReady(function() {
 			header : '套装价单位',
 			dataIndex : 'largecuspriceunit2',
 			sortable : true,  
-			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -352,7 +340,14 @@ Ext.onReady(function() {
 	        					}
 	        					commonAttach(fid, Largecuspriceclassify);
 	        				}
-	                    }]
+	                    },{
+	        				text : "筛选",
+    						iconCls : 'select',
+    						handler : function() {
+    							Ext.getCmp("Largecuspriceid").setEditable (true);
+    							createQueryWindow("筛选", LargecuspricedataForm, Largecuspricestore);
+    						}
+    					}]
 	                }
 	            }
 			},'->',{

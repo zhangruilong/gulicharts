@@ -77,7 +77,6 @@ Ext.onReady(function() {
 	var Feedbackgrid =  Ext.create('Ext.grid.Panel', {
 		height : document.documentElement.clientHeight - 4,
 		width : '100%',
-		forceFit: true,
 		title : Feedbacktitle,
 		store : Feedbackstore,
 		bbar : Feedbackbbar,
@@ -93,7 +92,6 @@ Ext.onReady(function() {
 			header : '客户反馈id',
 			dataIndex : 'feedbackid',
 			sortable : true, 
-			minWidth:100,
 			editor: {
                 xtype: 'textfield',
                 editable: false
@@ -103,7 +101,6 @@ Ext.onReady(function() {
 			header : '内容',
 			dataIndex : 'feedbackdetail',
 			sortable : true,  
-			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -112,7 +109,6 @@ Ext.onReady(function() {
 			header : '客户id',
 			dataIndex : 'feedbackcustomer',
 			sortable : true,  
-			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -121,7 +117,6 @@ Ext.onReady(function() {
 			header : '反馈时间',
 			dataIndex : 'feedbacktime',
 			sortable : true,  
-			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -130,7 +125,6 @@ Ext.onReady(function() {
 			header : '反馈状态',
 			dataIndex : 'feedbackstate',
 			sortable : true,  
-			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -226,7 +220,14 @@ Ext.onReady(function() {
 	        					}
 	        					commonAttach(fid, Feedbackclassify);
 	        				}
-	                    }]
+	                    },{
+	        				text : "筛选",
+    						iconCls : 'select',
+    						handler : function() {
+    							Ext.getCmp("Feedbackfeedbackid").setEditable (true);
+    							createQueryWindow("筛选", FeedbackdataForm, Feedbackstore);
+    						}
+    					}]
 	                }
 	            }
 			},'->',{

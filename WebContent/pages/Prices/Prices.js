@@ -161,7 +161,6 @@ Ext.onReady(function() {
 	var Pricesgrid =  Ext.create('Ext.grid.Panel', {
 		height : document.documentElement.clientHeight - 4,
 		width : '100%',
-		forceFit: true,
 		title : Pricestitle,
 		store : Pricesstore,
 		bbar : Pricesbbar,
@@ -177,7 +176,6 @@ Ext.onReady(function() {
 			header : '价格体系ID',
 			dataIndex : 'pricesid',
 			sortable : true, 
-			minWidth:100,
 			editor: {
                 xtype: 'textfield',
                 editable: false
@@ -187,7 +185,6 @@ Ext.onReady(function() {
 			header : '商品ID',
 			dataIndex : 'pricesgoods',
 			sortable : true,  
-			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -196,7 +193,6 @@ Ext.onReady(function() {
 			header : '分类',
 			dataIndex : 'pricesclass',
 			sortable : true,  
-			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -205,7 +201,6 @@ Ext.onReady(function() {
 			header : '等级',
 			dataIndex : 'priceslevel',
 			sortable : true,  
-			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -214,7 +209,6 @@ Ext.onReady(function() {
 			header : '单品价',
 			dataIndex : 'pricesprice',
 			sortable : true,  
-			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -223,7 +217,6 @@ Ext.onReady(function() {
 			header : '单品单位',
 			dataIndex : 'pricesunit',
 			sortable : true,  
-			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -232,7 +225,6 @@ Ext.onReady(function() {
 			header : '套装价',
 			dataIndex : 'pricesprice2',
 			sortable : true,  
-			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -241,7 +233,6 @@ Ext.onReady(function() {
 			header : '套装单位',
 			dataIndex : 'pricesunit2',
 			sortable : true,  
-			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -250,7 +241,6 @@ Ext.onReady(function() {
 			header : '创建时间',
 			dataIndex : 'createtime',
 			sortable : true,  
-			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -259,7 +249,6 @@ Ext.onReady(function() {
 			header : '修改时间',
 			dataIndex : 'updtime',
 			sortable : true,  
-			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -268,7 +257,6 @@ Ext.onReady(function() {
 			header : '创建人',
 			dataIndex : 'creator',
 			sortable : true,  
-			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -277,7 +265,6 @@ Ext.onReady(function() {
 			header : '修改人',
 			dataIndex : 'updor',
 			sortable : true,  
-			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -373,7 +360,14 @@ Ext.onReady(function() {
 	        					}
 	        					commonAttach(fid, Pricesclassify);
 	        				}
-	                    }]
+	                    },{
+	        				text : "筛选",
+    						iconCls : 'select',
+    						handler : function() {
+    							Ext.getCmp("Pricespricesid").setEditable (true);
+    							createQueryWindow("筛选", PricesdataForm, Pricesstore);
+    						}
+    					}]
 	                }
 	            }
 			},'->',{

@@ -89,7 +89,6 @@ Ext.onReady(function() {
 	var Goodsclassgrid =  Ext.create('Ext.grid.Panel', {
 		height : document.documentElement.clientHeight - 4,
 		width : '100%',
-		forceFit: true,
 		title : Goodsclasstitle,
 		store : Goodsclassstore,
 		bbar : Goodsclassbbar,
@@ -105,7 +104,6 @@ Ext.onReady(function() {
 			header : '大小类ID',
 			dataIndex : 'goodsclassid',
 			sortable : true, 
-			minWidth:100,
 			editor: {
                 xtype: 'textfield',
                 editable: false
@@ -115,7 +113,6 @@ Ext.onReady(function() {
 			header : '编码',
 			dataIndex : 'goodsclasscode',
 			sortable : true,  
-			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -124,7 +121,6 @@ Ext.onReady(function() {
 			header : '名称',
 			dataIndex : 'goodsclassname',
 			sortable : true,  
-			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -133,7 +129,6 @@ Ext.onReady(function() {
 			header : '父类',
 			dataIndex : 'goodsclassparent',
 			sortable : true,  
-			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -142,7 +137,6 @@ Ext.onReady(function() {
 			header : '描述',
 			dataIndex : 'goodsclassdetail',
 			sortable : true,  
-			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -151,7 +145,6 @@ Ext.onReady(function() {
 			header : '状态',
 			dataIndex : 'goodsclassstatue',
 			sortable : true,  
-			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -247,7 +240,14 @@ Ext.onReady(function() {
 	        					}
 	        					commonAttach(fid, Goodsclassclassify);
 	        				}
-	                    }]
+	                    },{
+	        				text : "筛选",
+    						iconCls : 'select',
+    						handler : function() {
+    							Ext.getCmp("Goodsclassgoodsclassid").setEditable (true);
+    							createQueryWindow("筛选", GoodsclassdataForm, Goodsclassstore);
+    						}
+    					}]
 	                }
 	            }
 			},'->',{

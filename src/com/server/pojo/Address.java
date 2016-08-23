@@ -30,7 +30,7 @@ public class Address
    /**
     * 是否默认(1默认,0不是默认)
     */
-   private int addressture;   
+   private Integer addressture;   
     //属性方法	    
      /**
 	 *设置主键"我的地址ID"属性
@@ -121,7 +121,7 @@ public class Address
 	 *设置"是否默认(1默认,0不是默认)"属性
 	 *@param addressture 实体的Addressture属性
 	 */
-	public void setAddressture(int addressture)
+	public void setAddressture(Integer addressture)
 	{
 		this.addressture = addressture;
 	}
@@ -129,7 +129,7 @@ public class Address
 	/**
 	 *获取"是否默认(1默认,0不是默认)"属性
 	 */
-	public int getAddressture()
+	public Integer getAddressture()
 	{
 		return this.addressture;
 	}	   
@@ -143,7 +143,7 @@ public class Address
 	 	,String addressconnect
 	 	,String addressphone
 	 	,String addressaddress
-	 	,int addressture
+	 	,Integer addressture
 		 ){
 		super();
 		this.addressid = addressid;

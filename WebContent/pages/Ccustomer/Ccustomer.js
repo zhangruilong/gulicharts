@@ -89,7 +89,6 @@ Ext.onReady(function() {
 	var Ccustomergrid =  Ext.create('Ext.grid.Panel', {
 		height : document.documentElement.clientHeight - 4,
 		width : '100%',
-		forceFit: true,
 		title : Ccustomertitle,
 		store : Ccustomerstore,
 		bbar : Ccustomerbbar,
@@ -105,7 +104,6 @@ Ext.onReady(function() {
 			header : '经销商和客户ID',
 			dataIndex : 'ccustomerid',
 			sortable : true, 
-			minWidth:100,
 			editor: {
                 xtype: 'textfield',
                 editable: false
@@ -115,7 +113,6 @@ Ext.onReady(function() {
 			header : '经销商ID',
 			dataIndex : 'ccustomercompany',
 			sortable : true,  
-			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -124,7 +121,6 @@ Ext.onReady(function() {
 			header : '客户ID',
 			dataIndex : 'ccustomercustomer',
 			sortable : true,  
-			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -133,7 +129,6 @@ Ext.onReady(function() {
 			header : '客户等级',
 			dataIndex : 'ccustomerdetail',
 			sortable : true,  
-			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -142,7 +137,6 @@ Ext.onReady(function() {
 			header : '客户经理',
 			dataIndex : 'createtime',
 			sortable : true,  
-			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -151,7 +145,6 @@ Ext.onReady(function() {
 			header : '大客户',
 			dataIndex : 'creator',
 			sortable : true,  
-			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -247,7 +240,14 @@ Ext.onReady(function() {
 	        					}
 	        					commonAttach(fid, Ccustomerclassify);
 	        				}
-	                    }]
+	                    },{
+	        				text : "筛选",
+    						iconCls : 'select',
+    						handler : function() {
+    							Ext.getCmp("Ccustomerccustomerid").setEditable (true);
+    							createQueryWindow("筛选", CcustomerdataForm, Ccustomerstore);
+    						}
+    					}]
 	                }
 	            }
 			},'->',{

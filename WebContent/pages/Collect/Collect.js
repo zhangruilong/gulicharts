@@ -77,7 +77,6 @@ Ext.onReady(function() {
 	var Collectgrid =  Ext.create('Ext.grid.Panel', {
 		height : document.documentElement.clientHeight - 4,
 		width : '100%',
-		forceFit: true,
 		title : Collecttitle,
 		store : Collectstore,
 		bbar : Collectbbar,
@@ -93,7 +92,6 @@ Ext.onReady(function() {
 			header : '收藏ID',
 			dataIndex : 'collectid',
 			sortable : true, 
-			minWidth:100,
 			editor: {
                 xtype: 'textfield',
                 editable: false
@@ -103,7 +101,6 @@ Ext.onReady(function() {
 			header : '商品ID',
 			dataIndex : 'collectgoods',
 			sortable : true,  
-			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -112,7 +109,6 @@ Ext.onReady(function() {
 			header : '客户ID',
 			dataIndex : 'collectcustomer',
 			sortable : true,  
-			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -121,7 +117,6 @@ Ext.onReady(function() {
 			header : '描述',
 			dataIndex : 'collectdetail',
 			sortable : true,  
-			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -130,7 +125,6 @@ Ext.onReady(function() {
 			header : '创建时间',
 			dataIndex : 'createtime',
 			sortable : true,  
-			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -226,7 +220,14 @@ Ext.onReady(function() {
 	        					}
 	        					commonAttach(fid, Collectclassify);
 	        				}
-	                    }]
+	                    },{
+	        				text : "筛选",
+    						iconCls : 'select',
+    						handler : function() {
+    							Ext.getCmp("Collectcollectid").setEditable (true);
+    							createQueryWindow("筛选", CollectdataForm, Collectstore);
+    						}
+    					}]
 	                }
 	            }
 			},'->',{

@@ -221,7 +221,6 @@ Ext.onReady(function() {
 	var Bkgoodsgrid =  Ext.create('Ext.grid.Panel', {
 		height : document.documentElement.clientHeight - 4,
 		width : '100%',
-		forceFit: true,
 		title : Bkgoodstitle,
 		store : Bkgoodsstore,
 		bbar : Bkgoodsbbar,
@@ -237,7 +236,6 @@ Ext.onReady(function() {
 			header : '促销品ID',
 			dataIndex : 'bkgoodsid',
 			sortable : true, 
-			minWidth: 80,
 			editor: {
                 xtype: 'textfield',
                 editable: false
@@ -247,7 +245,6 @@ Ext.onReady(function() {
 			header : '经销商ID',
 			dataIndex : 'bkgoodscompany',
 			sortable : true,  
-			minWidth: 80,
 			editor: {
                 xtype: 'textfield'
             }
@@ -256,7 +253,6 @@ Ext.onReady(function() {
 			header : '编码',
 			dataIndex : 'bkgoodscode',
 			sortable : true,  
-			minWidth: 80,
 			editor: {
                 xtype: 'textfield'
             }
@@ -265,7 +261,6 @@ Ext.onReady(function() {
 			header : '名称',
 			dataIndex : 'bkgoodsname',
 			sortable : true,  
-			minWidth: 80,
 			editor: {
                 xtype: 'textfield'
             }
@@ -274,7 +269,6 @@ Ext.onReady(function() {
 			header : '描述',
 			dataIndex : 'bkgoodsdetail',
 			sortable : true,  
-			minWidth: 80,
 			editor: {
                 xtype: 'textfield'
             }
@@ -283,7 +277,6 @@ Ext.onReady(function() {
 			header : '规格',
 			dataIndex : 'bkgoodsunits',
 			sortable : true,  
-			minWidth: 80,
 			editor: {
                 xtype: 'textfield'
             }
@@ -292,7 +285,6 @@ Ext.onReady(function() {
 			header : '单位',
 			dataIndex : 'bkgoodsunit',
 			sortable : true,  
-			minWidth: 80,
 			editor: {
                 xtype: 'textfield'
             }
@@ -301,7 +293,6 @@ Ext.onReady(function() {
 			header : '原价',
 			dataIndex : 'bkgoodsprice',
 			sortable : true,  
-			minWidth: 80,
 			editor: {
                 xtype: 'textfield'
             }
@@ -310,7 +301,6 @@ Ext.onReady(function() {
 			header : '现价',
 			dataIndex : 'bkgoodsorgprice',
 			sortable : true,  
-			minWidth: 80,
 			editor: {
                 xtype: 'textfield'
             }
@@ -319,7 +309,6 @@ Ext.onReady(function() {
 			header : '限量',
 			dataIndex : 'bkgoodsnum',
 			sortable : true,  
-			minWidth: 80,
 			editor: {
                 xtype: 'textfield'
             }
@@ -328,7 +317,6 @@ Ext.onReady(function() {
 			header : '小类名称',
 			dataIndex : 'bkgoodsclass',
 			sortable : true,  
-			minWidth: 80,
 			editor: {
                 xtype: 'textfield'
             }
@@ -337,7 +325,6 @@ Ext.onReady(function() {
 			header : '图片',
 			dataIndex : 'bkgoodsimage',
 			sortable : true,  
-			minWidth: 80,
 			editor: {
                 xtype: 'textfield'
             }
@@ -346,7 +333,6 @@ Ext.onReady(function() {
 			header : '状态',
 			dataIndex : 'bkgoodsstatue',
 			sortable : true,  
-			minWidth: 80,
 			editor: {
                 xtype: 'textfield'
             }
@@ -355,7 +341,6 @@ Ext.onReady(function() {
 			header : '创建时间',
 			dataIndex : 'bkcreatetime',
 			sortable : true,  
-			minWidth: 80,
 			editor: {
                 xtype: 'textfield'
             }
@@ -364,7 +349,6 @@ Ext.onReady(function() {
 			header : '创建人',
 			dataIndex : 'bkcreator',
 			sortable : true,  
-			minWidth: 80,
 			editor: {
                 xtype: 'textfield'
             }
@@ -373,7 +357,6 @@ Ext.onReady(function() {
 			header : '顺序',
 			dataIndex : 'bkgoodsseq',
 			sortable : true,  
-			minWidth: 80,
 			editor: {
                 xtype: 'textfield'
             }
@@ -382,7 +365,6 @@ Ext.onReady(function() {
 			header : '客户范围',
 			dataIndex : 'bkgoodsscope',
 			sortable : true,  
-			minWidth: 80,
 			editor: {
                 xtype: 'textfield'
             }
@@ -478,7 +460,14 @@ Ext.onReady(function() {
 	        					}
 	        					commonAttach(fid, Bkgoodsclassify);
 	        				}
-	                    }]
+	                    },{
+	        				text : "筛选",
+    						iconCls : 'select',
+    						handler : function() {
+    							Ext.getCmp("Bkgoodsbkgoodsid").setEditable (true);
+    							createQueryWindow("筛选", BkgoodsdataForm, Bkgoodsstore);
+    						}
+    					}]
 	                }
 	            }
 			},'->',{

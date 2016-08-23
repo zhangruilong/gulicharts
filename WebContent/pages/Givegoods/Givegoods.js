@@ -209,7 +209,6 @@ Ext.onReady(function() {
 	var Givegoodsgrid =  Ext.create('Ext.grid.Panel', {
 		height : document.documentElement.clientHeight - 4,
 		width : '100%',
-		forceFit: true,
 		title : Givegoodstitle,
 		store : Givegoodsstore,
 		bbar : Givegoodsbbar,
@@ -225,7 +224,6 @@ Ext.onReady(function() {
 			header : '买赠ID',
 			dataIndex : 'givegoodsid',
 			sortable : true, 
-			minWidth:100,
 			editor: {
                 xtype: 'textfield',
                 editable: false
@@ -235,7 +233,6 @@ Ext.onReady(function() {
 			header : '经销商ID',
 			dataIndex : 'givegoodscompany',
 			sortable : true,  
-			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -244,7 +241,6 @@ Ext.onReady(function() {
 			header : '编码',
 			dataIndex : 'givegoodscode',
 			sortable : true,  
-			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -253,7 +249,6 @@ Ext.onReady(function() {
 			header : '名称',
 			dataIndex : 'givegoodsname',
 			sortable : true,  
-			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -262,7 +257,6 @@ Ext.onReady(function() {
 			header : '描述',
 			dataIndex : 'givegoodsdetail',
 			sortable : true,  
-			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -271,7 +265,6 @@ Ext.onReady(function() {
 			header : '规格',
 			dataIndex : 'givegoodsunits',
 			sortable : true,  
-			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -280,7 +273,6 @@ Ext.onReady(function() {
 			header : '单位',
 			dataIndex : 'givegoodsunit',
 			sortable : true,  
-			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -289,7 +281,6 @@ Ext.onReady(function() {
 			header : '售价',
 			dataIndex : 'givegoodsprice',
 			sortable : true,  
-			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -298,7 +289,6 @@ Ext.onReady(function() {
 			header : '个人限购',
 			dataIndex : 'givegoodsnum',
 			sortable : true,  
-			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -307,7 +297,6 @@ Ext.onReady(function() {
 			header : '小类',
 			dataIndex : 'givegoodsclass',
 			sortable : true,  
-			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -316,7 +305,6 @@ Ext.onReady(function() {
 			header : '图片',
 			dataIndex : 'givegoodsimage',
 			sortable : true,  
-			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -325,7 +313,6 @@ Ext.onReady(function() {
 			header : '状态',
 			dataIndex : 'givegoodsstatue',
 			sortable : true,  
-			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -334,7 +321,6 @@ Ext.onReady(function() {
 			header : '创建时间',
 			dataIndex : 'createtime',
 			sortable : true,  
-			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -343,7 +329,6 @@ Ext.onReady(function() {
 			header : '创建人',
 			dataIndex : 'creator',
 			sortable : true,  
-			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -352,7 +337,6 @@ Ext.onReady(function() {
 			header : '顺序',
 			dataIndex : 'givegoodsseq',
 			sortable : true,  
-			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -361,7 +345,6 @@ Ext.onReady(function() {
 			header : '客户范围',
 			dataIndex : 'givegoodsscope',
 			sortable : true,  
-			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -457,7 +440,14 @@ Ext.onReady(function() {
 	        					}
 	        					commonAttach(fid, Givegoodsclassify);
 	        				}
-	                    }]
+	                    },{
+	        				text : "筛选",
+    						iconCls : 'select',
+    						handler : function() {
+    							Ext.getCmp("Givegoodsgivegoodsid").setEditable (true);
+    							createQueryWindow("筛选", GivegoodsdataForm, Givegoodsstore);
+    						}
+    					}]
 	                }
 	            }
 			},'->',{

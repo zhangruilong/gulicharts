@@ -38,11 +38,11 @@ public class Givegoods
    /**
     * 售价
     */
-   private String givegoodsprice;   
+   private Float givegoodsprice;   
    /**
     * 个人限购
     */
-   private int givegoodsnum;   
+   private Integer givegoodsnum;   
    /**
     * 小类
     */
@@ -66,7 +66,7 @@ public class Givegoods
    /**
     * 顺序
     */
-   private int givegoodsseq;   
+   private Integer givegoodsseq;   
    /**
     * 客户范围
     */
@@ -195,7 +195,7 @@ public class Givegoods
 	 *设置"售价"属性
 	 *@param givegoodsprice 实体的Givegoodsprice属性
 	 */
-	public void setGivegoodsprice(String givegoodsprice)
+	public void setGivegoodsprice(Float givegoodsprice)
 	{
 		this.givegoodsprice = givegoodsprice;
 	}
@@ -203,7 +203,7 @@ public class Givegoods
 	/**
 	 *获取"售价"属性
 	 */
-	public String getGivegoodsprice()
+	public Float getGivegoodsprice()
 	{
 		return this.givegoodsprice;
 	}	   
@@ -212,7 +212,7 @@ public class Givegoods
 	 *设置"个人限购"属性
 	 *@param givegoodsnum 实体的Givegoodsnum属性
 	 */
-	public void setGivegoodsnum(int givegoodsnum)
+	public void setGivegoodsnum(Integer givegoodsnum)
 	{
 		this.givegoodsnum = givegoodsnum;
 	}
@@ -220,7 +220,7 @@ public class Givegoods
 	/**
 	 *获取"个人限购"属性
 	 */
-	public int getGivegoodsnum()
+	public Integer getGivegoodsnum()
 	{
 		return this.givegoodsnum;
 	}	   
@@ -314,7 +314,7 @@ public class Givegoods
 	 *设置"顺序"属性
 	 *@param givegoodsseq 实体的Givegoodsseq属性
 	 */
-	public void setGivegoodsseq(int givegoodsseq)
+	public void setGivegoodsseq(Integer givegoodsseq)
 	{
 		this.givegoodsseq = givegoodsseq;
 	}
@@ -322,7 +322,7 @@ public class Givegoods
 	/**
 	 *获取"顺序"属性
 	 */
-	public int getGivegoodsseq()
+	public Integer getGivegoodsseq()
 	{
 		return this.givegoodsseq;
 	}	   
@@ -355,14 +355,14 @@ public class Givegoods
 	 	,String givegoodsdetail
 	 	,String givegoodsunits
 	 	,String givegoodsunit
-	 	,String givegoodsprice
-	 	,int givegoodsnum
+	 	,Float givegoodsprice
+	 	,Integer givegoodsnum
 	 	,String givegoodsclass
 	 	,String givegoodsimage
 	 	,String givegoodsstatue
 	 	,String createtime
 	 	,String creator
-	 	,int givegoodsseq
+	 	,Integer givegoodsseq
 	 	,String givegoodsscope
 		 ){
 		super();

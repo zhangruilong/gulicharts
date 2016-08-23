@@ -209,7 +209,6 @@ Ext.onReady(function() {
 	var Customergrid =  Ext.create('Ext.grid.Panel', {
 		height : document.documentElement.clientHeight - 4,
 		width : '100%',
-		forceFit: true,
 		title : Customertitle,
 		store : Customerstore,
 		bbar : Customerbbar,
@@ -225,7 +224,6 @@ Ext.onReady(function() {
 			header : '客户ID',
 			dataIndex : 'customerid',
 			sortable : true, 
-			minWidth:100,
 			editor: {
                 xtype: 'textfield',
                 editable: false
@@ -235,7 +233,6 @@ Ext.onReady(function() {
 			header : '编码',
 			dataIndex : 'customercode',
 			sortable : true,  
-			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -244,7 +241,6 @@ Ext.onReady(function() {
 			header : '姓名(联系人名)',
 			dataIndex : 'customername',
 			sortable : true,  
-			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -253,7 +249,6 @@ Ext.onReady(function() {
 			header : '手机',
 			dataIndex : 'customerphone',
 			sortable : true,  
-			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -262,7 +257,6 @@ Ext.onReady(function() {
 			header : '密码',
 			dataIndex : 'customerpsw',
 			sortable : true,  
-			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -271,7 +265,6 @@ Ext.onReady(function() {
 			header : '店铺(客户名)',
 			dataIndex : 'customershop',
 			sortable : true,  
-			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -280,7 +273,6 @@ Ext.onReady(function() {
 			header : '城市',
 			dataIndex : 'customercity',
 			sortable : true,  
-			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -289,7 +281,6 @@ Ext.onReady(function() {
 			header : '县',
 			dataIndex : 'customerxian',
 			sortable : true,  
-			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -298,7 +289,6 @@ Ext.onReady(function() {
 			header : '街道地址',
 			dataIndex : 'customeraddress',
 			sortable : true,  
-			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -307,7 +297,6 @@ Ext.onReady(function() {
 			header : '类型',
 			dataIndex : 'customertype',
 			sortable : true,  
-			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -316,7 +305,6 @@ Ext.onReady(function() {
 			header : '等级',
 			dataIndex : 'customerlevel',
 			sortable : true,  
-			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -325,7 +313,6 @@ Ext.onReady(function() {
 			header : 'openid',
 			dataIndex : 'openid',
 			sortable : true,  
-			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -334,7 +321,6 @@ Ext.onReady(function() {
 			header : '描述',
 			dataIndex : 'customerdetail',
 			sortable : true,  
-			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -343,7 +329,6 @@ Ext.onReady(function() {
 			header : '状态',
 			dataIndex : 'customerstatue',
 			sortable : true,  
-			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -352,7 +337,6 @@ Ext.onReady(function() {
 			header : '创建时间',
 			dataIndex : 'createtime',
 			sortable : true,  
-			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -361,7 +345,6 @@ Ext.onReady(function() {
 			header : '修改时间',
 			dataIndex : 'updtime',
 			sortable : true,  
-			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -457,7 +440,14 @@ Ext.onReady(function() {
 	        					}
 	        					commonAttach(fid, Customerclassify);
 	        				}
-	                    }]
+	                    },{
+	        				text : "筛选",
+    						iconCls : 'select',
+    						handler : function() {
+    							Ext.getCmp("Customercustomerid").setEditable (true);
+    							createQueryWindow("筛选", CustomerdataForm, Customerstore);
+    						}
+    					}]
 	                }
 	            }
 			},'->',{

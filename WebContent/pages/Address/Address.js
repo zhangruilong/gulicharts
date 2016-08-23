@@ -104,7 +104,6 @@ Ext.onReady(function() {
 			header : '我的地址ID',
 			dataIndex : 'addressid',
 			sortable : true, 
-			minWidth:100,
 			editor: {
                 xtype: 'textfield',
                 editable: false
@@ -114,7 +113,6 @@ Ext.onReady(function() {
 			header : '客户ID',
 			dataIndex : 'addresscustomer',
 			sortable : true,  
-			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -123,7 +121,6 @@ Ext.onReady(function() {
 			header : '联系人',
 			dataIndex : 'addressconnect',
 			sortable : true,  
-			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -132,7 +129,6 @@ Ext.onReady(function() {
 			header : '手机',
 			dataIndex : 'addressphone',
 			sortable : true,  
-			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -141,7 +137,6 @@ Ext.onReady(function() {
 			header : '地址',
 			dataIndex : 'addressaddress',
 			sortable : true,  
-			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -150,7 +145,6 @@ Ext.onReady(function() {
 			header : '是否默认(1默认,0不是默认)',
 			dataIndex : 'addressture',
 			sortable : true,  
-			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -246,7 +240,14 @@ Ext.onReady(function() {
 	        					}
 	        					commonAttach(fid, Addressclassify);
 	        				}
-	                    }]
+	                    },{
+	        				text : "筛选",
+    						iconCls : 'select',
+    						handler : function() {
+    							Ext.getCmp("Addressaddressid").setEditable (true);
+    							createQueryWindow("筛选", AddressdataForm, Addressstore);
+    						}
+    					}]
 	                }
 	            }
 			},'->',{

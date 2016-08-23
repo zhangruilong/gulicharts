@@ -26,15 +26,15 @@ public class Orderm
    /**
     * 种类数
     */
-   private int ordermnum;   
+   private Integer ordermnum;   
    /**
     * 下单金额
     */
-   private String ordermmoney;   
+   private Float ordermmoney;   
    /**
     * 实际金额
     */
-   private String ordermrightmoney;   
+   private Float ordermrightmoney;   
    /**
     * 支付方式
     */
@@ -148,7 +148,7 @@ public class Orderm
 	 *设置"种类数"属性
 	 *@param ordermnum 实体的Ordermnum属性
 	 */
-	public void setOrdermnum(int ordermnum)
+	public void setOrdermnum(Integer ordermnum)
 	{
 		this.ordermnum = ordermnum;
 	}
@@ -156,7 +156,7 @@ public class Orderm
 	/**
 	 *获取"种类数"属性
 	 */
-	public int getOrdermnum()
+	public Integer getOrdermnum()
 	{
 		return this.ordermnum;
 	}	   
@@ -165,7 +165,7 @@ public class Orderm
 	 *设置"下单金额"属性
 	 *@param ordermmoney 实体的Ordermmoney属性
 	 */
-	public void setOrdermmoney(String ordermmoney)
+	public void setOrdermmoney(Float ordermmoney)
 	{
 		this.ordermmoney = ordermmoney;
 	}
@@ -173,7 +173,7 @@ public class Orderm
 	/**
 	 *获取"下单金额"属性
 	 */
-	public String getOrdermmoney()
+	public Float getOrdermmoney()
 	{
 		return this.ordermmoney;
 	}	   
@@ -182,7 +182,7 @@ public class Orderm
 	 *设置"实际金额"属性
 	 *@param ordermrightmoney 实体的Ordermrightmoney属性
 	 */
-	public void setOrdermrightmoney(String ordermrightmoney)
+	public void setOrdermrightmoney(Float ordermrightmoney)
 	{
 		this.ordermrightmoney = ordermrightmoney;
 	}
@@ -190,7 +190,7 @@ public class Orderm
 	/**
 	 *获取"实际金额"属性
 	 */
-	public String getOrdermrightmoney()
+	public Float getOrdermrightmoney()
 	{
 		return this.ordermrightmoney;
 	}	   
@@ -373,9 +373,9 @@ public class Orderm
 	 	,String ordermcustomer
 	 	,String ordermcompany
 	 	,String ordermcode
-	 	,int ordermnum
-	 	,String ordermmoney
-	 	,String ordermrightmoney
+	 	,Integer ordermnum
+	 	,Float ordermmoney
+	 	,Float ordermrightmoney
 	 	,String ordermway
 	 	,String ordermstatue
 	 	,String ordermdetail

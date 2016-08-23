@@ -89,7 +89,6 @@ Ext.onReady(function() {
 	var Paygrid =  Ext.create('Ext.grid.Panel', {
 		height : document.documentElement.clientHeight - 4,
 		width : '100%',
-		forceFit: true,
 		title : Paytitle,
 		store : Paystore,
 		bbar : Paybbar,
@@ -105,7 +104,6 @@ Ext.onReady(function() {
 			header : '在线支付ID',
 			dataIndex : 'payid',
 			sortable : true, 
-			minWidth:100,
 			editor: {
                 xtype: 'textfield',
                 editable: false
@@ -115,7 +113,6 @@ Ext.onReady(function() {
 			header : '订单ID',
 			dataIndex : 'payorderm',
 			sortable : true,  
-			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -124,7 +121,6 @@ Ext.onReady(function() {
 			header : '备注',
 			dataIndex : 'paydetail',
 			sortable : true,  
-			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -133,7 +129,6 @@ Ext.onReady(function() {
 			header : '状态',
 			dataIndex : 'paystatue',
 			sortable : true,  
-			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -142,7 +137,6 @@ Ext.onReady(function() {
 			header : '修改时间',
 			dataIndex : 'updtime',
 			sortable : true,  
-			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -151,7 +145,6 @@ Ext.onReady(function() {
 			header : '修改人',
 			dataIndex : 'updor',
 			sortable : true,  
-			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -247,7 +240,14 @@ Ext.onReady(function() {
 	        					}
 	        					commonAttach(fid, Payclassify);
 	        				}
-	                    }]
+	                    },{
+	        				text : "筛选",
+    						iconCls : 'select',
+    						handler : function() {
+    							Ext.getCmp("Paypayid").setEditable (true);
+    							createQueryWindow("筛选", PaydataForm, Paystore);
+    						}
+    					}]
 	                }
 	            }
 			},'->',{

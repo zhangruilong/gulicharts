@@ -125,7 +125,6 @@ Ext.onReady(function() {
 	var Empgrid =  Ext.create('Ext.grid.Panel', {
 		height : document.documentElement.clientHeight - 4,
 		width : '100%',
-		forceFit: true,
 		title : Emptitle,
 		store : Empstore,
 		bbar : Empbbar,
@@ -141,7 +140,6 @@ Ext.onReady(function() {
 			header : '业务员ID',
 			dataIndex : 'empid',
 			sortable : true, 
-			minWidth:100,
 			editor: {
                 xtype: 'textfield',
                 editable: false
@@ -151,7 +149,6 @@ Ext.onReady(function() {
 			header : '经销商ID',
 			dataIndex : 'empcompany',
 			sortable : true,  
-			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -160,7 +157,6 @@ Ext.onReady(function() {
 			header : '编码',
 			dataIndex : 'empcode',
 			sortable : true,  
-			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -169,7 +165,6 @@ Ext.onReady(function() {
 			header : '账号',
 			dataIndex : 'loginname',
 			sortable : true,  
-			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -178,7 +173,6 @@ Ext.onReady(function() {
 			header : '密码',
 			dataIndex : 'password',
 			sortable : true,  
-			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -187,7 +181,6 @@ Ext.onReady(function() {
 			header : '描述',
 			dataIndex : 'empdetail',
 			sortable : true,  
-			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -196,7 +189,6 @@ Ext.onReady(function() {
 			header : '状态',
 			dataIndex : 'empstatue',
 			sortable : true,  
-			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -205,7 +197,6 @@ Ext.onReady(function() {
 			header : '创建时间',
 			dataIndex : 'createtime',
 			sortable : true,  
-			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -214,7 +205,6 @@ Ext.onReady(function() {
 			header : '修改时间',
 			dataIndex : 'updtime',
 			sortable : true,  
-			minWidth:100,
 			editor: {
                 xtype: 'textfield'
             }
@@ -310,7 +300,14 @@ Ext.onReady(function() {
 	        					}
 	        					commonAttach(fid, Empclassify);
 	        				}
-	                    }]
+	                    },{
+	        				text : "筛选",
+    						iconCls : 'select',
+    						handler : function() {
+    							Ext.getCmp("Empempid").setEditable (true);
+    							createQueryWindow("筛选", EmpdataForm, Empstore);
+    						}
+    					}]
 	                }
 	            }
 			},'->',{

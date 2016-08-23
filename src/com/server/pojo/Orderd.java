@@ -38,7 +38,7 @@ public class Orderd
    /**
     * 价格
     */
-   private String orderdprice;   
+   private Float orderdprice;   
    /**
     * 单位
     */
@@ -50,15 +50,15 @@ public class Orderd
    /**
     * 数量
     */
-   private int orderdnum;   
+   private Integer orderdnum;   
    /**
     * 下单金额
     */
-   private String orderdmoney;   
+   private Float orderdmoney;   
    /**
     * 实际金额
     */
-   private String orderdrightmoney;   
+   private Float orderdrightmoney;   
     //属性方法	    
      /**
 	 *设置主键"订单详细ID"属性
@@ -183,7 +183,7 @@ public class Orderd
 	 *设置"价格"属性
 	 *@param orderdprice 实体的Orderdprice属性
 	 */
-	public void setOrderdprice(String orderdprice)
+	public void setOrderdprice(Float orderdprice)
 	{
 		this.orderdprice = orderdprice;
 	}
@@ -191,7 +191,7 @@ public class Orderd
 	/**
 	 *获取"价格"属性
 	 */
-	public String getOrderdprice()
+	public Float getOrderdprice()
 	{
 		return this.orderdprice;
 	}	   
@@ -234,7 +234,7 @@ public class Orderd
 	 *设置"数量"属性
 	 *@param orderdnum 实体的Orderdnum属性
 	 */
-	public void setOrderdnum(int orderdnum)
+	public void setOrderdnum(Integer orderdnum)
 	{
 		this.orderdnum = orderdnum;
 	}
@@ -242,7 +242,7 @@ public class Orderd
 	/**
 	 *获取"数量"属性
 	 */
-	public int getOrderdnum()
+	public Integer getOrderdnum()
 	{
 		return this.orderdnum;
 	}	   
@@ -251,7 +251,7 @@ public class Orderd
 	 *设置"下单金额"属性
 	 *@param orderdmoney 实体的Orderdmoney属性
 	 */
-	public void setOrderdmoney(String orderdmoney)
+	public void setOrderdmoney(Float orderdmoney)
 	{
 		this.orderdmoney = orderdmoney;
 	}
@@ -259,7 +259,7 @@ public class Orderd
 	/**
 	 *获取"下单金额"属性
 	 */
-	public String getOrderdmoney()
+	public Float getOrderdmoney()
 	{
 		return this.orderdmoney;
 	}	   
@@ -268,7 +268,7 @@ public class Orderd
 	 *设置"实际金额"属性
 	 *@param orderdrightmoney 实体的Orderdrightmoney属性
 	 */
-	public void setOrderdrightmoney(String orderdrightmoney)
+	public void setOrderdrightmoney(Float orderdrightmoney)
 	{
 		this.orderdrightmoney = orderdrightmoney;
 	}
@@ -276,7 +276,7 @@ public class Orderd
 	/**
 	 *获取"实际金额"属性
 	 */
-	public String getOrderdrightmoney()
+	public Float getOrderdrightmoney()
 	{
 		return this.orderdrightmoney;
 	}	   
@@ -292,12 +292,12 @@ public class Orderd
 	 	,String orderdname
 	 	,String orderddetail
 	 	,String orderdunits
-	 	,String orderdprice
+	 	,Float orderdprice
 	 	,String orderdunit
 	 	,String orderdclass
-	 	,int orderdnum
-	 	,String orderdmoney
-	 	,String orderdrightmoney
+	 	,Integer orderdnum
+	 	,Float orderdmoney
+	 	,Float orderdrightmoney
 		 ){
 		super();
 		this.orderdid = orderdid;

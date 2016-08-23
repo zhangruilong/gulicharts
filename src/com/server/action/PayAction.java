@@ -39,15 +39,12 @@ public class PayAction extends BaseActionDao {
     	}
 		return querysql.substring(0, querysql.length() - 4);
 	};
-	//将json转换成cuss
-	public void json2cuss(HttpServletRequest request){
-		String json = request.getParameter("json");
-		System.out.println("json : " + json);
-		if(CommonUtil.isNotEmpty(json)) cuss = CommonConst.GSON.fromJson(json, TYPE);
-	}
 	//新增
 	public void insAll(HttpServletRequest request, HttpServletResponse response){
-		json2cuss(request);
+		String json = request.getParameter("json");
+		System.out.println("json : " + json);
+		json = json.replace("\"\"", "null");
+		if(CommonUtil.isNotEmpty(json)) cuss = CommonConst.GSON.fromJson(json, TYPE);
 		for(Pay temp:cuss){
 			if(CommonUtil.isNull(temp.getPayid()))
 				temp.setPayid(CommonUtil.getNewId());
@@ -57,7 +54,9 @@ public class PayAction extends BaseActionDao {
 	}
 	//删除
 	public void delAll(HttpServletRequest request, HttpServletResponse response){
-		json2cuss(request);
+		String json = request.getParameter("json");
+		System.out.println("json : " + json);
+		if(CommonUtil.isNotEmpty(json)) cuss = CommonConst.GSON.fromJson(json, TYPE);
 		for(Pay temp:cuss){
 			result = delSingle(temp,PayPoco.KEYCOLUMN);
 		}
@@ -65,7 +64,9 @@ public class PayAction extends BaseActionDao {
 	}
 	//修改
 	public void updAll(HttpServletRequest request, HttpServletResponse response){
-		json2cuss(request);
+		String json = request.getParameter("json");
+		System.out.println("json : " + json);
+		if(CommonUtil.isNotEmpty(json)) cuss = CommonConst.GSON.fromJson(json, TYPE);
 		for(Pay temp:cuss){
 			result = updSingle(temp,PayPoco.KEYCOLUMN);
 		}
@@ -98,6 +99,13 @@ public class PayAction extends BaseActionDao {
 		queryinfo.setType(Pay.class);
 		queryinfo.setQuery(getQuerysql(queryinfo.getQuery()));
 		if(CommonUtil.isNull(queryinfo.getOrder())) queryinfo.setOrder(PayPoco.ORDER);
+		String json = request.getParameter("json");
+		if(CommonUtil.isNotEmpty(json)){
+			System.out.println("json : " + json);
+			json = json.replace("\"\"", "null");
+			if(CommonUtil.isNotEmpty(json)) cuss = CommonConst.GSON.fromJson(json, TYPE);
+			queryinfo.setJson(cuss.get(0));
+		}
 		Pageinfo pageinfo = new Pageinfo(0, selAll(queryinfo));
 		result = CommonConst.GSON.toJson(pageinfo);
 		responsePW(response, result);
@@ -108,6 +116,13 @@ public class PayAction extends BaseActionDao {
 		queryinfo.setType(Pay.class);
 		queryinfo.setQuery(getQuerysql(queryinfo.getQuery()));
 		if(CommonUtil.isNull(queryinfo.getOrder())) queryinfo.setOrder(PayPoco.ORDER);
+		String json = request.getParameter("json");
+		if(CommonUtil.isNotEmpty(json)){
+			System.out.println("json : " + json);
+			json = json.replace("\"\"", "null");
+			if(CommonUtil.isNotEmpty(json)) cuss = CommonConst.GSON.fromJson(json, TYPE);
+			queryinfo.setJson(cuss.get(0));
+		}
 		Pageinfo pageinfo = new Pageinfo(getTotal(queryinfo), selQuery(queryinfo));
 		result = CommonConst.GSON.toJson(pageinfo);
 		responsePW(response, result);
