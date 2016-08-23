@@ -24,21 +24,7 @@ public class BkgoodsAction extends BaseActionDao {
 	public String result = CommonConst.FAILURE;
 	public ArrayList<Bkgoods> cuss = null;
 	public Type TYPE = new TypeToken<ArrayList<Bkgoods>>() {}.getType();
-	
-	/**
-    * 模糊查询语句
-    * @param query
-    * @return "filedname like '%query%' or ..."
-    */
-    public String getQuerysql(String query) {
-    	if(CommonUtil.isEmpty(query)) return null;
-    	String querysql = "";
-    	String queryfieldname[] = BkgoodsPoco.QUERYFIELDNAME;
-    	for(int i=0;i<queryfieldname.length;i++){
-    		querysql += queryfieldname[i] + " like '%" + query + "%' or ";
-    	}
-		return querysql.substring(0, querysql.length() - 4);
-	};
+
 	//新增
 	public void insAll(HttpServletRequest request, HttpServletResponse response){
 		String json = request.getParameter("json");
@@ -72,15 +58,6 @@ public class BkgoodsAction extends BaseActionDao {
 		}
 		responsePW(response, result);
 	}
-	//导出
-	public void expAll(HttpServletRequest request, HttpServletResponse response) throws Exception{
-		Queryinfo queryinfo = getQueryinfo(request);
-		queryinfo.setType(Bkgoods.class);
-		queryinfo.setQuery(getQuerysql(queryinfo.getQuery()));
-		if(CommonUtil.isNull(queryinfo.getOrder())) queryinfo.setOrder(BkgoodsPoco.ORDER);
-		cuss = (ArrayList<Bkgoods>) selAll(queryinfo);
-		FileUtil.expExcel(response,cuss,BkgoodsPoco.CHINESENAME,BkgoodsPoco.NAME);
-	}
 	//导入
 	public void impAll(HttpServletRequest request, HttpServletResponse response){
 		Fileinfo fileinfo = FileUtil.upload(request,0,null,BkgoodsPoco.NAME,"impAll");
@@ -93,36 +70,22 @@ public class BkgoodsAction extends BaseActionDao {
 		}
 		responsePW(response, result);
 	}
+	//导出
+	public void expAll(HttpServletRequest request, HttpServletResponse response) throws Exception{
+		Queryinfo queryinfo = getQueryinfo(request, Bkgoods.class, BkgoodsPoco.QUERYFIELDNAME, BkgoodsPoco.ORDER, TYPE);
+		cuss = (ArrayList<Bkgoods>) selAll(queryinfo);
+		FileUtil.expExcel(response,cuss,BkgoodsPoco.CHINESENAME,BkgoodsPoco.NAME);
+	}
 	//查询所有
 	public void selAll(HttpServletRequest request, HttpServletResponse response){
-		Queryinfo queryinfo = getQueryinfo(request);
-		queryinfo.setType(Bkgoods.class);
-		queryinfo.setQuery(getQuerysql(queryinfo.getQuery()));
-		if(CommonUtil.isNull(queryinfo.getOrder())) queryinfo.setOrder(BkgoodsPoco.ORDER);
-		String json = request.getParameter("json");
-		if(CommonUtil.isNotEmpty(json)){
-			System.out.println("json : " + json);
-			json = json.replace("\"\"", "null");
-			if(CommonUtil.isNotEmpty(json)) cuss = CommonConst.GSON.fromJson(json, TYPE);
-			queryinfo.setJson(cuss.get(0));
-		}
+		Queryinfo queryinfo = getQueryinfo(request, Bkgoods.class, BkgoodsPoco.QUERYFIELDNAME, BkgoodsPoco.ORDER, TYPE);
 		Pageinfo pageinfo = new Pageinfo(0, selAll(queryinfo));
 		result = CommonConst.GSON.toJson(pageinfo);
 		responsePW(response, result);
 	}
 	//分页查询
 	public void selQuery(HttpServletRequest request, HttpServletResponse response){
-		Queryinfo queryinfo = getQueryinfo(request);
-		queryinfo.setType(Bkgoods.class);
-		queryinfo.setQuery(getQuerysql(queryinfo.getQuery()));
-		if(CommonUtil.isNull(queryinfo.getOrder())) queryinfo.setOrder(BkgoodsPoco.ORDER);
-		String json = request.getParameter("json");
-		if(CommonUtil.isNotEmpty(json)){
-			System.out.println("json : " + json);
-			json = json.replace("\"\"", "null");
-			if(CommonUtil.isNotEmpty(json)) cuss = CommonConst.GSON.fromJson(json, TYPE);
-			queryinfo.setJson(cuss.get(0));
-		}
+		Queryinfo queryinfo = getQueryinfo(request, Bkgoods.class, BkgoodsPoco.QUERYFIELDNAME, BkgoodsPoco.ORDER, TYPE);
 		Pageinfo pageinfo = new Pageinfo(getTotal(queryinfo), selQuery(queryinfo));
 		result = CommonConst.GSON.toJson(pageinfo);
 		responsePW(response, result);

@@ -24,21 +24,7 @@ public class AddressAction extends BaseActionDao {
 	public String result = CommonConst.FAILURE;
 	public ArrayList<Address> cuss = null;
 	public Type TYPE = new TypeToken<ArrayList<Address>>() {}.getType();
-	
-	/**
-    * 模糊查询语句
-    * @param query
-    * @return "filedname like '%query%' or ..."
-    */
-    public String getQuerysql(String query) {
-    	if(CommonUtil.isEmpty(query)) return null;
-    	String querysql = "";
-    	String queryfieldname[] = AddressPoco.QUERYFIELDNAME;
-    	for(int i=0;i<queryfieldname.length;i++){
-    		querysql += queryfieldname[i] + " like '%" + query + "%' or ";
-    	}
-		return querysql.substring(0, querysql.length() - 4);
-	};
+
 	//新增
 	public void insAll(HttpServletRequest request, HttpServletResponse response){
 		String json = request.getParameter("json");
@@ -72,15 +58,6 @@ public class AddressAction extends BaseActionDao {
 		}
 		responsePW(response, result);
 	}
-	//导出
-	public void expAll(HttpServletRequest request, HttpServletResponse response) throws Exception{
-		Queryinfo queryinfo = getQueryinfo(request);
-		queryinfo.setType(Address.class);
-		queryinfo.setQuery(getQuerysql(queryinfo.getQuery()));
-		if(CommonUtil.isNull(queryinfo.getOrder())) queryinfo.setOrder(AddressPoco.ORDER);
-		cuss = (ArrayList<Address>) selAll(queryinfo);
-		FileUtil.expExcel(response,cuss,AddressPoco.CHINESENAME,AddressPoco.NAME);
-	}
 	//导入
 	public void impAll(HttpServletRequest request, HttpServletResponse response){
 		Fileinfo fileinfo = FileUtil.upload(request,0,null,AddressPoco.NAME,"impAll");
@@ -93,36 +70,22 @@ public class AddressAction extends BaseActionDao {
 		}
 		responsePW(response, result);
 	}
+	//导出
+	public void expAll(HttpServletRequest request, HttpServletResponse response) throws Exception{
+		Queryinfo queryinfo = getQueryinfo(request, Address.class, AddressPoco.QUERYFIELDNAME, AddressPoco.ORDER, TYPE);
+		cuss = (ArrayList<Address>) selAll(queryinfo);
+		FileUtil.expExcel(response,cuss,AddressPoco.CHINESENAME,AddressPoco.NAME);
+	}
 	//查询所有
 	public void selAll(HttpServletRequest request, HttpServletResponse response){
-		Queryinfo queryinfo = getQueryinfo(request);
-		queryinfo.setType(Address.class);
-		queryinfo.setQuery(getQuerysql(queryinfo.getQuery()));
-		if(CommonUtil.isNull(queryinfo.getOrder())) queryinfo.setOrder(AddressPoco.ORDER);
-		String json = request.getParameter("json");
-		if(CommonUtil.isNotEmpty(json)){
-			System.out.println("json : " + json);
-			json = json.replace("\"\"", "null");
-			if(CommonUtil.isNotEmpty(json)) cuss = CommonConst.GSON.fromJson(json, TYPE);
-			queryinfo.setJson(cuss.get(0));
-		}
+		Queryinfo queryinfo = getQueryinfo(request, Address.class, AddressPoco.QUERYFIELDNAME, AddressPoco.ORDER, TYPE);
 		Pageinfo pageinfo = new Pageinfo(0, selAll(queryinfo));
 		result = CommonConst.GSON.toJson(pageinfo);
 		responsePW(response, result);
 	}
 	//分页查询
 	public void selQuery(HttpServletRequest request, HttpServletResponse response){
-		Queryinfo queryinfo = getQueryinfo(request);
-		queryinfo.setType(Address.class);
-		queryinfo.setQuery(getQuerysql(queryinfo.getQuery()));
-		if(CommonUtil.isNull(queryinfo.getOrder())) queryinfo.setOrder(AddressPoco.ORDER);
-		String json = request.getParameter("json");
-		if(CommonUtil.isNotEmpty(json)){
-			System.out.println("json : " + json);
-			json = json.replace("\"\"", "null");
-			if(CommonUtil.isNotEmpty(json)) cuss = CommonConst.GSON.fromJson(json, TYPE);
-			queryinfo.setJson(cuss.get(0));
-		}
+		Queryinfo queryinfo = getQueryinfo(request, Address.class, AddressPoco.QUERYFIELDNAME, AddressPoco.ORDER, TYPE);
 		Pageinfo pageinfo = new Pageinfo(getTotal(queryinfo), selQuery(queryinfo));
 		result = CommonConst.GSON.toJson(pageinfo);
 		responsePW(response, result);

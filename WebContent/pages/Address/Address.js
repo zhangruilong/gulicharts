@@ -95,10 +95,10 @@ Ext.onReady(function() {
 	    selModel: {
 	        type: 'checkboxmodel'
 	    },
-	    plugins: {
+	    plugins: [{
 	         ptype: 'cellediting',
 	         clicksToEdit: 1
-	    },
+	    }],
 		columns : [{xtype: 'rownumberer',width:36}, 
 		{// 改
 			header : '我的地址ID',
@@ -222,7 +222,12 @@ Ext.onReady(function() {
 	                    	text : "前台导出",
 	        				iconCls : 'exp',
 	        				handler : function() {
-	        					commonExp(Addressgrid);
+//	        					commonExp(Addressgrid);
+	        					Addressgrid.saveDocumentAs({
+	        					     type: 'excel',
+	        					     title: 'My export',
+	        					     fileName: 'myExport.xml'
+	        					 });
 	        				}
 	                    },{
 	                    	text : "附件",
