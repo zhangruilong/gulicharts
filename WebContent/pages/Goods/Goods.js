@@ -209,17 +209,16 @@ Ext.onReady(function() {
 	var Goodsgrid =  Ext.create('Ext.grid.Panel', {
 		height : document.documentElement.clientHeight - 4,
 		width : '100%',
-		forceFit: true,
 		title : Goodstitle,
 		store : Goodsstore,
 		bbar : Goodsbbar,
 	    selModel: {
 	        type: 'checkboxmodel'
 	    },
-	    plugins: {
+	    plugins: [{
 	         ptype: 'cellediting',
 	         clicksToEdit: 1
-	    },
+	    }],
 		columns : [{xtype: 'rownumberer',width:36}, 
 		{// 改
 			header : '商品ID',
@@ -457,7 +456,14 @@ Ext.onReady(function() {
 	        					}
 	        					commonAttach(fid, Goodsclassify);
 	        				}
-	                    }]
+	                    },{
+	        				text : "筛选",
+    						iconCls : 'select',
+    						handler : function() {
+    							Ext.getCmp("Goodsgoodsid").setEditable (true);
+    							createQueryWindow("筛选", GoodsdataForm, Goodsstore);
+    						}
+    					}]
 	                }
 	            }
 			},'->',{

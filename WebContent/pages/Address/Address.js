@@ -89,7 +89,6 @@ Ext.onReady(function() {
 	var Addressgrid =  Ext.create('Ext.grid.Panel', {
 		height : document.documentElement.clientHeight - 4,
 		width : '100%',
-		forceFit: true,
 		title : Addresstitle,
 		store : Addressstore,
 		bbar : Addressbbar,

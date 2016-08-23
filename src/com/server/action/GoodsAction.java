@@ -39,15 +39,12 @@ public class GoodsAction extends BaseActionDao {
     	}
 		return querysql.substring(0, querysql.length() - 4);
 	};
-	//将json转换成cuss
-	public void json2cuss(HttpServletRequest request){
-		String json = request.getParameter("json");
-		System.out.println("json : " + json);
-		if(CommonUtil.isNotEmpty(json)) cuss = CommonConst.GSON.fromJson(json, TYPE);
-	}
 	//新增
 	public void insAll(HttpServletRequest request, HttpServletResponse response){
-		json2cuss(request);
+		String json = request.getParameter("json");
+		System.out.println("json : " + json);
+		json = json.replace("\"\"", "null");
+		if(CommonUtil.isNotEmpty(json)) cuss = CommonConst.GSON.fromJson(json, TYPE);
 		for(Goods temp:cuss){
 			if(CommonUtil.isNull(temp.getGoodsid()))
 				temp.setGoodsid(CommonUtil.getNewId());
@@ -57,7 +54,9 @@ public class GoodsAction extends BaseActionDao {
 	}
 	//删除
 	public void delAll(HttpServletRequest request, HttpServletResponse response){
-		json2cuss(request);
+		String json = request.getParameter("json");
+		System.out.println("json : " + json);
+		if(CommonUtil.isNotEmpty(json)) cuss = CommonConst.GSON.fromJson(json, TYPE);
 		for(Goods temp:cuss){
 			result = delSingle(temp,GoodsPoco.KEYCOLUMN);
 		}
@@ -65,7 +64,9 @@ public class GoodsAction extends BaseActionDao {
 	}
 	//修改
 	public void updAll(HttpServletRequest request, HttpServletResponse response){
-		json2cuss(request);
+		String json = request.getParameter("json");
+		System.out.println("json : " + json);
+		if(CommonUtil.isNotEmpty(json)) cuss = CommonConst.GSON.fromJson(json, TYPE);
 		for(Goods temp:cuss){
 			result = updSingle(temp,GoodsPoco.KEYCOLUMN);
 		}
@@ -98,6 +99,13 @@ public class GoodsAction extends BaseActionDao {
 		queryinfo.setType(Goods.class);
 		queryinfo.setQuery(getQuerysql(queryinfo.getQuery()));
 		if(CommonUtil.isNull(queryinfo.getOrder())) queryinfo.setOrder(GoodsPoco.ORDER);
+		String json = request.getParameter("json");
+		if(CommonUtil.isNotEmpty(json)){
+			System.out.println("json : " + json);
+			json = json.replace("\"\"", "null");
+			if(CommonUtil.isNotEmpty(json)) cuss = CommonConst.GSON.fromJson(json, TYPE);
+			queryinfo.setJson(cuss.get(0));
+		}
 		Pageinfo pageinfo = new Pageinfo(0, selAll(queryinfo));
 		result = CommonConst.GSON.toJson(pageinfo);
 		responsePW(response, result);
@@ -108,6 +116,13 @@ public class GoodsAction extends BaseActionDao {
 		queryinfo.setType(Goods.class);
 		queryinfo.setQuery(getQuerysql(queryinfo.getQuery()));
 		if(CommonUtil.isNull(queryinfo.getOrder())) queryinfo.setOrder(GoodsPoco.ORDER);
+		String json = request.getParameter("json");
+		if(CommonUtil.isNotEmpty(json)){
+			System.out.println("json : " + json);
+			json = json.replace("\"\"", "null");
+			if(CommonUtil.isNotEmpty(json)) cuss = CommonConst.GSON.fromJson(json, TYPE);
+			queryinfo.setJson(cuss.get(0));
+		}
 		Pageinfo pageinfo = new Pageinfo(getTotal(queryinfo), selQuery(queryinfo));
 		result = CommonConst.GSON.toJson(pageinfo);
 		responsePW(response, result);

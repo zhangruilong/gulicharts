@@ -140,6 +140,11 @@ public class BaseDao {
 		try {
 			String sql = "select * from (select A.*, ROWNUM RN from (select * from " + 
 						 	queryinfo.getType().getSimpleName() + " where 1=1 ";
+			if(CommonUtil.isNotEmpty(queryinfo.getJson())){
+				String jsonsql = TypeUtil.beanToSql(queryinfo.getJson());
+				if(CommonUtil.isNotNull(jsonsql))
+				sql += " and (" + TypeUtil.beanToSql(queryinfo.getJson()) + ") ";
+			}
 			if(CommonUtil.isNotEmpty(queryinfo.getWheresql())){
 				sql += " and (" + queryinfo.getWheresql() + ") ";
 			}
@@ -204,6 +209,11 @@ public class BaseDao {
 		List objs = new ArrayList();
 		try {
 			String sql = "select * from " + queryinfo.getType().getSimpleName() + " where 1=1 ";
+			if(CommonUtil.isNotEmpty(queryinfo.getJson())){
+				String jsonsql = TypeUtil.beanToSql(queryinfo.getJson());
+				if(CommonUtil.isNotNull(jsonsql))
+				sql += " and (" + TypeUtil.beanToSql(queryinfo.getJson()) + ") ";
+			}
 			if(CommonUtil.isNotEmpty(queryinfo.getWheresql())){
 				sql += " and (" + queryinfo.getWheresql() + ") ";
 			}
