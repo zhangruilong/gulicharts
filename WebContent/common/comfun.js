@@ -272,7 +272,7 @@ function createQueryWindow(title,_form,store) {
 					handler : function() {
 						var json = "[" + Ext.encode(_form.form.getValues(false)) + "]";
 //						json = json.replace(/""/g,null);
-						store.load({
+						store.reload({
 							params : {
 								json : json
 							}

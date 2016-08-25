@@ -41,6 +41,11 @@ public class BaseDao {
 		int total = 0;
 		try {
 			sql = "SELECT count(*) AS rowcount FROM " + queryinfo.getType().getSimpleName() + " where 1=1 ";
+			if(CommonUtil.isNotEmpty(queryinfo.getJson())){
+				String jsonsql = TypeUtil.beanToSql(queryinfo.getJson());
+				if(CommonUtil.isNotNull(jsonsql))
+				sql += " and (" + TypeUtil.beanToSql(queryinfo.getJson()) + ") ";
+			}
 			if(CommonUtil.isNotEmpty(queryinfo.getWheresql())){
 				sql += " and (" + queryinfo.getWheresql() + ") ";
 			}
