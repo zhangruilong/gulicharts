@@ -15,7 +15,7 @@ Ext.onReady(function() {
 	        			    ,'largecuspriceunit2' 
 	        			      ];// 全部字段
 	var Largecuspricekeycolumn = [ 'id' ];// 主键
-	var Largecuspricestore = dataStore(Largecuspricefields, basePath + Largecuspriceaction + "?method=selQuery");// 定义Largecuspricestore
+	var Largecuspricestore = dataStore(Largecuspricefields, basePath + Largecuspriceaction + "?method=selAll");// 定义Largecuspricestore
 	var LargecuspricedataForm = Ext.create('Ext.form.Panel', {// 定义新增和修改的FormPanel
 		id:'LargecuspricedataForm',
 		labelAlign : 'right',
@@ -145,13 +145,13 @@ Ext.onReady(function() {
 		]
 	});
 	
-	var Largecuspricebbar = pagesizebar(Largecuspricestore);//定义分页
+	//var Largecuspricebbar = pagesizebar(Largecuspricestore);//定义分页
 	var Largecuspricegrid =  Ext.create('Ext.grid.Panel', {
 		height : document.documentElement.clientHeight - 4,
 		width : '100%',
-		title : Largecuspricetitle,
+		//title : Largecuspricetitle,
 		store : Largecuspricestore,
-		bbar : Largecuspricebbar,
+		//bbar : Largecuspricebbar,
 	    selModel: {
 	        type: 'checkboxmodel'
 	    },
@@ -159,7 +159,7 @@ Ext.onReady(function() {
 	         ptype: 'cellediting',
 	         clicksToEdit: 1
 	    },
-		columns : [{xtype: 'rownumberer',width:36}, 
+		columns : [{xtype: 'rownumberer',width:50}, 
 		{// 改
 			header : 'ID',
 			dataIndex : 'id',

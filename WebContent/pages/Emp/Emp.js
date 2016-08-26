@@ -13,7 +13,7 @@ Ext.onReady(function() {
 	        			    ,'updtime' 
 	        			      ];// 全部字段
 	var Empkeycolumn = [ 'empid' ];// 主键
-	var Empstore = dataStore(Empfields, basePath + Empaction + "?method=selQuery");// 定义Empstore
+	var Empstore = dataStore(Empfields, basePath + Empaction + "?method=selAll");// 定义Empstore
 	var EmpdataForm = Ext.create('Ext.form.Panel', {// 定义新增和修改的FormPanel
 		id:'EmpdataForm',
 		labelAlign : 'right',
@@ -121,13 +121,13 @@ Ext.onReady(function() {
 		]
 	});
 	
-	var Empbbar = pagesizebar(Empstore);//定义分页
+	//var Empbbar = pagesizebar(Empstore);//定义分页
 	var Empgrid =  Ext.create('Ext.grid.Panel', {
 		height : document.documentElement.clientHeight - 4,
 		width : '100%',
-		title : Emptitle,
+		//title : Emptitle,
 		store : Empstore,
-		bbar : Empbbar,
+		//bbar : Empbbar,
 	    selModel: {
 	        type: 'checkboxmodel'
 	    },
@@ -135,7 +135,7 @@ Ext.onReady(function() {
 	         ptype: 'cellediting',
 	         clicksToEdit: 1
 	    },
-		columns : [{xtype: 'rownumberer',width:36}, 
+		columns : [{xtype: 'rownumberer',width:50}, 
 		{// 改
 			header : '业务员ID',
 			dataIndex : 'empid',

@@ -21,7 +21,7 @@ Ext.onReady(function() {
 	        			    ,'bkgoodsscope' 
 	        			      ];// 全部字段
 	var Bkgoodskeycolumn = [ 'bkgoodsid' ];// 主键
-	var Bkgoodsstore = dataStore(Bkgoodsfields, basePath + Bkgoodsaction + "?method=selQuery");// 定义Bkgoodsstore
+	var Bkgoodsstore = dataStore(Bkgoodsfields, basePath + Bkgoodsaction + "?method=selAll");// 定义Bkgoodsstore
 	var BkgoodsdataForm = Ext.create('Ext.form.Panel', {// 定义新增和修改的FormPanel
 		id:'BkgoodsdataForm',
 		labelAlign : 'right',
@@ -217,13 +217,13 @@ Ext.onReady(function() {
 		]
 	});
 	
-	var Bkgoodsbbar = pagesizebar(Bkgoodsstore);//定义分页
+	//var Bkgoodsbbar = pagesizebar(Bkgoodsstore);//定义分页
 	var Bkgoodsgrid =  Ext.create('Ext.grid.Panel', {
 		height : document.documentElement.clientHeight - 4,
 		width : '100%',
-		title : Bkgoodstitle,
+		//title : Bkgoodstitle,
 		store : Bkgoodsstore,
-		bbar : Bkgoodsbbar,
+		//bbar : Bkgoodsbbar,
 	    selModel: {
 	        type: 'checkboxmodel'
 	    },
@@ -231,7 +231,7 @@ Ext.onReady(function() {
 	         ptype: 'cellediting',
 	         clicksToEdit: 1
 	    },
-		columns : [{xtype: 'rownumberer',width:36}, 
+		columns : [{xtype: 'rownumberer',width:50}, 
 		{// 改
 			header : '促销品ID',
 			dataIndex : 'bkgoodsid',

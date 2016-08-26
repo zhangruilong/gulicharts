@@ -10,7 +10,7 @@ Ext.onReady(function() {
 	        			    ,'citystatue' 
 	        			      ];// 全部字段
 	var Citykeycolumn = [ 'cityid' ];// 主键
-	var Citystore = dataStore(Cityfields, basePath + Cityaction + "?method=selQuery");// 定义Citystore
+	var Citystore = dataStore(Cityfields, basePath + Cityaction + "?method=selAll");// 定义Citystore
 	var CitydataForm = Ext.create('Ext.form.Panel', {// 定义新增和修改的FormPanel
 		id:'CitydataForm',
 		labelAlign : 'right',
@@ -85,13 +85,13 @@ Ext.onReady(function() {
 		]
 	});
 	
-	var Citybbar = pagesizebar(Citystore);//定义分页
+	//var Citybbar = pagesizebar(Citystore);//定义分页
 	var Citygrid =  Ext.create('Ext.grid.Panel', {
 		height : document.documentElement.clientHeight - 4,
 		width : '100%',
-		title : Citytitle,
+		//title : Citytitle,
 		store : Citystore,
-		bbar : Citybbar,
+		//bbar : Citybbar,
 	    selModel: {
 	        type: 'checkboxmodel'
 	    },
@@ -99,7 +99,7 @@ Ext.onReady(function() {
 	         ptype: 'cellediting',
 	         clicksToEdit: 1
 	    },
-		columns : [{xtype: 'rownumberer',width:36}, 
+		columns : [{xtype: 'rownumberer',width:50}, 
 		{// 改
 			header : '城市ID',
 			dataIndex : 'cityid',

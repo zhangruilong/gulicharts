@@ -20,7 +20,7 @@ Ext.onReady(function() {
 	        			    ,'givegoodsscope' 
 	        			      ];// 全部字段
 	var Givegoodskeycolumn = [ 'givegoodsid' ];// 主键
-	var Givegoodsstore = dataStore(Givegoodsfields, basePath + Givegoodsaction + "?method=selQuery");// 定义Givegoodsstore
+	var Givegoodsstore = dataStore(Givegoodsfields, basePath + Givegoodsaction + "?method=selAll");// 定义Givegoodsstore
 	var GivegoodsdataForm = Ext.create('Ext.form.Panel', {// 定义新增和修改的FormPanel
 		id:'GivegoodsdataForm',
 		labelAlign : 'right',
@@ -205,13 +205,13 @@ Ext.onReady(function() {
 		]
 	});
 	
-	var Givegoodsbbar = pagesizebar(Givegoodsstore);//定义分页
+	//var Givegoodsbbar = pagesizebar(Givegoodsstore);//定义分页
 	var Givegoodsgrid =  Ext.create('Ext.grid.Panel', {
 		height : document.documentElement.clientHeight - 4,
 		width : '100%',
-		title : Givegoodstitle,
+		//title : Givegoodstitle,
 		store : Givegoodsstore,
-		bbar : Givegoodsbbar,
+		//bbar : Givegoodsbbar,
 	    selModel: {
 	        type: 'checkboxmodel'
 	    },
@@ -219,7 +219,7 @@ Ext.onReady(function() {
 	         ptype: 'cellediting',
 	         clicksToEdit: 1
 	    },
-		columns : [{xtype: 'rownumberer',width:36}, 
+		columns : [{xtype: 'rownumberer',width:50}, 
 		{// 改
 			header : '买赠ID',
 			dataIndex : 'givegoodsid',

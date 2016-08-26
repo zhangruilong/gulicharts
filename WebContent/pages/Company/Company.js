@@ -17,7 +17,7 @@ Ext.onReady(function() {
 	        			    ,'updtime' 
 	        			      ];// 全部字段
 	var Companykeycolumn = [ 'companyid' ];// 主键
-	var Companystore = dataStore(Companyfields, basePath + Companyaction + "?method=selQuery");// 定义Companystore
+	var Companystore = dataStore(Companyfields, basePath + Companyaction + "?method=selAll");// 定义Companystore
 	var CompanydataForm = Ext.create('Ext.form.Panel', {// 定义新增和修改的FormPanel
 		id:'CompanydataForm',
 		labelAlign : 'right',
@@ -149,7 +149,7 @@ Ext.onReady(function() {
 			layout : 'form',
 			items : [ {
 				xtype : 'textfield',
-				fieldLabel : '创建时间',
+				fieldLabel : '创建时间(服务区域)',
 				id : 'Companycreatetime',
 				name : 'createtime',
 				maxLength : 100
@@ -169,13 +169,13 @@ Ext.onReady(function() {
 		]
 	});
 	
-	var Companybbar = pagesizebar(Companystore);//定义分页
+	//var Companybbar = pagesizebar(Companystore);//定义分页
 	var Companygrid =  Ext.create('Ext.grid.Panel', {
 		height : document.documentElement.clientHeight - 4,
 		width : '100%',
-		title : Companytitle,
+		//title : Companytitle,
 		store : Companystore,
-		bbar : Companybbar,
+		//bbar : Companybbar,
 	    selModel: {
 	        type: 'checkboxmodel'
 	    },
@@ -183,7 +183,7 @@ Ext.onReady(function() {
 	         ptype: 'cellediting',
 	         clicksToEdit: 1
 	    },
-		columns : [{xtype: 'rownumberer',width:36}, 
+		columns : [{xtype: 'rownumberer',width:50}, 
 		{// 改
 			header : '经销商ID',
 			dataIndex : 'companyid',
@@ -274,7 +274,7 @@ Ext.onReady(function() {
             }
 		}
 		, {
-			header : '创建时间',
+			header : '创建时间(服务区域)',
 			dataIndex : 'createtime',
 			sortable : true,  
 			editor: {

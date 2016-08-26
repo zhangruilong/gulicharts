@@ -16,7 +16,7 @@ Ext.onReady(function() {
 	        			    ,'updor' 
 	        			      ];// 全部字段
 	var Priceskeycolumn = [ 'pricesid' ];// 主键
-	var Pricesstore = dataStore(Pricesfields, basePath + Pricesaction + "?method=selQuery");// 定义Pricesstore
+	var Pricesstore = dataStore(Pricesfields, basePath + Pricesaction + "?method=selAll");// 定义Pricesstore
 	var PricesdataForm = Ext.create('Ext.form.Panel', {// 定义新增和修改的FormPanel
 		id:'PricesdataForm',
 		labelAlign : 'right',
@@ -157,13 +157,13 @@ Ext.onReady(function() {
 		]
 	});
 	
-	var Pricesbbar = pagesizebar(Pricesstore);//定义分页
+	//var Pricesbbar = pagesizebar(Pricesstore);//定义分页
 	var Pricesgrid =  Ext.create('Ext.grid.Panel', {
 		height : document.documentElement.clientHeight - 4,
 		width : '100%',
-		title : Pricestitle,
+		//title : Pricestitle,
 		store : Pricesstore,
-		bbar : Pricesbbar,
+		//bbar : Pricesbbar,
 	    selModel: {
 	        type: 'checkboxmodel'
 	    },
@@ -171,7 +171,7 @@ Ext.onReady(function() {
 	         ptype: 'cellediting',
 	         clicksToEdit: 1
 	    },
-		columns : [{xtype: 'rownumberer',width:36}, 
+		columns : [{xtype: 'rownumberer',width:50}, 
 		{// 改
 			header : '价格体系ID',
 			dataIndex : 'pricesid',

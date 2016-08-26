@@ -17,7 +17,7 @@ Ext.onReady(function() {
 	        			    ,'orderdrightmoney' 
 	        			      ];// 全部字段
 	var Orderdkeycolumn = [ 'orderdid' ];// 主键
-	var Orderdstore = dataStore(Orderdfields, basePath + Orderdaction + "?method=selQuery");// 定义Orderdstore
+	var Orderdstore = dataStore(Orderdfields, basePath + Orderdaction + "?method=selAll");// 定义Orderdstore
 	var OrderddataForm = Ext.create('Ext.form.Panel', {// 定义新增和修改的FormPanel
 		id:'OrderddataForm',
 		labelAlign : 'right',
@@ -169,13 +169,13 @@ Ext.onReady(function() {
 		]
 	});
 	
-	var Orderdbbar = pagesizebar(Orderdstore);//定义分页
+	//var Orderdbbar = pagesizebar(Orderdstore);//定义分页
 	var Orderdgrid =  Ext.create('Ext.grid.Panel', {
 		height : document.documentElement.clientHeight - 4,
 		width : '100%',
-		title : Orderdtitle,
+		//title : Orderdtitle,
 		store : Orderdstore,
-		bbar : Orderdbbar,
+		//bbar : Orderdbbar,
 	    selModel: {
 	        type: 'checkboxmodel'
 	    },
@@ -183,7 +183,7 @@ Ext.onReady(function() {
 	         ptype: 'cellediting',
 	         clicksToEdit: 1
 	    },
-		columns : [{xtype: 'rownumberer',width:36}, 
+		columns : [{xtype: 'rownumberer',width:50}, 
 		{// 改
 			header : '订单详细ID',
 			dataIndex : 'orderdid',

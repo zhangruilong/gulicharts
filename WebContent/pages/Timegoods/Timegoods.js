@@ -23,7 +23,7 @@ Ext.onReady(function() {
 	        			    ,'timegoodsscope' 
 	        			      ];// 全部字段
 	var Timegoodskeycolumn = [ 'timegoodsid' ];// 主键
-	var Timegoodsstore = dataStore(Timegoodsfields, basePath + Timegoodsaction + "?method=selQuery");// 定义Timegoodsstore
+	var Timegoodsstore = dataStore(Timegoodsfields, basePath + Timegoodsaction + "?method=selAll");// 定义Timegoodsstore
 	var TimegoodsdataForm = Ext.create('Ext.form.Panel', {// 定义新增和修改的FormPanel
 		id:'TimegoodsdataForm',
 		labelAlign : 'right',
@@ -241,13 +241,13 @@ Ext.onReady(function() {
 		]
 	});
 	
-	var Timegoodsbbar = pagesizebar(Timegoodsstore);//定义分页
+	//var Timegoodsbbar = pagesizebar(Timegoodsstore);//定义分页
 	var Timegoodsgrid =  Ext.create('Ext.grid.Panel', {
 		height : document.documentElement.clientHeight - 4,
 		width : '100%',
-		title : Timegoodstitle,
+		//title : Timegoodstitle,
 		store : Timegoodsstore,
-		bbar : Timegoodsbbar,
+		//bbar : Timegoodsbbar,
 	    selModel: {
 	        type: 'checkboxmodel'
 	    },
@@ -255,7 +255,7 @@ Ext.onReady(function() {
 	         ptype: 'cellediting',
 	         clicksToEdit: 1
 	    },
-		columns : [{xtype: 'rownumberer',width:36}, 
+		columns : [{xtype: 'rownumberer',width:50}, 
 		{// 改
 			header : '促销品ID',
 			dataIndex : 'timegoodsid',

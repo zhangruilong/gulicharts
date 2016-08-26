@@ -10,7 +10,7 @@ Ext.onReady(function() {
 	        			    ,'updor' 
 	        			      ];// 全部字段
 	var Paykeycolumn = [ 'payid' ];// 主键
-	var Paystore = dataStore(Payfields, basePath + Payaction + "?method=selQuery");// 定义Paystore
+	var Paystore = dataStore(Payfields, basePath + Payaction + "?method=selAll");// 定义Paystore
 	var PaydataForm = Ext.create('Ext.form.Panel', {// 定义新增和修改的FormPanel
 		id:'PaydataForm',
 		labelAlign : 'right',
@@ -85,13 +85,13 @@ Ext.onReady(function() {
 		]
 	});
 	
-	var Paybbar = pagesizebar(Paystore);//定义分页
+	//var Paybbar = pagesizebar(Paystore);//定义分页
 	var Paygrid =  Ext.create('Ext.grid.Panel', {
 		height : document.documentElement.clientHeight - 4,
 		width : '100%',
-		title : Paytitle,
+		//title : Paytitle,
 		store : Paystore,
-		bbar : Paybbar,
+		//bbar : Paybbar,
 	    selModel: {
 	        type: 'checkboxmodel'
 	    },
@@ -99,7 +99,7 @@ Ext.onReady(function() {
 	         ptype: 'cellediting',
 	         clicksToEdit: 1
 	    },
-		columns : [{xtype: 'rownumberer',width:36}, 
+		columns : [{xtype: 'rownumberer',width:50}, 
 		{// 改
 			header : '在线支付ID',
 			dataIndex : 'payid',

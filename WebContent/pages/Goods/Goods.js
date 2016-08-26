@@ -20,7 +20,7 @@ Ext.onReady(function() {
 	        			    ,'goodsorder' 
 	        			      ];// 全部字段
 	var Goodskeycolumn = [ 'goodsid' ];// 主键
-	var Goodsstore = dataStore(Goodsfields, basePath + Goodsaction + "?method=selQuery");// 定义Goodsstore
+	var Goodsstore = dataStore(Goodsfields, basePath + Goodsaction + "?method=selAll");// 定义Goodsstore
 	var GoodsdataForm = Ext.create('Ext.form.Panel', {// 定义新增和修改的FormPanel
 		id:'GoodsdataForm',
 		labelAlign : 'right',
@@ -185,7 +185,7 @@ Ext.onReady(function() {
 			layout : 'form',
 			items : [ {
 				xtype : 'textfield',
-				fieldLabel : '种类',
+				fieldLabel : '种类(用来搜索用,有时候陪在小类里面.比如 裸价商品)',
 				id : 'Goodsgoodstype',
 				name : 'goodstype',
 				maxLength : 100
@@ -205,13 +205,13 @@ Ext.onReady(function() {
 		]
 	});
 	
-	var Goodsbbar = pagesizebar(Goodsstore);//定义分页
+	//var Goodsbbar = pagesizebar(Goodsstore);//定义分页
 	var Goodsgrid =  Ext.create('Ext.grid.Panel', {
 		height : document.documentElement.clientHeight - 4,
 		width : '100%',
-		title : Goodstitle,
+		//title : Goodstitle,
 		store : Goodsstore,
-		bbar : Goodsbbar,
+		//bbar : Goodsbbar,
 	    selModel: {
 	        type: 'checkboxmodel'
 	    },
@@ -219,7 +219,7 @@ Ext.onReady(function() {
 	         ptype: 'cellediting',
 	         clicksToEdit: 1
 	    },
-		columns : [{xtype: 'rownumberer',width:36}, 
+		columns : [{xtype: 'rownumberer',width:50}, 
 		{// 改
 			header : '商品ID',
 			dataIndex : 'goodsid',
@@ -334,7 +334,7 @@ Ext.onReady(function() {
             }
 		}
 		, {
-			header : '种类',
+			header : '种类(用来搜索用,有时候陪在小类里面.比如 裸价商品)',
 			dataIndex : 'goodstype',
 			sortable : true,  
 			editor: {

@@ -14,7 +14,7 @@ Ext.onReady(function() {
 	        			    ,'scantstatue' 
 	        			      ];// 全部字段
 	var Scantkeycolumn = [ 'scantid' ];// 主键
-	var Scantstore = dataStore(Scantfields, basePath + Scantaction + "?method=selQuery");// 定义Scantstore
+	var Scantstore = dataStore(Scantfields, basePath + Scantaction + "?method=selAll");// 定义Scantstore
 	var ScantdataForm = Ext.create('Ext.form.Panel', {// 定义新增和修改的FormPanel
 		id:'ScantdataForm',
 		labelAlign : 'right',
@@ -133,13 +133,13 @@ Ext.onReady(function() {
 		]
 	});
 	
-	var Scantbbar = pagesizebar(Scantstore);//定义分页
+	//var Scantbbar = pagesizebar(Scantstore);//定义分页
 	var Scantgrid =  Ext.create('Ext.grid.Panel', {
 		height : document.documentElement.clientHeight - 4,
 		width : '100%',
-		title : Scanttitle,
+		//title : Scanttitle,
 		store : Scantstore,
-		bbar : Scantbbar,
+		//bbar : Scantbbar,
 	    selModel: {
 	        type: 'checkboxmodel'
 	    },
@@ -147,7 +147,7 @@ Ext.onReady(function() {
 	         ptype: 'cellediting',
 	         clicksToEdit: 1
 	    },
-		columns : [{xtype: 'rownumberer',width:36}, 
+		columns : [{xtype: 'rownumberer',width:50}, 
 		{// 改
 			header : '标品ID',
 			dataIndex : 'scantid',

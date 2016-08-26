@@ -10,7 +10,7 @@ Ext.onReady(function() {
 	        			    ,'addressture' 
 	        			      ];// 全部字段
 	var Addresskeycolumn = [ 'addressid' ];// 主键
-	var Addressstore = dataStore(Addressfields, basePath + Addressaction + "?method=selQuery");// 定义Addressstore
+	var Addressstore = dataStore(Addressfields, basePath + Addressaction + "?method=selAll");// 定义Addressstore
 	var AddressdataForm = Ext.create('Ext.form.Panel', {// 定义新增和修改的FormPanel
 		id:'AddressdataForm',
 		labelAlign : 'right',
@@ -85,21 +85,21 @@ Ext.onReady(function() {
 		]
 	});
 	
-	var Addressbbar = pagesizebar(Addressstore);//定义分页
+	//var Addressbbar = pagesizebar(Addressstore);//定义分页
 	var Addressgrid =  Ext.create('Ext.grid.Panel', {
 		height : document.documentElement.clientHeight - 4,
 		width : '100%',
-		title : Addresstitle,
+		//title : Addresstitle,
 		store : Addressstore,
-		bbar : Addressbbar,
+		//bbar : Addressbbar,
 	    selModel: {
 	        type: 'checkboxmodel'
 	    },
-	    plugins: [{
+	    plugins: {
 	         ptype: 'cellediting',
 	         clicksToEdit: 1
-	    }],
-		columns : [{xtype: 'rownumberer',width:36}, 
+	    },
+		columns : [{xtype: 'rownumberer',width:50}, 
 		{// 改
 			header : '我的地址ID',
 			dataIndex : 'addressid',
@@ -222,12 +222,7 @@ Ext.onReady(function() {
 	                    	text : "前台导出",
 	        				iconCls : 'exp',
 	        				handler : function() {
-//	        					commonExp(Addressgrid);
-	        					Addressgrid.saveDocumentAs({
-	        					     type: 'excel',
-	        					     title: 'My export',
-	        					     fileName: 'myExport.xml'
-	        					 });
+	        					commonExp(Addressgrid);
 	        				}
 	                    },{
 	                    	text : "附件",

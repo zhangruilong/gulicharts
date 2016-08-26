@@ -20,7 +20,7 @@ Ext.onReady(function() {
 	        			    ,'updtime' 
 	        			      ];// 全部字段
 	var Customerkeycolumn = [ 'customerid' ];// 主键
-	var Customerstore = dataStore(Customerfields, basePath + Customeraction + "?method=selQuery");// 定义Customerstore
+	var Customerstore = dataStore(Customerfields, basePath + Customeraction + "?method=selAll");// 定义Customerstore
 	var CustomerdataForm = Ext.create('Ext.form.Panel', {// 定义新增和修改的FormPanel
 		id:'CustomerdataForm',
 		labelAlign : 'right',
@@ -205,13 +205,13 @@ Ext.onReady(function() {
 		]
 	});
 	
-	var Customerbbar = pagesizebar(Customerstore);//定义分页
+	//var Customerbbar = pagesizebar(Customerstore);//定义分页
 	var Customergrid =  Ext.create('Ext.grid.Panel', {
 		height : document.documentElement.clientHeight - 4,
 		width : '100%',
-		title : Customertitle,
+		//title : Customertitle,
 		store : Customerstore,
-		bbar : Customerbbar,
+		//bbar : Customerbbar,
 	    selModel: {
 	        type: 'checkboxmodel'
 	    },
@@ -219,7 +219,7 @@ Ext.onReady(function() {
 	         ptype: 'cellediting',
 	         clicksToEdit: 1
 	    },
-		columns : [{xtype: 'rownumberer',width:36}, 
+		columns : [{xtype: 'rownumberer',width:50}, 
 		{// 改
 			header : '客户ID',
 			dataIndex : 'customerid',

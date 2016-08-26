@@ -9,7 +9,7 @@ Ext.onReady(function() {
 	        			    ,'feedbackstate' 
 	        			      ];// 全部字段
 	var Feedbackkeycolumn = [ 'feedbackid' ];// 主键
-	var Feedbackstore = dataStore(Feedbackfields, basePath + Feedbackaction + "?method=selQuery");// 定义Feedbackstore
+	var Feedbackstore = dataStore(Feedbackfields, basePath + Feedbackaction + "?method=selAll");// 定义Feedbackstore
 	var FeedbackdataForm = Ext.create('Ext.form.Panel', {// 定义新增和修改的FormPanel
 		id:'FeedbackdataForm',
 		labelAlign : 'right',
@@ -73,13 +73,13 @@ Ext.onReady(function() {
 		]
 	});
 	
-	var Feedbackbbar = pagesizebar(Feedbackstore);//定义分页
+	//var Feedbackbbar = pagesizebar(Feedbackstore);//定义分页
 	var Feedbackgrid =  Ext.create('Ext.grid.Panel', {
 		height : document.documentElement.clientHeight - 4,
 		width : '100%',
-		title : Feedbacktitle,
+		//title : Feedbacktitle,
 		store : Feedbackstore,
-		bbar : Feedbackbbar,
+		//bbar : Feedbackbbar,
 	    selModel: {
 	        type: 'checkboxmodel'
 	    },
@@ -87,7 +87,7 @@ Ext.onReady(function() {
 	         ptype: 'cellediting',
 	         clicksToEdit: 1
 	    },
-		columns : [{xtype: 'rownumberer',width:36}, 
+		columns : [{xtype: 'rownumberer',width:50}, 
 		{// 改
 			header : '客户反馈id',
 			dataIndex : 'feedbackid',

@@ -9,7 +9,7 @@ Ext.onReady(function() {
 	        			    ,'createtime' 
 	        			      ];// 全部字段
 	var Collectkeycolumn = [ 'collectid' ];// 主键
-	var Collectstore = dataStore(Collectfields, basePath + Collectaction + "?method=selQuery");// 定义Collectstore
+	var Collectstore = dataStore(Collectfields, basePath + Collectaction + "?method=selAll");// 定义Collectstore
 	var CollectdataForm = Ext.create('Ext.form.Panel', {// 定义新增和修改的FormPanel
 		id:'CollectdataForm',
 		labelAlign : 'right',
@@ -73,13 +73,13 @@ Ext.onReady(function() {
 		]
 	});
 	
-	var Collectbbar = pagesizebar(Collectstore);//定义分页
+	//var Collectbbar = pagesizebar(Collectstore);//定义分页
 	var Collectgrid =  Ext.create('Ext.grid.Panel', {
 		height : document.documentElement.clientHeight - 4,
 		width : '100%',
-		title : Collecttitle,
+		//title : Collecttitle,
 		store : Collectstore,
-		bbar : Collectbbar,
+		//bbar : Collectbbar,
 	    selModel: {
 	        type: 'checkboxmodel'
 	    },
@@ -87,7 +87,7 @@ Ext.onReady(function() {
 	         ptype: 'cellediting',
 	         clicksToEdit: 1
 	    },
-		columns : [{xtype: 'rownumberer',width:36}, 
+		columns : [{xtype: 'rownumberer',width:50}, 
 		{// 改
 			header : '收藏ID',
 			dataIndex : 'collectid',

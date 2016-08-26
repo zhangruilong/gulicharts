@@ -10,7 +10,7 @@ Ext.onReady(function() {
 	        			    ,'creator' 
 	        			      ];// 全部字段
 	var Ccustomerkeycolumn = [ 'ccustomerid' ];// 主键
-	var Ccustomerstore = dataStore(Ccustomerfields, basePath + Ccustomeraction + "?method=selQuery");// 定义Ccustomerstore
+	var Ccustomerstore = dataStore(Ccustomerfields, basePath + Ccustomeraction + "?method=selAll");// 定义Ccustomerstore
 	var CcustomerdataForm = Ext.create('Ext.form.Panel', {// 定义新增和修改的FormPanel
 		id:'CcustomerdataForm',
 		labelAlign : 'right',
@@ -54,7 +54,7 @@ Ext.onReady(function() {
 			layout : 'form',
 			items : [ {
 				xtype : 'textfield',
-				fieldLabel : '客户等级',
+				fieldLabel : '描述(关系等级)',
 				id : 'Ccustomerccustomerdetail',
 				name : 'ccustomerdetail',
 				maxLength : 100
@@ -65,7 +65,7 @@ Ext.onReady(function() {
 			layout : 'form',
 			items : [ {
 				xtype : 'textfield',
-				fieldLabel : '客户经理',
+				fieldLabel : '创建时间(业务员名)',
 				id : 'Ccustomercreatetime',
 				name : 'createtime',
 				maxLength : 100
@@ -76,7 +76,7 @@ Ext.onReady(function() {
 			layout : 'form',
 			items : [ {
 				xtype : 'textfield',
-				fieldLabel : '大客户',
+				fieldLabel : '创建人(是否大客户:1是大客户)',
 				id : 'Ccustomercreator',
 				name : 'creator',
 				maxLength : 100
@@ -85,13 +85,13 @@ Ext.onReady(function() {
 		]
 	});
 	
-	var Ccustomerbbar = pagesizebar(Ccustomerstore);//定义分页
+	//var Ccustomerbbar = pagesizebar(Ccustomerstore);//定义分页
 	var Ccustomergrid =  Ext.create('Ext.grid.Panel', {
 		height : document.documentElement.clientHeight - 4,
 		width : '100%',
-		title : Ccustomertitle,
+		//title : Ccustomertitle,
 		store : Ccustomerstore,
-		bbar : Ccustomerbbar,
+		//bbar : Ccustomerbbar,
 	    selModel: {
 	        type: 'checkboxmodel'
 	    },
@@ -99,7 +99,7 @@ Ext.onReady(function() {
 	         ptype: 'cellediting',
 	         clicksToEdit: 1
 	    },
-		columns : [{xtype: 'rownumberer',width:36}, 
+		columns : [{xtype: 'rownumberer',width:50}, 
 		{// 改
 			header : '经销商和客户ID',
 			dataIndex : 'ccustomerid',
@@ -126,7 +126,7 @@ Ext.onReady(function() {
             }
 		}
 		, {
-			header : '客户等级',
+			header : '描述(关系等级)',
 			dataIndex : 'ccustomerdetail',
 			sortable : true,  
 			editor: {
@@ -134,7 +134,7 @@ Ext.onReady(function() {
             }
 		}
 		, {
-			header : '客户经理',
+			header : '创建时间(业务员名)',
 			dataIndex : 'createtime',
 			sortable : true,  
 			editor: {
@@ -142,7 +142,7 @@ Ext.onReady(function() {
             }
 		}
 		, {
-			header : '大客户',
+			header : '创建人(是否大客户:1是大客户)',
 			dataIndex : 'creator',
 			sortable : true,  
 			editor: {

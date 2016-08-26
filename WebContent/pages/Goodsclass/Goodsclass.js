@@ -10,7 +10,7 @@ Ext.onReady(function() {
 	        			    ,'goodsclassstatue' 
 	        			      ];// 全部字段
 	var Goodsclasskeycolumn = [ 'goodsclassid' ];// 主键
-	var Goodsclassstore = dataStore(Goodsclassfields, basePath + Goodsclassaction + "?method=selQuery");// 定义Goodsclassstore
+	var Goodsclassstore = dataStore(Goodsclassfields, basePath + Goodsclassaction + "?method=selAll");// 定义Goodsclassstore
 	var GoodsclassdataForm = Ext.create('Ext.form.Panel', {// 定义新增和修改的FormPanel
 		id:'GoodsclassdataForm',
 		labelAlign : 'right',
@@ -85,13 +85,13 @@ Ext.onReady(function() {
 		]
 	});
 	
-	var Goodsclassbbar = pagesizebar(Goodsclassstore);//定义分页
+	//var Goodsclassbbar = pagesizebar(Goodsclassstore);//定义分页
 	var Goodsclassgrid =  Ext.create('Ext.grid.Panel', {
 		height : document.documentElement.clientHeight - 4,
 		width : '100%',
-		title : Goodsclasstitle,
+		//title : Goodsclasstitle,
 		store : Goodsclassstore,
-		bbar : Goodsclassbbar,
+		//bbar : Goodsclassbbar,
 	    selModel: {
 	        type: 'checkboxmodel'
 	    },
@@ -99,7 +99,7 @@ Ext.onReady(function() {
 	         ptype: 'cellediting',
 	         clicksToEdit: 1
 	    },
-		columns : [{xtype: 'rownumberer',width:36}, 
+		columns : [{xtype: 'rownumberer',width:50}, 
 		{// 改
 			header : '大小类ID',
 			dataIndex : 'goodsclassid',

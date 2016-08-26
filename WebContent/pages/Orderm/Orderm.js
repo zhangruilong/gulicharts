@@ -21,7 +21,7 @@ Ext.onReady(function() {
 	        			    ,'ordermemp' 
 	        			      ];// 全部字段
 	var Ordermkeycolumn = [ 'ordermid' ];// 主键
-	var Ordermstore = dataStore(Ordermfields, basePath + Ordermaction + "?method=selQuery");// 定义Ordermstore
+	var Ordermstore = dataStore(Ordermfields, basePath + Ordermaction + "?method=selAll");// 定义Ordermstore
 	var OrdermdataForm = Ext.create('Ext.form.Panel', {// 定义新增和修改的FormPanel
 		id:'OrdermdataForm',
 		labelAlign : 'right',
@@ -131,7 +131,7 @@ Ext.onReady(function() {
 			layout : 'form',
 			items : [ {
 				xtype : 'textfield',
-				fieldLabel : '备注',
+				fieldLabel : '备注(客户留言)',
 				id : 'Ordermordermdetail',
 				name : 'ordermdetail',
 				maxLength : 100
@@ -208,7 +208,7 @@ Ext.onReady(function() {
 			layout : 'form',
 			items : [ {
 				xtype : 'textfield',
-				fieldLabel : '业务员ID',
+				fieldLabel : '业务员ID(订单源)',
 				id : 'Ordermordermemp',
 				name : 'ordermemp',
 				maxLength : 100
@@ -217,13 +217,13 @@ Ext.onReady(function() {
 		]
 	});
 	
-	var Ordermbbar = pagesizebar(Ordermstore);//定义分页
+	//var Ordermbbar = pagesizebar(Ordermstore);//定义分页
 	var Ordermgrid =  Ext.create('Ext.grid.Panel', {
 		height : document.documentElement.clientHeight - 4,
 		width : '100%',
-		title : Ordermtitle,
+		//title : Ordermtitle,
 		store : Ordermstore,
-		bbar : Ordermbbar,
+		//bbar : Ordermbbar,
 	    selModel: {
 	        type: 'checkboxmodel'
 	    },
@@ -231,7 +231,7 @@ Ext.onReady(function() {
 	         ptype: 'cellediting',
 	         clicksToEdit: 1
 	    },
-		columns : [{xtype: 'rownumberer',width:36}, 
+		columns : [{xtype: 'rownumberer',width:50}, 
 		{// 改
 			header : '订单ID',
 			dataIndex : 'ordermid',
@@ -306,7 +306,7 @@ Ext.onReady(function() {
             }
 		}
 		, {
-			header : '备注',
+			header : '备注(客户留言)',
 			dataIndex : 'ordermdetail',
 			sortable : true,  
 			editor: {
@@ -362,7 +362,7 @@ Ext.onReady(function() {
             }
 		}
 		, {
-			header : '业务员ID',
+			header : '业务员ID(订单源)',
 			dataIndex : 'ordermemp',
 			sortable : true,  
 			editor: {
