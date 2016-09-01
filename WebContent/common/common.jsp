@@ -9,11 +9,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<link rel="stylesheet" type="text/css" href="<%=basePath%>common/buttonstyle.css" />
-	<script src="<%=basePath%>sencha/ext-bootstrap.js"></script>
-	<link rel="stylesheet" href="<%=basePath%>sencha/build/classic/theme-crisp/resources/theme-crisp-all.css"/>
-	<script type="text/javascript" src="<%=basePath%>common/comfun.js"></script>
-	<script type="text/javascript" src="<%=basePath%>common/common.js"></script>
+<link rel="stylesheet" type="text/css" href="<%=basePath%>common/buttonstyle.css" />
+<script src="<%=basePath%>common/sencha/ext-bootstrap.js"></script>
+<link rel="stylesheet" href="<%=basePath%>common/sencha/build/classic/theme-crisp/resources/theme-crisp-all.css"/>
+<script type="text/javascript" src="<%=basePath%>common/comfun.js"></script>
+<script type="text/javascript" src="<%=basePath%>common/common.js"></script>
 <script>
 var basePath = '<%=basePath%>';
 </script>
