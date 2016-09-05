@@ -1,0 +1,84 @@
+body{
+	dataContext : /pageInfo;
+}
+//统计数据
+.col-md-3 {
+	-> [name="cusNum-total"] {
+		text : topInfo.cusTotal;
+	};
+	
+	-> [name="cusNum-today"] {
+		text : topInfo.todayCusTo;
+	};
+	
+	-> [name="odgNum-total"] {
+		text : topInfo.odGoodsTotal;
+	};
+	
+	-> [name="odgNum-today"] {
+		text : topInfo.todayOdGTo;
+	};
+	
+	-> [name="turn-total"] {
+		text : topInfo.turnoverTotal;
+	};
+	
+	-> [name="turn-today"] {
+		text : topInfo.todayTurnTo;
+	};
+	
+	-> [name="omNum-total"] {
+		text : topInfo.ordersTotal;
+	};
+	
+	-> [name="omNum-today"] {
+		text : topInfo.todayOrdersTo;
+	};
+}
+//今日订单
+#todayOrder-tb {
+	foreach : todayOrdMli;
+	
+	-> tr {
+		-> td:nth-child(1) {
+			text : ordermtime;
+		};
+		
+		-> td:nth-child(2) {
+			text : ordermnum;
+		};
+		
+		-> td:nth-child(3) {
+			text : ordermrightmoney;
+		};
+		
+		-> td:nth-child(4) {
+			text : ordermstatue;
+		};
+		
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

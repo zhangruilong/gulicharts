@@ -3,9 +3,12 @@ package com.server.action;
 import java.lang.reflect.Type;
 import com.google.gson.reflect.TypeToken;
 import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.server.pojo.Company;
 import com.server.pojo.Orderm;
 import com.server.poco.OrdermPoco;
 import com.system.tools.CommonConst;
@@ -13,6 +16,7 @@ import com.system.tools.base.BaseActionDao;
 import com.system.tools.pojo.Fileinfo;
 import com.system.tools.pojo.Queryinfo;
 import com.system.tools.util.CommonUtil;
+import com.system.tools.util.DateUtils;
 import com.system.tools.util.FileUtil;
 import com.system.tools.pojo.Pageinfo;
 
@@ -90,4 +94,35 @@ public class OrdermAction extends BaseActionDao {
 		result = CommonConst.GSON.toJson(pageinfo);
 		responsePW(response, result);
 	}
+	//查看供应商的今日订单
+	@SuppressWarnings("unchecked")
+	public void comTodayOrder(HttpServletRequest request, HttpServletResponse response){
+		String comid = (String) request.getSession().getAttribute("comid");
+		if(CommonUtil.isEmpty(comid)){
+			comid = "1";
+		}
+		//今天的订单
+		cuss = (ArrayList<Orderm>) selAll(Orderm.class, 
+				"select * from orderm om where om.ordermcompany='"+comid+"' and om.ordermtime like '"+DateUtils.getDate()+"%'");
+		Pageinfo pageinfo = new Pageinfo(0, cuss);
+		result = CommonConst.GSON.toJson(pageinfo);
+		responsePW(response, result);
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -20,7 +20,12 @@ body{
 #navMenu{
     foreach: categories;
 
-    -> li{
-        text: name;
+    -> li {
+        -> span:nth-child(1){
+        	text: name;
+        };
+        -> span:nth-child(2){
+        	text: name2;
+        };
     }
 }
