@@ -2,7 +2,7 @@ window.pageInfo = new Object();
 
 $(function(){
 	var b=document.documentElement.clientHeight;  
-	$('#todaOd-box').css('max-height',b*0.4+'px');
+	$('#todaOd-box').css('max-height',b*0.5+'px');
 	//统计数据
 	$.ajax({
 		url:"CompanyAction.do?method=comIndexInfo",
