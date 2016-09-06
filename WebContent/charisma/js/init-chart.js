@@ -1,4 +1,4 @@
-//chart with points
+//chart with points(图 关联 点?)
 if ($("#sincos").length) {
     var sin = [], cos = [];
 
@@ -20,7 +20,7 @@ if ($("#sincos").length) {
             yaxis: { min: -1.2, max: 1.2 },
             colors: ["#539F2E", "#3C67A5"]
         });
-
+    //显示工具提示
     function showTooltip(x, y, contents) {
         $('<div id="tooltip">' + contents + '</div>').css({
             position: 'absolute',
@@ -103,8 +103,9 @@ if ($("#flotchart").length) {
     });
 }
 
-//stack chart
+//stack chart(柱状图)
 if ($("#stackchart").length) {
+	alert('柱状图');
     var d1 = [];
     for (var i = 0; i <= 10; i += 1)
         d1.push([i, parseInt(Math.random() * 30)]);
@@ -120,6 +121,7 @@ if ($("#stackchart").length) {
     var stack = 0, bars = true, lines = false, steps = false;
 
     function plotWithOptions() {
+    	alert(d1.toString());
         $.plot($("#stackchart"), [ d1, d2, d3 ], {
             series: {
                 stack: stack,
@@ -145,7 +147,7 @@ if ($("#stackchart").length) {
     });
 }
 
-//pie chart
+//饼图
 var data = [
     { label: "Internet Explorer", data: 12},
     { label: "Mobile", data: 27},
@@ -182,7 +184,7 @@ if ($("#piechart").length) {
     $("#piechart").bind("plothover", pieHover);
 }
 
-//donut chart
+//圈图
 if ($("#donutchart").length) {
     $.plot($("#donutchart"), data,
         {
@@ -199,15 +201,16 @@ if ($("#donutchart").length) {
 }
 
 
-// we use an inline data source in the example, usually data would
-// be fetched from a server
-var data = [], totalPoints = 300;
-
+// we use an inline data source in the example, usually data would(我们在例子中使用的一个内联数据源, 通常的数据)
+// be fetched from a server(从服务器获取)
+var data = [];
+var totalPoints = 300;		//总分数
+//得到随机数据 ?
 function getRandomData() {
     if (data.length > 0)
         data = data.slice(1);
 
-    // do a random walk
+    // 做一个随机游标
     while (data.length < totalPoints) {
         var prev = data.length > 0 ? data[data.length - 1] : 50;
         var y = prev + Math.random() * 10 - 5;
@@ -218,14 +221,14 @@ function getRandomData() {
         data.push(y);
     }
 
-    // zip the generated y values with the x values
+    // zip the generated y values with the x values(用x值压缩生成的Y值)
     var res = [];
     for (var i = 0; i < data.length; ++i)
         res.push([i, data[i]])
     return res;
 }
 
-// setup control widget
+// setup control widget(设置控件)
 var updateInterval = 30;
 $("#updateInterval").val(updateInterval).change(function () {
     var v = $(this).val();
@@ -239,7 +242,7 @@ $("#updateInterval").val(updateInterval).change(function () {
     }
 });
 
-//realtime chart
+//实时图表
 if ($("#realtimechart").length) {
     var options = {
         series: { shadowSize: 1 }, // drawing is faster without shadows
@@ -247,8 +250,9 @@ if ($("#realtimechart").length) {
         xaxis: { show: false }
     };
     var plot = $.plot($("#realtimechart"), [ getRandomData() ], options);
-
+//更新
     function update() {
+    	alert("update");
         plot.setData([ getRandomData() ]);
         // since the axes don't change, we don't need to call plot.setupGrid()
         plot.draw();
