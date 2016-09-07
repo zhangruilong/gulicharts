@@ -110,7 +110,7 @@ public class EmpAction extends BaseActionDao {
 									"left outer join customer c "+
 									"on om.ordermcustomer = c.customerid "+
 									"left outer join ccustomer cc "+
-									"on cc.ccustomercustomer = c.customerid where cc.ccustomercompany='"+comid+"' and om.ordermtime like '"/*+dateStr*/+"%' "+
+									"on cc.ccustomercustomer = c.customerid where cc.ccustomercompany='"+comid+"' and om.ordermtime like '"+dateStr+"%' "+
 									"group by cc.createtime");
 		Pageinfo pageinfo = new Pageinfo(0, cuss);
 		result = CommonConst.GSON.toJson(pageinfo);
@@ -120,6 +120,7 @@ public class EmpAction extends BaseActionDao {
 	@SuppressWarnings("unchecked")
 	public void manaOrderm(HttpServletRequest request, HttpServletResponse response){
 		String comid = (String) request.getSession().getAttribute("comid");
+		String dateStr = request.getParameter("date");
 		String empname = request.getParameter("empname");
 		if(empname.equals("未分配")){
 			empname = " is null";
@@ -144,6 +145,7 @@ public class EmpAction extends BaseActionDao {
 				 "where cc.ccustomercompany = '"+comid+"' "+
 				   "and om.ordermstatue != '已删除' "+
 				   "and cc.createtime "+empname+" "+
+				   "and om.ordermtime like '"+dateStr+"%'"+
 				 "group by c.customerid, "+
 				          "c.customershop, "+
 				          "c.customername, "+
