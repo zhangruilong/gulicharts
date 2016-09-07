@@ -85,7 +85,11 @@ $(function(){
 				}
 			});
 			plotWithOptions();
-			initManaOd(data.root[1].createtime);
+			if(typeof(data.root[1]) != 'undefined'){
+				initManaOd(data.root[1].createtime);
+			} else {
+				initManaOd('未分配');
+			}
 			$('#stackchart').bind('plotclick',function(event ,pos ,item){
 				if(item){
 					//alert(item.dataIndex);

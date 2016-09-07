@@ -103,7 +103,7 @@ public class OrdermAction extends BaseActionDao {
 		}
 		//今天的订单
 		cuss = (ArrayList<Orderm>) selAll(Orderm.class, 
-				"select * from orderm om where om.ordermcompany='"+comid+"' and om.ordermtime like '2016-07"+DateUtils.getDate()+"%'");
+				"select * from orderm om where om.ordermcompany='"+comid+"' and om.ordermtime like '"+DateUtils.getDate()+"%'");
 		Pageinfo pageinfo = new Pageinfo(0, cuss);
 		result = CommonConst.GSON.toJson(pageinfo);
 		responsePW(response, result);
