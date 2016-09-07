@@ -105,7 +105,6 @@ if ($("#flotchart").length) {
 
 //stack chart(柱状图)
 if ($("#stackchart").length) {
-	alert('柱状图');
     var d1 = [];
     for (var i = 0; i <= 10; i += 1)
         d1.push([i, parseInt(Math.random() * 30)]);
@@ -121,7 +120,6 @@ if ($("#stackchart").length) {
     var stack = 0, bars = true, lines = false, steps = false;
 
     function plotWithOptions() {
-    	alert(d1.toString());
         $.plot($("#stackchart"), [ d1, d2, d3 ], {
             series: {
                 stack: stack,

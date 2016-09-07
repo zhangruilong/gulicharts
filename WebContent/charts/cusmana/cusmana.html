@@ -71,11 +71,6 @@
             <div class="box-content">
                 <div id="stackchart" class="center" style="height:300px;"></div>
 
-                <p class="stackControls center">
-                    <input class="btn btn-default" type="button" value="With stacking">
-                    <input class="btn btn-default" type="button" value="Without stacking">
-                </p>
-
                 <p class="graphControls center">
                     <input class="btn btn-primary" type="button" value="Bars">
                     <input class="btn btn-primary" type="button" value="Lines">
@@ -88,7 +83,7 @@
         <div class="box col-md-12">
             <div class="box-inner">
                 <div class="box-header well" data-original-title="">
-                    <h2>订单</h2>
+                    <h2>客户经理订单</h2>
 
                     <!-- <div class="box-icon">
                         <a href="#" class="btn btn-setting btn-round btn-default"><i
@@ -103,14 +98,14 @@
                     <table class="table table-bordered table-striped table-condensed">
                         <!-- <thead>
                         <tr>
-                            <th>下单时间</th>
-                            <th>种类数</th>
-                            <th>实际金额</th>
-                            <th>订单状态</th>
+                            <th>店名</th>
+                            <th>客户经理</th>
+                            <th>订单数量</th>
+                            <th>订单总额</th>
                         </tr>
                         </thead> -->
-                        <tbody id="todayOrder-tb">
-                        <tr knot-template>
+                        <tbody id="manaOrder-tb">
+                        <tr  knot-template>
                             <td>Muhammad Usman</td>
                             <td class="center">2012/01/01</td>
                             <td class="center">Member</td>
@@ -131,8 +126,10 @@
 <script src="../../charisma/bower_components/flot/jquery.flot.pie.js"></script>
 <script src="../../charisma/bower_components/flot/jquery.flot.stack.js"></script>
 <script src="../../charisma/bower_components/flot/jquery.flot.resize.js"></script>
+<!-- 日期 -->
+<script type="text/javascript" src="../js/dateutil.js"></script>
 <!-- 图表依赖库结束 -->
-<script src="cusmana.js"></script>
+
 
     <!-- content ends -->
     </div><!--/#content.col-md-0-->
@@ -176,6 +173,11 @@
 <script src="../js/charismafun.js"></script>
 <!-- kont.js框架 -->
 <script src="../../common/knot/knot-0.1.0.min.js"></script>
-
+<!-- kont.js的DEBUG -->
+<!-- <script type="text/javascript" src="../../common/knot/debugger/knot.debug.js"></script> -->
+<!-- 本业专属js -->
+<script type="text/javascript"  src="cusmana.js"></script>
+<!-- pageInfo -->
+<script type="text/cbs" src="cusmana.cbs"></script>
 </body>
 </html>

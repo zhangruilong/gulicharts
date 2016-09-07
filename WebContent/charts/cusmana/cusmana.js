@@ -27,7 +27,7 @@ function getRandomData() {
 }
 
 // setup control widget(设置控件)
-var updateInterval = 30;
+var updateInterval = 70;
 $("#updateInterval").val(updateInterval).change(function () {
     var v = $(this).val();
     if (v && !isNaN(+v)) {
@@ -41,33 +41,86 @@ $("#updateInterval").val(updateInterval).change(function () {
 });
 
 
-//生成柱状图
-	var d1 = [];
-    for (var i = 0; i <= 10; i += 1)		//循环添加10个数组,数组中第一个数字是位置,第二个数字是柱状图的高度
-        d1.push([i, parseInt(Math.random() * 30)]);
-
-    var d2 = [];
-    for (var i = 0; i <= 10; i += 1)
-        d2.push([i, parseInt(Math.random() * 30)]);
-
-    var d3 = [];
-    for (var i = 0; i <= 10; i += 1)
-        d3.push([i, parseInt(Math.random() * 30)]);
-
+	//生成柱状图
+	window.pageInfo = new Object();
+	var mydate = new Date();
+	var t = formatDate(mydate);
+	var odmNum = [];					//普通订单数量
+	var odmMana = [];
+	var pl = null;
     var stack = 0, bars = true, lines = false, steps = false;
 
     function plotWithOptions() {
-    	alert(d1.toString());
-        $.plot($("#stackchart"), [ d1, d2, d3 ], {
+    	//alert(odmNum.toString());
+    	pl = $.plot($("#stackchart"), [ odmNum ], {
             series: {
                 stack: stack,			//柱状图
                 lines: { show: lines, fill: true, steps: steps },
-                bars: { show: bars, barWidth: 0.6 }
-            }
+                bars: { align: "center", show: bars, barWidth: 0.6 }
+            },
+            xaxis: {  
+                ticks: odmMana,  											//自定义每一列下面的文字
+            },
+            grid: { hoverable: true, clickable: true, backgroundColor: { colors: ["#fff", "#eee"] } },		//可以绑定 点击事件 和 鼠标悬浮时的事件
         });
     }
+    
+$(function(){
+	$.ajax({
+		url:"EmpAction.do?method=manaOrderNum",
+		type:"post",
+		data:{
+			date:t
+		},
+		success:function(resp){
+			var data = eval('('+resp+')');
+			window.pageInfo = data.root;
+			$.each(data.root,function(i,item){
+				var empMoney = parseFloat(item.empcode) / 1000;
+				odmNum.push([i,Math.round(empMoney) ]);
+				if(typeof(item.createtime)!='undefined'){
+					odmMana.push([i,item.createtime]);			//设置列名
+				} else {
+					odmMana.push([i,"未分配"]);
+				}
+			});
+			plotWithOptions();
+			initManaOd(data.root[1].createtime);
+			$('#stackchart').bind('plotclick',function(event ,pos ,item){
+				if(item){
+					//alert(item.dataIndex);
+					var itIndex = item.dataIndex;
+					//alert(odmMana[itIndex][1]);
+					initManaOd(odmMana[itIndex][1]);
+				}
+			});
+		},
+		error:function(resp){
+			var data = eval('('+resp+')');
+			alert(data.msg);
+		}
+	});
 
-    plotWithOptions();
+});
+//订单表数据
+function initManaOd(empname){
+    $.ajax({
+    	url:"EmpAction.do?method=manaOrderm",
+    	type:"post",
+    	data:{
+    		date:t,
+    		empname:empname
+    	},
+    	success:function(resp){
+    		var data = eval('('+resp+')');
+    		window.pageInfo.empOrder = data.root;
+    	},
+    	error:function(resp){
+    		var data = eval('('+resp+')');
+			alert(data.msg);
+    	}
+    });
+}
 
     $(".stackControls input").click(function (e) {
         e.preventDefault();
@@ -81,3 +134,16 @@ $("#updateInterval").val(updateInterval).change(function () {
         steps = $(this).val().indexOf("steps") != -1;
         plotWithOptions();
     });
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    

@@ -1,0 +1,44 @@
+body{
+	dataContext : /pageInfo;
+}
+//业务员名称
+#manaOrder-tb {
+	foreach : empOrder;
+	
+	-> tr {
+		-> td:nth-child(1) {
+			text : customershop;
+		};
+		
+		-> td:nth-child(2) {
+			text : customercity;
+		};
+		
+		-> td:nth-child(3) {
+			text : customerxian;
+		};
+		
+		-> td:nth-child(4) {
+			text : createtime;
+		};
+		
+	}
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
