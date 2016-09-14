@@ -130,12 +130,12 @@ $(document).ready(function () {
 //$(document).ready 结束
 
 function docReady() {
-    //prevent # links from moving to top
+    //prevent # links from moving to top(防止#链接移动到顶部 )
     $('a[href="#"][data-top!=true]').click(function (e) {
         e.preventDefault();
     });
 
-    //notifications
+    //notifications(通知)
     $('.noty').click(function (e) {
         e.preventDefault();
         var options = $.parseJSON($(this).attr('data-noty-options'));
@@ -152,14 +152,13 @@ function docReady() {
         $(this).tab('show');
     });
 
-
-    //tooltip
+    //tooltip(工具提示 )
     $('[data-toggle="tooltip"]').tooltip();
 
     //auto grow textarea
     $('textarea.autogrow').autogrow();
 
-    //popover
+    //popover(弹出)
     $('[data-toggle="popover"]').popover();
 
     //iOS / iPhone style toggle switch
@@ -170,7 +169,7 @@ function docReady() {
         score: 4 //default stars
     });
 
-    //uploadify - multiple uploads
+    //uploadify - multiple uploads(Uploadify多上传)
     $('#file_upload').uploadify({
         'swf': 'misc/uploadify.swf',
         'uploader': 'misc/uploadify.php'

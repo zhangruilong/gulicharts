@@ -73,9 +73,15 @@
         </noscript>
 
         <div id="content" class="col-lg-10 col-sm-10">
+        <!-- content starts -->
+				<div>
+					<ul class="breadcrumb">
+						<li><a href="javascript:void(0)">首页</a></li>
+					</ul>
+				</div>
 <div class=" row">
     <div class="col-md-3 col-sm-3 col-xs-6">
-        <a data-toggle="tooltip" title="6 new members." class="well top-block" href="#">
+        <a data-toggle="tooltip" title="今日新增客户" class="well top-block" href="#">
             <i class="glyphicon glyphicon-user blue"></i>
 
             <div>客户</div>
@@ -85,7 +91,7 @@
     </div>
 
     <div class="col-md-3 col-sm-3 col-xs-6">
-        <a data-toggle="tooltip" title="4 new pro members." class="well top-block" href="#">
+        <a data-toggle="tooltip" title="今日商品订单" class="well top-block" href="#">
             <i class="glyphicon glyphicon-star green"></i>
 
             <div>订单商品</div>
@@ -95,7 +101,7 @@
     </div>
 
     <div class="col-md-3 col-sm-3 col-xs-6">
-        <a data-toggle="tooltip" title="$34 new sales." class="well top-block" href="#">
+        <a data-toggle="tooltip" title="今日营业额" class="well top-block" href="#">
             <i class="glyphicon glyphicon-shopping-cart yellow"></i>
 
             <div>营业额</div>
@@ -105,7 +111,7 @@
     </div>
 
     <div class="col-md-3 col-sm-3 col-xs-6">
-        <a data-toggle="tooltip" title="12 new messages." class="well top-block" href="#">
+        <a data-toggle="tooltip" title="今日订单数量" class="well top-block" href="#">
             <i class="glyphicon glyphicon-envelope red"></i>
 
             <div>订单</div>
@@ -145,7 +151,7 @@
                             <td>Muhammad Usman</td>
                             <td class="center">2012/01/01</td>
                             <td class="center">Member</td>
-                            <td class="center"></td>
+                            <td class="center"><span class="label label-default"></span></td>
                         </tr>
                         </tbody>
                     </table>
@@ -188,23 +194,23 @@
 
 <!-- library for cookie management -->
 <script src="../../charisma/js/jquery.cookie.js"></script>
-<!-- calender plugin -->
+<!-- calender plugin(日历插件) -->
 <script src='../../charisma/bower_components/moment/min/moment.min.js'></script>
 <script src='../../charisma/bower_components/fullcalendar/dist/fullcalendar.min.js'></script>
-<!-- data table plugin -->
+<!-- data table plugin(数据表的插件) -->
 <script src='../../charisma/js/jquery.dataTables.min.js'></script>
 
-<!-- select or dropdown enhancer -->
+<!-- select or dropdown enhancer(选择或下拉增强) -->
 <script src="../../charisma/bower_components/chosen/chosen.jquery.min.js"></script>
-<!-- plugin for gallery image view -->
+<!-- plugin for gallery image view(用于画廊图像视图的插件 ) -->
 <script src="../../charisma/bower_components/colorbox/jquery.colorbox-min.js"></script>
-<!-- notification plugin -->
+<!-- notification plugin(通知插件 ) -->
 <script src="../../charisma/js/jquery.noty.js"></script>
-<!-- library for making tables responsive -->
+<!-- library for making tables responsive(用于使表响应的库) -->
 <script src="../../charisma/bower_components/responsive-tables/responsive-tables.js"></script>
-<!-- tour plugin -->
+<!-- tour plugin(轮播插件) -->
 <script src="../../charisma/bower_components/bootstrap-tour/build/js/bootstrap-tour.min.js"></script>
-<!-- star rating plugin -->
+<!-- star rating plugin(星级评定插件) -->
 <script src="../../charisma/js/jquery.raty.min.js"></script>
 <!-- for iOS style toggle switch -->
 <script src="../../charisma/js/jquery.iphone.toggle.js"></script>
@@ -215,7 +221,8 @@
 <!-- history.js for cross-browser state change on ajax -->
 <script src="../../charisma/js/jquery.history.js"></script>
 <!-- application script for Charisma demo -->
-<script src="../../charisma/js/charismafun.js"></script>
+<!-- <script src="../js/charismafun.js"></script> -->
+<script src="../js/charismafun.js"></script>
 <!-- kont.js框架 -->
 <script src="../../common/knot/knot-0.1.0.min.js"></script>
 <!-- kont.js的DEBUG -->
@@ -224,5 +231,10 @@
 <script type="text/javascript" src="home.js"></script>
 <!-- pageinfo -->
 <script type="text/cbs" src="home.cbs"></script>
+<script type="text/javascript">
+$(function(){
+	charisma();
+})
+</script>
 </body>
 </html>

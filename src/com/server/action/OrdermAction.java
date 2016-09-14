@@ -103,7 +103,15 @@ public class OrdermAction extends BaseActionDao {
 		}
 		//今天的订单
 		cuss = (ArrayList<Orderm>) selAll(Orderm.class, 
-				"select * from orderm om where om.ordermcompany='"+comid+"' and om.ordermstatue != '已删除' and om.ordermtime like '"+DateUtils.getDate()+"%'");
+				"select * from orderm om where om.ordermcompany='"+comid+"' and om.ordermstatue != '已删除' and om.ordermtime like '"+
+				DateUtils.getDate()+"%' order by om.ordermtime desc");
+		for (Orderm om : cuss) {
+			if(om.getOrdermstatue().equals("已下单")){
+				om.setOrdermcompany("+label-danger");
+			} else if(om.getOrdermstatue().equals("已确认")){
+				om.setOrdermcompany("+label-success");
+			}
+		}
 		Pageinfo pageinfo = new Pageinfo(0, cuss);
 		result = CommonConst.GSON.toJson(pageinfo);
 		responsePW(response, result);

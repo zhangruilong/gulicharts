@@ -163,8 +163,7 @@ function docReady() {
         $(this).tab('show');
     });
 
-
-    //tooltip
+    //tooltip(工具提示)
     $('[data-toggle="tooltip"]').tooltip();
 
     //auto grow textarea

@@ -52,11 +52,12 @@ $("#updateInterval").val(updateInterval).change(function () {
 
     function plotWithOptions() {
     	//alert(odmNum.toString());
-    	pl = $.plot($("#stackchart"), [ odmNum ], {
+    	pl = $.plot($("#stackchart"), [ odmNum ],  {
             series: {
+            	label : "单位:千元",			//图例
                 stack: stack,			//柱状图
                 lines: { show: lines, fill: true, steps: steps },
-                bars: { align: "center", show: bars, barWidth: 0.6 }
+                bars: { align: "center", show: bars, barWidth: 0.6 },
             },
             xaxis: {  
                 ticks: odmMana,  											//自定义每一列下面的文字
