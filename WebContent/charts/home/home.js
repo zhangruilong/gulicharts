@@ -1,11 +1,12 @@
 window.pageInfo = new Object();
 
 $(function(){
+	charisma();
 	var b=document.documentElement.clientHeight;  
 	$('#todaOd-box').css('max-height',b*0.5+'px');
 	//统计数据
 	$.ajax({
-		url:"CompanyAction.do?method=comIndexInfo",
+		url:"ChCompanyAction.do?method=comIndexInfo",
 		type:"post",
 		data:{},
 		success:function(resp){
@@ -19,7 +20,7 @@ $(function(){
 	});
 	//今日订单
 	$.ajax({
-		url:"OrdermAction.do?method=comTodayOrder",
+		url:"ChOrdermAction.do?method=comTodayOrder",
 		type:"post",
 		data:{},
 		success:function(resp){

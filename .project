@@ -31,17 +31,17 @@
 		<link>
 			<name>adminsrc</name>
 			<type>2</type>
-			<location>D:/j2eeWorkspace/guliadmin/src</location>
+			<location>E:/gulicompany/guliadmin/src</location>
 		</link>
 		<link>
 			<name>zrlextsrc</name>
 			<type>2</type>
-			<location>D:/j2eeWorkspace/zrlext/src</location>
+			<location>E:/gulicompany/zrlext/zrlext/src</location>
 		</link>
 		<link>
 			<name>WebContent/zrlextpages</name>
 			<type>2</type>
-			<location>D:/j2eeWorkspace/zrlext/WebContent/zrlextpages</location>
+			<location>E:/gulicompany/zrlext/zrlext/WebContent/zrlextpages</location>
 		</link>
 	</linkedResources>
 </projectDescription>

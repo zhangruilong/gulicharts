@@ -82,7 +82,7 @@ function initPlotData(){
 	odmNum = [];
 	odmMana = [];
 	$.ajax({
-		url:"EmpAction.do?method=manaOrderNum",
+		url:"ChEmpAction.do?method=manaOrderNum",
 		type:"post",
 		data:{
 			date:t
@@ -127,7 +127,7 @@ function initPlotData(){
 //订单表数据
 function initManaOd(){
     $.ajax({
-    	url:"EmpAction.do?method=manaOrderm",
+    	url:"ChEmpAction.do?method=manaOrderm",
     	type:"post",
     	data:{
     		date:t,
