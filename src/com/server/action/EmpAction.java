@@ -122,7 +122,9 @@ public class EmpAction extends BaseActionDao {
 		String comid = (String) request.getSession().getAttribute("comid");
 		String dateStr = request.getParameter("date");
 		String empname = request.getParameter("empname");
-		if(empname.equals("未分配")){
+		if(null == empname){
+			empname="";
+		} else if(empname.equals("未分配")){
 			empname = " is null";
 		} else {
 			empname = " = '"+empname+"'";
@@ -145,7 +147,7 @@ public class EmpAction extends BaseActionDao {
 				 "where cc.ccustomercompany = '"+comid+"' "+
 				   "and om.ordermstatue != '已删除' "+
 				   "and cc.createtime "+empname+" "+
-				   "and om.ordermtime like '"+dateStr+"%'"+
+				   "and om.ordermtime like '"+dateStr+"%' "+
 				 "group by c.customerid, "+
 				          "c.customershop, "+
 				          "c.customername, "+

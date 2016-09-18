@@ -49,7 +49,7 @@ $("#updateInterval").val(updateInterval).change(function () {
 	var odmMana = [];
 	var pl = null;
     var stack = 0, bars = true, lines = false, steps = false;
-
+    //生成柱状图
     function plotWithOptions() {
     	//alert(odmNum.toString());
     	pl = $.plot($("#stackchart"), [ odmNum ],  {
@@ -65,8 +65,22 @@ $("#updateInterval").val(updateInterval).change(function () {
             grid: { hoverable: true, clickable: true, backgroundColor: { colors: ["#fff", "#eee"] } },		//可以绑定 点击事件 和 鼠标悬浮时的事件
         });
     }
-    
+var empname = "";
 $(function(){
+	//绑定时间
+	$('#odm-Date').change(function(){
+		t=$(this).val();
+		initManaOd();
+		initPlotData();
+	});
+	//页面数据
+	initPlotData();
+
+});
+//初始化图形数据
+function initPlotData(){
+	odmNum = [];
+	odmMana = [];
 	$.ajax({
 		url:"EmpAction.do?method=manaOrderNum",
 		type:"post",
@@ -85,18 +99,22 @@ $(function(){
 					odmMana.push([i,"未分配"]);
 				}
 			});
-			plotWithOptions();
+			plotWithOptions();								//生成柱状图
 			if(typeof(data.root[1]) != 'undefined'){
-				initManaOd(data.root[1].createtime);
+				empname = data.root[1].createtime;
+				initManaOd();
 			} else {
-				initManaOd('未分配');
+				empname = '未分配';
+				initManaOd();
 			}
+			$('#stackchart').unbind('plotclick');
 			$('#stackchart').bind('plotclick',function(event ,pos ,item){
 				if(item){
 					//alert(item.dataIndex);
 					var itIndex = item.dataIndex;
 					//alert(odmMana[itIndex][1]);
-					initManaOd(odmMana[itIndex][1]);
+					empname = odmMana[itIndex][1];
+					initManaOd();
 				}
 			});
 		},
@@ -105,10 +123,9 @@ $(function(){
 			alert(data.msg);
 		}
 	});
-
-});
+}
 //订单表数据
-function initManaOd(empname){
+function initManaOd(){
     $.ajax({
     	url:"EmpAction.do?method=manaOrderm",
     	type:"post",
@@ -119,6 +136,7 @@ function initManaOd(empname){
     	success:function(resp){
     		var data = eval('('+resp+')');
     		window.pageInfo.empOrder = data.root;
+    		plotWithOptions();
     	},
     	error:function(resp){
     		var data = eval('('+resp+')');
@@ -127,7 +145,7 @@ function initManaOd(empname){
     });
 }
 
-    $(".stackControls input").click(function (e) {
+    /*$(".stackControls input").click(function (e) {
         e.preventDefault();
         stack = $(this).val() == "With stacking" ? true : null;
         plotWithOptions();
@@ -138,7 +156,7 @@ function initManaOd(empname){
         lines = $(this).val().indexOf("Lines") != -1;
         steps = $(this).val().indexOf("steps") != -1;
         plotWithOptions();
-    });
+    });*/
 
 
     
